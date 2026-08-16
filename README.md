@@ -39,3 +39,9 @@ Os arquivos abaixo são ferramentas utilitárias criadas para validação de int
 * **`debug_nomes.py` e `ver_colunas.py`:** Scripts investigativos usados para varrer a tabela de atributos (`.dbf`) do Shapefile e encontrar os identificadores exatos que o IPPUC usou para nomear as colunas (como a `NMVIA`).
 
 ## ATENÇÃO, OS DADOS NECESSARIOS PARA O PROJETO PODEM SER BAIXADOS EM https://ippuc.org.br/geodownloads/geo.htm  OU NO MEU GOOGLE DRIVE  https://drive.google.com/file/d/1G_TyDlhXrZ-uHM17ONIaw-5KRDzijHaS/view?usp=sharing
+
+
+caso decidam baixar pelo site:
+- Para a distância (Arestas): Na seção ARRUAMENTO, baixe o arquivo Eixos de rua.
+- Para a elevação (Eixo Z): Na seção ALTIMETRIA, baixe o arquivo Curvas de nível.
+- escolham o modelo SIRGAS.
