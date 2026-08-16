@@ -37,3 +37,5 @@ Os arquivos abaixo são ferramentas utilitárias criadas para validação de int
 * **`explorar_mapa.py`:** Um script de topologia. Dado o nome de uma rua, ele busca no grafo todos os cruzamentos validados e retorna a lista de ruas que efetivamente se conectam a ela, evitando erros de "ilhas isoladas" no A*.
 * **`ver_grafo.py`:** Usa a biblioteca `matplotlib` para ler o CSV e plotar as arestas em um plano cartesiano, provando visualmente que a extração gerou o mapa correto da cidade.
 * **`debug_nomes.py` e `ver_colunas.py`:** Scripts investigativos usados para varrer a tabela de atributos (`.dbf`) do Shapefile e encontrar os identificadores exatos que o IPPUC usou para nomear as colunas (como a `NMVIA`).
+
+## ATENÇÃO, OS DADOS NECESSARIOS PARA O PROJETO PODEM SER BAIXADOS EM https://ippuc.org.br/geodownloads/geo.htm  OU NO MEU GOOGLE DRIVE  https://drive.google.com/file/d/1G_TyDlhXrZ-uHM17ONIaw-5KRDzijHaS/view?usp=sharing
