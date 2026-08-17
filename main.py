@@ -2,8 +2,8 @@ import geopandas as gpd
 import pandas as pd
 
 def extrair_dados_iniciais():
-    caminho_ruas = "EIXO_RUA_SIRGAS/EIXO_RUA.shp"
-    caminho_curvas = "ALT_CURVA_DE_NIVEL_SIRGAS/ALT_CURVA_DE_NIVEL.shp"
+    caminho_ruas = "../EIXO_RUA_SIRGAS/EIXO_RUA.shp"
+    caminho_curvas = "../ALT_CURVA_DE_NIVEL_SIRGAS/ALT_CURVA_DE_NIVEL.shp"
 
     print("1. Carregando arquivos do IPPUC (isso pode levar alguns segundos)...")
     gdf_ruas = gpd.read_file(caminho_ruas, encoding="latin1")

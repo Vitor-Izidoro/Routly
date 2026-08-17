@@ -1,30 +1,42 @@
 import pandas as pd
 import math
 import heapq
+import matplotlib.pyplot as plt
 
-def carregar_grafo(caminho_csv):
-    print("Montando o grafo na memória...")
+def carregar_grafos_direcionais(caminho_csv):
+    print("Montando grafos direcionais (Ida e Volta) na memória para NBA*...")
     df = pd.read_csv(caminho_csv)
-    grafo = {}
+    grafo_ida = {}
+    grafo_volta = {}
     
     for _, row in df.iterrows():
-        origem = (row['origem_x'], row['origem_y'])
-        destino = (row['destino_x'], row['destino_y'])
+        u = (row['origem_x'], row['origem_y'])
+        v = (row['destino_x'], row['destino_y'])
         
-        if origem not in grafo: grafo[origem] = []
-        if destino not in grafo: grafo[destino] = []
-        
-        grafo[origem].append((destino, row['custo_carbono']))
+        if u not in grafo_ida: 
+            grafo_ida[u] = []
+            grafo_volta[u] = []
+        if v not in grafo_ida: 
+            grafo_ida[v] = []
+            grafo_volta[v] = []
+            
+        c_uv = row['custo_carbono']
         
         delta_z_volta = -row['delta_z']
         if delta_z_volta > 0:
-            custo_volta = row['distancia_m'] + (delta_z_volta * 5.0)
+            c_vu = row['distancia_m'] + (delta_z_volta * 5.0)
         else:
-            custo_volta = row['distancia_m']
+            c_vu = row['distancia_m']
             
-        grafo[destino].append((origem, custo_volta))
+        # Aresta u -> v
+        grafo_ida[u].append((v, c_uv))
+        grafo_volta[v].append((u, c_uv))
         
-    return grafo
+        # Aresta v -> u
+        grafo_ida[v].append((u, c_vu))
+        grafo_volta[u].append((v, c_vu))
+        
+    return grafo_ida, grafo_volta
 
 def carregar_indice_ruas(caminho_csv):
     print("Montando índice de ruas...")
@@ -41,72 +53,107 @@ def carregar_indice_ruas(caminho_csv):
         
     return indice_ruas
 
-# --- NOVA FUNÇÃO SIMPLIFICADA (Pegar um nó qualquer da rua) ---
 def pegar_um_no_da_rua(indice_ruas, nome_rua_exato):
     nos = indice_ruas.get(nome_rua_exato)
     if not nos:
         print(f"Erro: Rua '{nome_rua_exato}' não encontrada no índice.")
         return None
-    # Retorna a primeira coordenada associada a esta rua
     return list(nos)[0]
 
 def heuristica(no_atual, no_objetivo):
     return math.hypot(no_objetivo[0] - no_atual[0], no_objetivo[1] - no_atual[1])
 
-def a_estrela(grafo, inicio, objetivo):
-    open_set = []
-    heapq.heappush(open_set, (0, inicio))
-    came_from = {}
+def nba_estrela(grafo_ida, grafo_volta, inicio, destino):
+    if inicio not in grafo_ida or destino not in grafo_ida:
+        return None, float('inf')
+
+    # Filas de prioridade para a busca Forward (F) e Backward (B)
+    open_F = []
+    heapq.heappush(open_F, (heuristica(inicio, destino), 0, inicio)) # (f, g, node)
+    g_F = {inicio: 0}
+    came_from_F = {}
+    closed_F = set()
     
-    g_score = {no: float('inf') for no in grafo}
-    g_score[inicio] = 0
+    open_B = []
+    heapq.heappush(open_B, (heuristica(destino, inicio), 0, destino))
+    g_B = {destino: 0}
+    came_from_B = {}
+    closed_B = set()
     
-    closed_set = set()
+    best_path_cost = float('inf')
+    meeting_node = None
     
-    while open_set:
-        _, atual = heapq.heappop(open_set)
+    while open_F and open_B:
+        f_f, current_g_f, u_f = open_F[0]
+        f_b, current_g_b, u_b = open_B[0]
         
-        if atual == objetivo:
-            caminho = [atual]
-            while atual in came_from:
-                atual = came_from[atual]
-                caminho.append(atual)
-            return caminho[::-1], g_score[objetivo]
+        # Condição de parada da busca bidirecional
+        if current_g_f + current_g_b >= best_path_cost:
+            break
             
-        if atual in closed_set:
-            continue
-        closed_set.add(atual)
+        # Expande a menor fronteira para otimizar espaço de busca
+        if len(open_F) < len(open_B):
+            _, current_g, u = heapq.heappop(open_F)
+            if u in closed_F: continue
+            closed_F.add(u)
+            
+            for v, custo in grafo_ida.get(u, []):
+                tentative_g = current_g + custo
+                if v not in g_F or tentative_g < g_F[v]:
+                    g_F[v] = tentative_g
+                    came_from_F[v] = u
+                    heapq.heappush(open_F, (tentative_g + heuristica(v, destino), tentative_g, v))
+                    
+                    if v in g_B:
+                        if tentative_g + g_B[v] < best_path_cost:
+                            best_path_cost = tentative_g + g_B[v]
+                            meeting_node = v
+        else:
+            _, current_g, u = heapq.heappop(open_B)
+            if u in closed_B: continue
+            closed_B.add(u)
+            
+            for v, custo in grafo_volta.get(u, []):
+                tentative_g = current_g + custo
+                if v not in g_B or tentative_g < g_B[v]:
+                    g_B[v] = tentative_g
+                    came_from_B[v] = u
+                    heapq.heappush(open_B, (tentative_g + heuristica(v, inicio), tentative_g, v))
+                    
+                    if v in g_F:
+                        if tentative_g + g_F[v] < best_path_cost:
+                            best_path_cost = tentative_g + g_F[v]
+                            meeting_node = v
+                            
+    if meeting_node is None:
+        return None, float('inf')
         
-        for vizinho, custo_aresta in grafo[atual]:
-            if vizinho in closed_set:
-                continue
-                
-            tentativa_g_score = g_score[atual] + custo_aresta
-            
-            if tentativa_g_score < g_score[vizinho]:
-                came_from[vizinho] = atual
-                g_score[vizinho] = tentativa_g_score
-                f_score = tentativa_g_score + heuristica(vizinho, objetivo)
-                heapq.heappush(open_set, (f_score, vizinho))
-                
-    return None, float('inf')
+    # Reconstruir caminho a partir do meeting_node
+    path_F = []
+    curr = meeting_node
+    while curr in came_from_F:
+        path_F.append(curr)
+        curr = came_from_F[curr]
+    path_F.append(inicio)
+    path_F.reverse()
+    
+    path_B = []
+    curr = came_from_B.get(meeting_node)
+    while curr is not None:
+        path_B.append(curr)
+        curr = came_from_B.get(curr)
+        
+    return path_F + path_B, best_path_cost
+
 def gerar_instrucoes_de_rota(rota_nos, df_arestas):
-    """
-    Pega a lista matemática de nós (rota_nos) e converte em texto legível.
-    Precisamos do DataFrame original (df_arestas) para resgatar o nome da rua 
-    que conecta o Nó(A) ao Nó(B).
-    """
     print("\n[GERANDO INSTRUÇÕES DE NAVEGAÇÃO...]")
     instrucoes = []
     rua_atual = None
     
-    # Vamos iterar pela rota pegando pares de nós (atual e o próximo)
     for i in range(len(rota_nos) - 1):
         no_atual = rota_nos[i]
         proximo_no = rota_nos[i + 1]
         
-        # Procura no CSV qual rua conecta exatamente esses dois nós
-        # (Lembrando que o grafo funciona nos dois sentidos)
         aresta_ida = df_arestas[
             (df_arestas['origem_x'] == no_atual[0]) & 
             (df_arestas['origem_y'] == no_atual[1]) & 
@@ -128,7 +175,6 @@ def gerar_instrucoes_de_rota(rota_nos, df_arestas):
         else:
             nome_da_rua = "RUA DESCONHECIDA"
             
-        # Lógica para imprimir apenas quando mudar de rua!
         if nome_da_rua != rua_atual:
             if rua_atual is None:
                 instrucoes.append(f"-> Saia pela: {nome_da_rua}")
@@ -138,55 +184,42 @@ def gerar_instrucoes_de_rota(rota_nos, df_arestas):
             
     return instrucoes
 
-""" #ESTE AQUI NÃO PRINTA O CAMINHO COMPLETO
-if __name__ == "__main__":
-    caminho_csv = "grafo_curitiba_carbono.csv"
-    meu_grafo = carregar_grafo(caminho_csv)
-    indice_ruas = carregar_indice_ruas(caminho_csv)
+def plotar_rota_no_mapa(df_arestas, rota_nos):
+    print("\nDesenhando o mapa de Curitiba com a rota gerada (Roxa)...")
+    plt.figure(figsize=(10, 10))
     
-    print("\n--- SISTEMA DE ROTAS DE CURITIBA ---")
+    plt.plot(
+        [df_arestas['origem_x'], df_arestas['destino_x']], 
+        [df_arestas['origem_y'], df_arestas['destino_y']], 
+        color='grey', alpha=0.1, linewidth=0.5
+    )
     
-    # Nomes exatos copiados do seu log do debug_nomes.py!
-    rua_origem = "R. VER. ANTÔNIO DOMAKOSKI"
-    rua_destino = "R. HASDRUBAL BELLEGARD"
-    
-    print(f"\nBuscando ponto inicial na: {rua_origem}")
-    inicio = pegar_um_no_da_rua(indice_ruas, rua_origem)
-    
-    print(f"Buscando ponto final na: {rua_destino}")
-    destino = pegar_um_no_da_rua(indice_ruas, rua_destino)
-    
-    if inicio and destino:
-        print(f"\nCoordenadas carregadas!")
-        print(f"  Origem (X,Y): {inicio[0]:.2f}, {inicio[1]:.2f}")
-        print(f"  Destino (X,Y): {destino[0]:.2f}, {destino[1]:.2f}")
+    if rota_nos:
+        x_rota = [no[0] for no in rota_nos]
+        y_rota = [no[1] for no in rota_nos]
+        plt.plot(x_rota, y_rota, color='purple', linewidth=3, label='Melhor Rota (NBA*)')
         
-        print("\nExecutando o motor ecológico A*...")
-        rota, custo_total = a_estrela(meu_grafo, inicio, destino)
+        plt.scatter(x_rota[0], y_rota[0], color='green', s=100, label='Início', zorder=5)
+        plt.scatter(x_rota[-1], y_rota[-1], color='red', s=100, label='Destino', zorder=5)
         
-        if rota:
-            print(f"\n[SUCESSO!] Rota gerada passando por {len(rota)} cruzamentos (nós).")
-            print(f"[RESULTADO] Custo total estimado (Distância + Penalidade Z): {custo_total:.2f}")
-        else:
-            print("\n[AVISO] Caminho impossível (as ruas podem estar em ilhas desconectadas da malha viária).")
-            
-    """
-            
+    plt.title("Grafo de Ruas - Curitiba (Rotas Ecológicas)")
+    plt.axis('equal')
+    plt.legend()
+    plt.show()
+
 if __name__ == "__main__":
     caminho_csv = "grafo_curitiba_carbono.csv"
     
     print("\nCarregando banco de dados...")
-    # Precisamos carregar o DataFrame cru também para buscar os nomes na instrução
     df_arestas = pd.read_csv(caminho_csv)
     
-    meu_grafo = carregar_grafo(caminho_csv)
+    grafo_ida, grafo_volta = carregar_grafos_direcionais(caminho_csv)
     indice_ruas = carregar_indice_ruas(caminho_csv)
     
-    print("\n--- SISTEMA DE ROTAS DE CURITIBA ---")
+    print("\n--- SISTEMA DE ROTAS DE CURITIBA (NBA*) ---")
     
-    # Nomes exatos do log. Vamos usar ruas próximas!
-    rua_origem = "R. JOÃO CHEDE"
-    rua_destino = "R. CYRO CORREIA PEREIRA"
+    rua_origem = "R. AMADEU ASSAD YASSIM"
+    rua_destino = "R. GEN. LUIZ CARLOS PEREIRA TOURINHO"
     
     print(f"\nBuscando ponto inicial na: {rua_origem}")
     inicio = pegar_um_no_da_rua(indice_ruas, rua_origem)
@@ -195,19 +228,20 @@ if __name__ == "__main__":
     destino = pegar_um_no_da_rua(indice_ruas, rua_destino)
     
     if inicio and destino:
-        print("\nExecutando o motor ecológico A*...")
-        rota, custo_total = a_estrela(meu_grafo, inicio, destino)
+        print("\nExecutando o motor ecológico Bidirecional (NBA*)...")
+        rota, custo_total = nba_estrela(grafo_ida, grafo_volta, inicio, destino)
         
         if rota:
             print(f"\n[SUCESSO!] Rota gerada passando por {len(rota)} cruzamentos (nós).")
             print(f"[RESULTADO] Custo total estimado: {custo_total:.2f}")
             
-            # --- CHAMA A FUNÇÃO DE TEXTO AQUI ---
             instrucoes = gerar_instrucoes_de_rota(rota, df_arestas)
             print("\n--- PASSO A PASSO DA ROTA ---")
             for passo in instrucoes:
                 print(passo)
             print("-> [CHEGOU AO DESTINO]")
+            
+            plotar_rota_no_mapa(df_arestas, rota)
             
         else:
             print("\n[AVISO] Caminho impossível.")
