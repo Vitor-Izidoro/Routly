@@ -58,6 +58,67 @@ Os dados primários para execução deste baseline ultrapassam o limite de repos
 | **Fase 7** | Substituir o dataset de emissão de carbono de carros para especializar o algoritmo em rotas para caminhões. | A iniciar |
 | **Fase 8** | Análise de resultados, validação matemática das rotas e geração de logs. | A Iniciar |
 | **Fase 9** | Redação do documento final, formatação acadêmica e defesa. | A Iniciar |
+---
+## Exemplo de funcionamento
+**Entrada no Código:**
+```python
+carro_escolhido = "CHEVROLET CRUZE" 
+print("\n--- SISTEMA DE ROTAS DE CURITIBA (NBA*) ---")
+rua_origem = "R. AMADEU ASSAD YASSIM"
+rua_destino = "R. GEN. LUIZ CARLOS PEREIRA TOURINHO"
+```
+### Saida no terminal
+
+```plaintext
+
+--- SISTEMA DE ROTAS DE CURITIBA (NBA*) ---
+
+Executando o motor de roteamento Bidirecional...
+
+[SUCESSO!] Rota gerada passando por 240 cruzamentos (nós).
+[RESULTADO] Emissão total estimada: 4888.73 gramas de CO2
+
+[GERANDO INSTRUÇÕES DE NAVEGAÇÃO...]
+
+--- PASSO A PASSO DA ROTA ---
+-> Saia pela: R. PURÚS
+-> Entre na: R. GUSTAVO RATTMAN
+-> Entre na: R. FAGUNDES VARELA
+-> Entre na: R. AUGUSTO STRESSER
+-> Entre na: R. FLÁVIO DALLEGRAVE
+-> Entre na: R. ZEILA MOURA DOS SANTOS
+-> Entre na: AV. PRES. AFFONSO CAMARGO
+-> Entre na: VIADUTO DO CAPANEMA
+-> Entre na: AV. DR. DARIO LOPES DOS SANTOS
+-> Entre na: R. CONS. LAURINDO
+-> Entre na: R. CHILE
+-> Entre na: AV. MAL. FLORIANO PEIXOTO
+-> Entre na: AV. PRES. KENNEDY
+-> Entre na: AV. REPÚBLICA ARGENTINA
+-> Entre na: AV. WINSTON CHURCHILL
+-> Entre na: ROD. BR-476
+-> Entre na: R. NICOLA PELLANDA
+-> Entre na: R. STELLA ANTONIASSI GROCHEWSKI
+-> Entre na: R. MARIANO SNAK
+-> Entre na: R. BRASÍLIO PERY MOREIRA
+-> Entre na: ROD. BR-476
+-> Entre na: ROD. BR-116 - RÉGIS BITTENCOURT
+-> Entre na: R. VER. ANGELO BURBELLO
+-> Entre na: ESTR. DEL. BRUNO DE ALMEIDA
+-> Entre na: R. JÚLIO PEREIRA SOBRINHO
+-> Entre na: R. EMANOEL ERNESTO BERTOLDI
+-> Entre na: R. CRESCÊNCIA BERTHOLDI
+-> Entre na: R. LUCAS CARVALHO
+-> Entre na: R. GEN. LUIZ CARLOS PEREIRA TOURINHO
+-> [CHEGOU AO DESTINO]
+
+Desenhando o mapa de Curitiba com a rota gerada...
+
+```
+
+<img width="1636" height="909" alt="image" src="https://github.com/user-attachments/assets/a4cc73b6-55cd-46d9-8636-ff2d370405e3" />
+
+    
 
 
 
