@@ -1,5 +1,6 @@
 # Mapa-De-Carbono: Sistema de Rotas Ecológicas - Curitiba
 
+## Grupo: Alex Menegatti Secco, Gabriel Marques Simini, Mariana de Castro, Vitor Rodrigues Izidoro
 ## 1. Descrição, Contextualização e Escopo do Projeto
 
 **Contextualização:** Sistemas de navegação tradicionais frequentemente calculam a rota mais rápida ou mais curta, ignorando o relevo topográfico. Em cidades com variações de altitude significativas como Curitiba, rotas com aclives severos aumentam exponencialmente o esforço do motor e, consequentemente, a emissão de gases de efeito estufa. 
