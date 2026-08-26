@@ -1,4 +1,4 @@
-<img width="395" height="160" alt="image" src="https://github.com/user-attachments/assets/a6848e78-fc51-4ee6-91db-eb7b1752f911" /># Mapa-De-Carbono: Sistema de Rotas Ecológicas - Curitiba
+# Mapa-De-Carbono: Sistema de Rotas Ecológicas - Curitiba
 
 ## 1. Descrição, Contextualização e Escopo do Projeto
 
