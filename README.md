@@ -1,5 +1,8 @@
 # Mapa-De-Carbono: Sistema de Rotas Ecológicas - Curitiba
 
+> **Atualização do motor:** a execução padrão agora utiliza um modelo CMEM simplificado para caminhões.
+> A fórmula antiga abaixo é o baseline histórico. Consulte [o modelo, as fontes e a validação](docs/MODELO_EMISSOES.md).
+
 ## Grupo: Alex Menegatti Secco, Gabriel Marques Simini, Mariana de Castro, Vitor Rodrigues Izidoro
 ## 1. Descrição, Contextualização e Escopo do Projeto
 
@@ -123,3 +126,56 @@ Desenhando o mapa de Curitiba com a rota gerada...
 
 
 
+
+## ALT e BOA*: execução e validação
+
+Crie um ambiente virtual e instale as dependências:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python estrela.py
+```
+
+O menu oferece ALT por distância, ALT por emissão e BOA* para alternativas
+entre os dois objetivos. Pressione Enter para aceitar as ruas de exemplo.
+No BOA*, escolha o número da alternativa para visualizar seu mapa e instruções.
+Os caminhos dos CSVs são resolvidos a partir da pasta dos scripts.
+O padrão é um caminhão de referência com 13.000 kg vazio, carga configurável e
+velocidade constante configurável. O modelo legado ainda permite catálogo ou
+taxa de exemplo de 200 g/km, com indicação explícita do fallback.
+
+Execução sem perguntas (adicione `--sem-mapa` para ambientes sem interface gráfica):
+
+```bash
+.venv/bin/python estrela.py --algoritmo alt --modo distancia
+.venv/bin/python estrela.py --algoritmo alt --modo emissao --landmarks 4
+.venv/bin/python estrela.py --algoritmo boa --carga-kg 10000 --velocidade-kmh 30 --rota 1
+.venv/bin/python estrela.py --algoritmo nba --modo emissao
+.venv/bin/python -m unittest discover -s tests -v
+```
+
+Use `--origem "NOME EXATO"` e `--destino "NOME EXATO"` para alterar as ruas.
+O nó de cada rua é escolhido deterministicamente pela menor coordenada.
+
+`algoritmos.py` contém um ALT dirigido com tabelas de distâncias de/para cada
+landmark, separadas por métrica. A classe `IndiceALT` permite reutilizar o
+pré-processamento em várias chamadas de `buscar`; cada execução do terminal
+reconstrói o índice. O tempo de pré-processamento é mostrado separadamente.
+
+BOA* usa uma fila lexicográfica e poda por menor emissão já expandida em cada
+nó, seguindo o algoritmo 3 de Hernández et al. Dois Dijkstras no grafo reverso
+calculam heurísticas por objetivo. Retorna uma rota por par de custos não
+dominado, sem limitar artificialmente o número de alternativas. Sua memória e
+seu tempo podem crescer com a fronteira. O tempo exibido inclui as heurísticas.
+Os custos usam ponto flutuante, como no modelo original.
+
+As emissões agora usam o CMEM simplificado, com custos não negativos;
+a fórmula original permanece em `--modelo-emissao legado`. Consulte
+[MODELO_EMISSOES.md](docs/MODELO_EMISSOES.md) para hipóteses e fontes. A malha ainda trata todas as ruas como transitáveis nos dois
+sentidos. A implementação NBA* anterior foi mantida como opção legada.
+
+Referências:
+
+- [ALT — Goldberg e Harrelson](https://www.microsoft.com/en-us/research/wp-content/uploads/2005/01/soda05.pdf).
+- [BOA* — Hernández et al.](https://ojs.aaai.org/index.php/ICAPS/article/view/6655).
