@@ -3,3 +3,6 @@ ALT_CURVA_DE_NIVEL_SIRGAS/
 EIXO_RUA_SIRGAS/
 CO2 Emissions_Canada.csv
 grafo_curitiba_carbono.csv
+
+.venv/
+__pycache__/

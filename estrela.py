@@ -2,6 +2,8 @@ import pandas as pd
 import math
 import heapq
 import matplotlib.pyplot as plt
+import warnings
+from emissoes import CaminhaoCMEM, consumo_trecho, emissao_legada, validar_cenario
 
 def carregar_catalogo_veiculos(caminho_dataset):
     print("Carregando catálogo de emissões de veículos do dataset...")
@@ -20,44 +22,44 @@ def carregar_catalogo_veiculos(caminho_dataset):
 
 
 
-# alterar no futuro para ficar mais otimizado
-# o que fazer: separar em funções diferentes, um para o calculo de distancia do caminho e outra para a taxa de emissão de co2
-def carregar_grafos_direcionais(caminho_csv, taxa_emissao_g_km):
-    
-    print(f"Montando grafos multiobjetivo na memória (Base: {taxa_emissao_g_km} g/km)...")
+def carregar_grafos_direcionais(caminho_csv, taxa_emissao_g_km=None, *,
+                                modelo="cmem", caminhao=None, carga_kg=0.0,
+                                velocidade_kmh=30.0):
+    if modelo not in ("cmem", "legado"):
+        raise ValueError("Modelo deve ser cmem ou legado.")
+    validar_cenario(carga_kg, velocidade_kmh)
+    if modelo == "cmem" and taxa_emissao_g_km is not None:
+        raise ValueError("Taxa em g/km só se aplica ao modelo legado.")
+    if modelo == "legado":
+        emissao_legada(0, 0, taxa_emissao_g_km if taxa_emissao_g_km is not None else float('nan'))
+    caminhao = caminhao or CaminhaoCMEM()
+    print(f"Montando grafos na memória (modelo: {modelo})...")
     df = pd.read_csv(caminho_csv)
-    grafo_ida = {}
-    grafo_volta = {}
-    
-    for _, row in df.iterrows():
-        u = (row['origem_x'], row['origem_y'])
-        v = (row['destino_x'], row['destino_y'])
-        
-        if u not in grafo_ida: 
-            grafo_ida[u] = []; grafo_volta[u] = []
-        if v not in grafo_ida: 
-            grafo_ida[v] = []; grafo_volta[v] = []
-            
-        # Custo 1: Distância Pura (metros)
-        c_dist_ida = row['distancia_m']
-        c_dist_volta = row['distancia_m']
-        
-        # Custo 2: Emissão Real (Gramas de CO2)
-        dist_km = row['distancia_m'] / 1000.0
-        emissao_base = dist_km * taxa_emissao_g_km
-        
-        delta_z_ida = row['delta_z']
-        c_emissao_ida = emissao_base * (1 + (delta_z_ida * 0.015)) if delta_z_ida > 0 else emissao_base
-            
-        delta_z_volta = -row['delta_z']
-        c_emissao_volta = emissao_base * (1 + (delta_z_volta * 0.015)) if delta_z_volta > 0 else emissao_base
-            
-        grafo_ida[u].append((v, c_dist_ida, c_emissao_ida))
-        grafo_volta[v].append((u, c_dist_ida, c_emissao_ida))
-        
-        grafo_ida[v].append((u, c_dist_volta, c_emissao_volta))
-        grafo_volta[u].append((v, c_dist_volta, c_emissao_volta))
-        
+    colunas = ['origem_x', 'origem_y', 'destino_x', 'destino_y', 'distancia_m', 'delta_z']
+    if not all(math.isfinite(float(x)) for x in df[colunas].to_numpy().flat):
+        raise ValueError("Grafo contém coordenadas/distâncias/altitudes ausentes ou não finitas.")
+    if (df.distancia_m < 0).any() or ((df.distancia_m == 0) & (df.delta_z != 0)).any():
+        raise ValueError("Grafo contém distância inválida.")
+    suspeitos = int((df.delta_z.abs() > 0.20 * df.distancia_m).sum())
+    if modelo == "cmem" and suspeitos:
+        warnings.warn(f"{suspeitos} segmentos têm declividade estimada acima de 20%; "
+                      "revise as altitudes antes de interpretar emissões como valores reais.",
+                      UserWarning, stacklevel=2)
+    grafo_ida, grafo_volta = {}, {}
+    for row in df.itertuples(index=False):
+        u = (row.origem_x, row.origem_y)
+        v = (row.destino_x, row.destino_y)
+        for no in (u, v):
+            grafo_ida.setdefault(no, [])
+            grafo_volta.setdefault(no, [])
+        for origem, destino, dz in ((u, v, row.delta_z), (v, u, -row.delta_z)):
+            if modelo == "cmem":
+                emissao = consumo_trecho(row.distancia_m, dz, caminhao,
+                                         carga_kg=carga_kg, velocidade_kmh=velocidade_kmh).co2_g
+            else:
+                emissao = emissao_legada(row.distancia_m, dz, taxa_emissao_g_km)
+            grafo_ida[origem].append((destino, row.distancia_m, emissao))
+            grafo_volta[destino].append((origem, row.distancia_m, emissao))
     return grafo_ida, grafo_volta
 
 def carregar_indice_ruas(caminho_csv):
@@ -80,7 +82,7 @@ def pegar_um_no_da_rua(indice_ruas, nome_rua_exato):
     if not nos:
         print(f"Erro: Rua '{nome_rua_exato}' não encontrada no índice.")
         return None
-    return list(nos)[0]
+    return min(nos)  # Escolha determinística para consultas reproduzíveis.
 
 def heuristica(no_atual, no_objetivo, modo, taxa_emissao_g_km):
     distancia_metros = math.hypot(no_objetivo[0] - no_atual[0], no_objetivo[1] - no_atual[1])
@@ -243,57 +245,5 @@ def plotar_rota_no_mapa(df_arestas, rota_nos, modo_escolhido):
     plt.show()
 
 if __name__ == "__main__":
-    caminho_csv_rotas = "grafo_curitiba_carbono.csv"
-    caminho_csv_carros = "CO2 Emissions_Canada.csv"
-    
-    # 1. Menu de Configuração
-    # Opções de modo: "distancia" ou "emissao"
-    modo_escolhido = "emissao" 
-    
-    # Tente digitar um nome exatamente como está no CSV do Kaggle. 
-    # Caso não exista, o fallback de 200.0 g/km será usado.
-    carro_escolhido = "CHEVROLET CRUZE" 
-    
-    catalogo_carros = carregar_catalogo_veiculos(caminho_csv_carros)
-    taxa_emissao = catalogo_carros.get(carro_escolhido, 200.0)
-    
-    print(f"\n[CONFIG] Veículo: {carro_escolhido} | Emissão Base: {taxa_emissao} g/km")
-    print(f"[CONFIG] Otimizando rota para: {modo_escolhido.upper()}")
-    
-    # 2. Carrega Dados
-    df_arestas = pd.read_csv(caminho_csv_rotas)
-    grafo_ida, grafo_volta = carregar_grafos_direcionais(caminho_csv_rotas, taxa_emissao)
-    indice_ruas = carregar_indice_ruas(caminho_csv_rotas)
-    
-    # 3. Define Origem e Destino
-    print("\n--- SISTEMA DE ROTAS DE CURITIBA (NBA*) ---")
-    rua_origem = "R. AMADEU ASSAD YASSIM"
-    rua_destino = "R. GEN. LUIZ CARLOS PEREIRA TOURINHO"
-    
-    inicio = pegar_um_no_da_rua(indice_ruas, rua_origem)
-    destino = pegar_um_no_da_rua(indice_ruas, rua_destino)
-    
-    # 4. Executa a Busca
-    if inicio and destino:
-        print("\nExecutando o motor de roteamento Bidirecional...")
-        rota, custo_total = nba_estrela(grafo_ida, grafo_volta, inicio, destino, modo_escolhido, taxa_emissao)
-        
-        if rota:
-            print(f"\n[SUCESSO!] Rota gerada passando por {len(rota)} cruzamentos (nós).")
-            
-            # Formatação inteligente do print baseada no modo escolhido
-            if modo_escolhido == "distancia":
-                print(f"[RESULTADO] Distância total estimada: {custo_total:.2f} metros")
-            else:
-                print(f"[RESULTADO] Emissão total estimada: {custo_total:.2f} gramas de CO2")
-            
-            instrucoes = gerar_instrucoes_de_rota(rota, df_arestas)
-            print("\n--- PASSO A PASSO DA ROTA ---")
-            for passo in instrucoes:
-                print(passo)
-            print("-> [CHEGOU AO DESTINO]")
-            
-            plotar_rota_no_mapa(df_arestas, rota, modo_escolhido)
-            
-        else:
-            print("\n[AVISO] Caminho impossível.")
+    from executar import main
+    main()
