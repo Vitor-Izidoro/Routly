@@ -5,7 +5,10 @@ from time import perf_counter
 import math
 import pandas as pd
 from algoritmos import IndiceALT, boa_estrela
-from emissoes import CaminhaoCMEM, validar_cenario
+from emissoes import configurar_caminhao, validar_cenario
+from veiculos import HDDT1
+from vtcpfm import configurar_vtcpfm
+from cenarios_co2 import selecionar_cenario_co2
 from estrela import (carregar_catalogo_veiculos, carregar_grafos_direcionais,
                      carregar_indice_ruas, pegar_um_no_da_rua,
                      gerar_instrucoes_de_rota, plotar_rota_no_mapa, nba_estrela)
@@ -20,8 +23,13 @@ def main():
     parser.add_argument('--origem', default='R. AMADEU ASSAD YASSIM')
     parser.add_argument('--destino', default='R. GEN. LUIZ CARLOS PEREIRA TOURINHO')
     parser.add_argument('--veiculo', help='Marca/modelo do catálogo, somente no modelo legado.')
-    parser.add_argument('--modelo-emissao', choices=['cmem', 'legado'], default='cmem')
-    parser.add_argument('--carga-kg', type=float, default=0.0)
+    parser.add_argument('--modelo-emissao', choices=['vtcpfm', 'cmem', 'legado'], default='vtcpfm')
+    parser.add_argument('--cenario-co2', choices=['epa', 'artigo'],
+                        help='Conversão CO₂: epa (padrão) ou artigo (somente VT-CPFM).')
+    parser.add_argument('--caminhao', choices=['hddt1', 'hdv-generico'],
+                        help='Perfil físico (padrão: hddt1; hdv-generico exige CMEM).')
+    parser.add_argument('--carga-kg', type=float, default=0.0,
+                        help='Massa adicional em kg, incluindo reboque e carga (padrão: 0).')
     parser.add_argument('--velocidade-kmh', type=float, default=30.0)
     parser.add_argument('--taxa-emissao', type=float)
     parser.add_argument('--landmarks', type=int, default=4)
@@ -40,12 +48,34 @@ def main():
         args.destino = input(f'Rua de destino [{args.destino}]: ').strip() or args.destino
     if args.landmarks < 1:
         parser.error('--landmarks deve ser positivo.')
-    if args.modelo_emissao == 'cmem' and (args.taxa_emissao is not None or args.veiculo):
+    if args.modelo_emissao != 'legado' and (args.taxa_emissao is not None or args.veiculo):
         parser.error('--taxa-emissao e --veiculo exigem --modelo-emissao legado.')
-    if interativo and args.modelo_emissao == 'cmem':
-        print('Caminhão pesado de referência: 13.000 kg vazio. Velocidade é uma hipótese constante.')
+    if args.modelo_emissao == 'legado' and args.caminhao is not None:
+        parser.error('--caminhao exige --modelo-emissao cmem ou vtcpfm.')
+    perfil = args.caminhao or 'hddt1'
+    if args.modelo_emissao == 'vtcpfm' and perfil != 'hddt1':
+        parser.error('VT-CPFM possui coeficientes apenas para --caminhao hddt1.')
+    # A seleção do cenário ocorre antes de carregar o grafo e seus pesos.
+    if interativo and args.modelo_emissao == 'vtcpfm' and args.cenario_co2 is None:
+        print('\nConversão de CO₂:\n1. EPA: diesel de referência (2697,20 g/L)'
+              '\n2. Artigo: fator empírico de Wang e Rakha (2070 g/L)')
+        escolha_co2 = input('Cenário de CO₂ [1]: ').strip() or '1'
+        if escolha_co2 not in ('1', '2'):
+            parser.error('Escolha 1 ou 2 para o cenário de CO₂.')
+        args.cenario_co2 = 'epa' if escolha_co2 == '1' else 'artigo'
+    cenario_co2 = None
+    if args.modelo_emissao != 'legado' or args.cenario_co2 is not None:
         try:
-            args.carga_kg = float(input(f'Carga em kg [{args.carga_kg:g}]: ').strip() or args.carga_kg)
+            cenario_co2 = selecionar_cenario_co2(args.cenario_co2 or 'epa', modelo=args.modelo_emissao)
+        except ValueError as erro:
+            parser.error(str(erro))
+    caminhao = configurar_vtcpfm(cenario_co2.nome) if args.modelo_emissao == 'vtcpfm' else configurar_caminhao(perfil)
+    descricao = HDDT1.descricao if perfil == 'hddt1' else 'HDV genérico — Lai et al. (2024)'
+    if interativo and args.modelo_emissao != 'legado':
+        print(f'{descricao} | massa base {caminhao.massa_vazia_kg:g} kg. '
+              'Velocidade é uma hipótese constante.')
+        try:
+            args.carga_kg = float(input(f'Massa adicional (reboque + carga) em kg [{args.carga_kg:g}]: ').strip() or args.carga_kg)
             args.velocidade_kmh = float(input(f'Velocidade em km/h [{args.velocidade_kmh:g}]: ').strip() or args.velocidade_kmh)
         except ValueError:
             parser.error('Carga e velocidade devem ser números.')
@@ -66,10 +96,18 @@ def main():
     caminho = BASE / 'grafo_curitiba_carbono.csv'
     if not caminho.exists():
         parser.error('Grafo ausente. Disponibilize os shapefiles e execute main.py antes.')
-    caminhao = CaminhaoCMEM()
-    if args.modelo_emissao == 'cmem':
-        print(f'[CONFIG] CMEM simplificado | massa total {caminhao.massa_vazia_kg + args.carga_kg:g} kg | '
+    if args.modelo_emissao != 'legado':
+        print(f'[CONFIG] {descricao} | base {caminhao.massa_vazia_kg:g} kg | '
+              f'reboque + carga {args.carga_kg:g} kg')
+        nome_modelo = 'VT-CPFM-1 convexo' if args.modelo_emissao == 'vtcpfm' else 'CMEM simplificado'
+        print(f'[CONFIG] {nome_modelo} | massa total {caminhao.massa_vazia_kg + args.carga_kg:g} kg | '
               f'{args.velocidade_kmh:g} km/h | diesel de referência')
+        if args.modelo_emissao == 'cmem' and perfil == 'hddt1':
+            print('[CONFIG] Perfil físico HDDT1 aplicado ao CMEM; consumo ainda sem calibração para esse caminhão.')
+        print(f'[CONFIG] Cenário CO₂: {cenario_co2.nome} | {cenario_co2.descricao} | '
+              f'{cenario_co2.fator_g_l:.2f} g/L.')
+        print(f'[FONTE CO₂] {cenario_co2.fonte}')
+        print(f'[CENÁRIO] {cenario_co2.alcance}')
         print('[CONFIG] Cenário teórico sem calibração local; altitude por extremidades, sem tráfego/paradas.')
     try:
         grafo, reverso = carregar_grafos_direcionais(
@@ -83,6 +121,10 @@ def main():
     if inicio is None or destino is None:
         parser.error('Confira os nomes exatos das ruas no CSV.')
     print(f'\n{args.algoritmo.upper()} | {len(grafo)} nós | modelo {args.modelo_emissao}')
+    resumo_co2 = (f'CO₂: {cenario_co2.nome} ({cenario_co2.fator_g_l:.2f} g/L)'
+                  if cenario_co2 else None)
+    if resumo_co2:
+        print(f'[RESULTADO] {resumo_co2}')
     if args.algoritmo == 'alt':
         t = perf_counter()
         indice = IndiceALT(grafo, args.modo, args.landmarks)
@@ -98,8 +140,8 @@ def main():
         print(f'BOA* (inclui heurísticas reversas): {perf_counter() - t:.3f} s')
     else:
         # A heurística antiga por g/km não é admissível para o novo custo.
-        # h=0 na emissão CMEM reduz a busca legada à busca bidirecional por g.
-        taxa_heuristica = 0.0 if args.modelo_emissao == 'cmem' else taxa
+        # h=0 na emissão física reduz a busca legada à busca bidirecional por g.
+        taxa_heuristica = 0.0 if args.modelo_emissao != 'legado' else taxa
         nos, custo = nba_estrela(grafo, reverso, inicio, destino, args.modo, taxa_heuristica)
         if not nos:
             print('Não existe caminho entre os nós selecionados.')
@@ -108,14 +150,14 @@ def main():
         for passo in gerar_instrucoes_de_rota(nos, pd.read_csv(caminho)):
             print(passo)
         if not args.sem_mapa:
-            plotar_rota_no_mapa(pd.read_csv(caminho), nos, args.modo)
+            plotar_rota_no_mapa(pd.read_csv(caminho), nos, args.modo, cenario_co2=resumo_co2)
         return
     if not alternativas:
         print('Não existe caminho entre os nós selecionados.')
         return
-    print('\nRota | Distância (km) | CO₂ estimado (g)' + (' | Diesel estimado (L)' if args.modelo_emissao == 'cmem' else ''))
+    print('\nRota | Distância (km) | CO₂ estimado (g)' + (' | Diesel estimado (L)' if args.modelo_emissao != 'legado' else ''))
     for i, rota in enumerate(alternativas, 1):
-        combustivel = f' | {rota.emissao / caminhao.fator_co2_g_l:20.3f}' if args.modelo_emissao == 'cmem' else ''
+        combustivel = f' | {rota.emissao / caminhao.fator_co2_g_l:20.3f}' if args.modelo_emissao != 'legado' else ''
         print(f'{i:4} | {rota.distancia / 1000:14.3f} | {rota.emissao:16.2f}{combustivel}')
     numero = 1 if args.rota is None else args.rota
     if interativo and len(alternativas) > 1:
@@ -132,7 +174,8 @@ def main():
         print(passo)
     print('-> [CHEGOU AO DESTINO]')
     if not args.sem_mapa:
-        plotar_rota_no_mapa(df, rota.nos, 'pareto' if args.algoritmo == 'boa' else args.modo)
+        plotar_rota_no_mapa(df, rota.nos, 'pareto' if args.algoritmo == 'boa' else args.modo,
+                           cenario_co2=resumo_co2)
 
 
 if __name__ == '__main__':

@@ -1,7 +1,16 @@
 # Custo de emissão para caminhões
 
-Implementado em 2026-09-09 em `emissoes.py`. O padrão da aplicação passa a ser
-`--modelo-emissao cmem`. A fórmula anterior continua em `--modelo-emissao legado`.
+**Padrão atual (2026-09-15):** `--modelo-emissao vtcpfm`, com HDDT1.
+As equações, parâmetros e verificações estão em [VTCPFM.md](VTCPFM.md).
+As seções abaixo documentam o CMEM, disponível com `--modelo-emissao cmem`.
+A fórmula anterior continua em `--modelo-emissao legado`.
+
+Desde 2026-09-15, o perfil físico padrão é o HDDT1, com massa base de 7.182 kg,
+cilindrada de 10,8 L, área frontal de 10,0 m² e Cd de 0,78. Veja
+[CAMINHAO_REFERENCIA.md](CAMINHAO_REFERENCIA.md) para fonte e limitações.
+A fórmula CMEM abaixo permanece disponível como opção de comparação.
+Os valores genéricos da tabela e da validação histórica são recuperados com
+`--caminhao hdv-generico`; os demais parâmetros CMEM também permanecem no HDDT1.
 
 ## Referências e escolha
 
@@ -91,9 +100,9 @@ continua apenas escalando os custos de combustível.
 # Dentro de Routly: menu com carga e velocidade
 bash validar.sh
 
-# Caminhão de 13t + carga de 10t, velocidade constante de 30 km/h
-.venv/bin/python estrela.py --algoritmo alt --modo emissao --carga-kg 10000 --velocidade-kmh 30
-.venv/bin/python estrela.py --algoritmo boa --carga-kg 10000 --velocidade-kmh 30
+# HDDT1 de 7,182 t + 10 t adicionais (reboque + carga), a 30 km/h
+.venv/bin/python estrela.py --algoritmo alt --modelo-emissao cmem --modo emissao --carga-kg 10000 --velocidade-kmh 30
+.venv/bin/python estrela.py --algoritmo boa --modelo-emissao cmem --carga-kg 10000 --velocidade-kmh 30
 
 # Reproduzir a fórmula anterior
 .venv/bin/python estrela.py --algoritmo boa --modelo-emissao legado --taxa-emissao 200
@@ -148,6 +157,7 @@ custos do grafo reverso e um caso em que a rota de menor emissão é mais longa.
 Os testes anteriores de ALT e BOA* permanecem.
 
 Uma execução na malha real, entre os nós determinísticos das ruas de exemplo,
-comparou ALT com Dijkstra nos dois objetivos, com carga zero e 10.000 kg.
+comparou ALT com Dijkstra nos dois objetivos, com carga zero e 10.000 kg,
+usando o perfil histórico `hdv-generico` (13.000 kg de massa vazia).
 Os valores são registrados em `validacao_cmem.json`; a igualdade dos custos
 verifica a busca, não a precisão física da estimativa de emissão.

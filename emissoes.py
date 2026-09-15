@@ -7,6 +7,8 @@ Detalhes, unidades e limitações: docs/MODELO_EMISSOES.md.
 """
 from dataclasses import dataclass, fields
 import math
+from veiculos import HDDT1
+from cenarios_co2 import FATOR_EPA_G_L
 
 
 @dataclass(frozen=True)
@@ -25,7 +27,7 @@ class CaminhaoCMEM:
     densidade_ar_kg_m3: float = 1.2041
     gravidade_m_s2: float = 9.81
     # EPA (2025), tabela 2: 10.21 kg CO2/galão americano.
-    fator_co2_g_l: float = 10210.0 / 3.785411784
+    fator_co2_g_l: float = FATOR_EPA_G_L
 
     def __post_init__(self):
         for campo in fields(self):
@@ -40,6 +42,25 @@ class CaminhaoCMEM:
 class ConsumoTrecho:
     combustivel_l: float
     co2_g: float
+
+
+def configurar_caminhao(perfil='hddt1'):
+    """Adaptação física ao CMEM atual, ainda sem calibração para o HDDT1.
+
+    Só transfere grandezas com a mesma definição nos dois modelos. Parâmetros
+    internos do CMEM permanecem os de Lai; Cr e eficiência do VT-CPFM não são
+    intercambiáveis. A classe CaminhaoCMEM mantém o baseline genérico explícito.
+    """
+    if perfil == 'hdv-generico':
+        return CaminhaoCMEM()
+    if perfil == 'hddt1':
+        return CaminhaoCMEM(
+            massa_vazia_kg=HDDT1.massa_veicular_kg,
+            cilindrada_l=HDDT1.cilindrada_l,
+            area_frontal_m2=HDDT1.area_frontal_m2,
+            coef_arrasto=HDDT1.coef_arrasto,
+        )
+    raise ValueError('Caminhão deve ser hddt1 ou hdv-generico.')
 
 
 def validar_cenario(carga_kg, velocidade_kmh):
@@ -63,7 +84,7 @@ def consumo_trecho(distancia_m, delta_z, caminhao=None, *, carga_kg=0.0,
         if delta_z != 0:
             raise ValueError('Trecho com distância zero não pode ter desnível.')
         return ConsumoTrecho(0.0, 0.0)
-    p = caminhao or CaminhaoCMEM()
+    p = caminhao or configurar_caminhao()
     comprimento = math.hypot(distancia_m, delta_z)
     seno = delta_z / comprimento
     cosseno = distancia_m / comprimento

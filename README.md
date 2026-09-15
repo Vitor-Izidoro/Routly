@@ -1,6 +1,9 @@
 # Mapa-De-Carbono: Sistema de Rotas Ecológicas - Curitiba
 
-> **Atualização do motor:** a execução padrão agora utiliza um modelo CMEM simplificado para caminhões.
+> **Atualização do motor:** a execução padrão utiliza o VT-CPFM-1 convexo de Wang e Rakha (2017).
+> O perfil físico padrão é o International 9800 SBA (1997), Cummins M11-330 (HDDT1), com 7.182 kg de massa base.
+> Consulte [o perfil do caminhão](docs/CAMINHAO_REFERENCIA.md) e [as equações implementadas](docs/VTCPFM.md).
+> `--cenario-co2 epa` (padrão) usa 2.697,20 g/L; `--cenario-co2 artigo` reproduz o fator empírico de 2.070 g/L do estudo, com VT-CPFM.
 > A fórmula antiga abaixo é o baseline histórico. Consulte [o modelo, as fontes e a validação](docs/MODELO_EMISSOES.md).
 
 ## Grupo: Alex Menegatti Secco, Gabriel Marques Simini, Mariana de Castro, Vitor Rodrigues Izidoro
@@ -141,7 +144,7 @@ O menu oferece ALT por distância, ALT por emissão e BOA* para alternativas
 entre os dois objetivos. Pressione Enter para aceitar as ruas de exemplo.
 No BOA*, escolha o número da alternativa para visualizar seu mapa e instruções.
 Os caminhos dos CSVs são resolvidos a partir da pasta dos scripts.
-O padrão é um caminhão de referência com 13.000 kg vazio, carga configurável e
+O padrão é o HDDT1 com 7.182 kg de massa base, massa adicional configurável (reboque + carga) e
 velocidade constante configurável. O modelo legado ainda permite catálogo ou
 taxa de exemplo de 200 g/km, com indicação explícita do fallback.
 
@@ -150,8 +153,10 @@ Execução sem perguntas (adicione `--sem-mapa` para ambientes sem interface gr�
 ```bash
 .venv/bin/python estrela.py --algoritmo alt --modo distancia
 .venv/bin/python estrela.py --algoritmo alt --modo emissao --landmarks 4
+.venv/bin/python estrela.py --algoritmo alt --cenario-co2 artigo --carga-kg 20411.65665
 .venv/bin/python estrela.py --algoritmo boa --carga-kg 10000 --velocidade-kmh 30 --rota 1
 .venv/bin/python estrela.py --algoritmo nba --modo emissao
+.venv/bin/python estrela.py --algoritmo alt --modelo-emissao cmem --caminhao hdv-generico --sem-mapa
 .venv/bin/python -m unittest discover -s tests -v
 ```
 
@@ -170,8 +175,9 @@ dominado, sem limitar artificialmente o número de alternativas. Sua memória e
 seu tempo podem crescer com a fronteira. O tempo exibido inclui as heurísticas.
 Os custos usam ponto flutuante, como no modelo original.
 
-As emissões agora usam o CMEM simplificado, com custos não negativos;
-a fórmula original permanece em `--modelo-emissao legado`. Consulte
+As emissões usam VT-CPFM com custos não negativos, altitude média por trecho,
+velocidade constante e aceleração zero. CMEM continua disponível com
+`--modelo-emissao cmem`, e a fórmula original com `--modelo-emissao legado`. Consulte
 [MODELO_EMISSOES.md](docs/MODELO_EMISSOES.md) para hipóteses e fontes. A malha ainda trata todas as ruas como transitáveis nos dois
 sentidos. A implementação NBA* anterior foi mantida como opção legada.
 
