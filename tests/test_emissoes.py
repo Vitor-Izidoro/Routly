@@ -2,7 +2,7 @@ import math
 from pathlib import Path
 import tempfile
 import unittest
-from emissoes import CaminhaoCMEM, consumo_trecho
+from emissoes import CaminhaoCMEM, configurar_caminhao, consumo_trecho
 from estrela import carregar_grafos_direcionais
 from algoritmos import IndiceALT, boa_estrela
 
@@ -14,7 +14,7 @@ class EmissoesTest(unittest.TestCase):
                            (13000 * 9.81 * 0.008 + 0.5 * 1.2041 * 0.7 * 8.2 * 100)
                            * 10 / (1000 * 0.4 * 0.9))
         litros = energia_kj / (45 * 737)
-        r = consumo_trecho(1000, 0, velocidade_kmh=36)
+        r = consumo_trecho(1000, 0, configurar_caminhao('hdv-generico'), velocidade_kmh=36)
         self.assertAlmostEqual(r.combustivel_l, litros)
         self.assertAlmostEqual(r.co2_g, litros * 10210 / 3.785411784)
 
@@ -23,12 +23,27 @@ class EmissoesTest(unittest.TestCase):
         self.assertLess(descida, plano)
         self.assertLess(plano, subida)
         self.assertGreater(consumo_trecho(1000, 50, carga_kg=10000).co2_g, subida)
-        p = CaminhaoCMEM()
         r = consumo_trecho(1000, -100, velocidade_kmh=36)
-        piso_l = math.hypot(1000,100)/10 * (.17*33*11)/(45*737)
+        piso_l = math.hypot(1000,100)/10 * (.17*33*10.8)/(45*737)
         self.assertAlmostEqual(r.combustivel_l, piso_l)
         self.assertGreater(r.co2_g, 0)
         self.assertEqual(consumo_trecho(0,0).co2_g, 0)
+
+    def test_hddt1_padrao_com_reboque_e_carga(self):
+        # 1 km a 36 km/h: 100 s; HDDT1 de 7182 kg + 20000 kg adicionais.
+        # Adaptação CMEM, não a equação VT-CPFM de Wang e Rakha.
+        litros = 100 * (.17 * 33 * 10.8 +
+                        ((7182 + 20000) * 9.81 * .008 +
+                         .5 * 1.2041 * .78 * 10 * 100) * 10 / (1000 * .4 * .9)) / (45 * 737)
+        r = consumo_trecho(1000, 0, carga_kg=20000, velocidade_kmh=36)
+        self.assertAlmostEqual(r.combustivel_l, litros)
+        self.assertAlmostEqual(r.co2_g, litros * 10210 / 3.785411784)
+        with tempfile.TemporaryDirectory() as pasta:
+            arquivo = Path(pasta) / 'grafo.csv'
+            arquivo.write_text('origem_x,origem_y,destino_x,destino_y,distancia_m,delta_z\n'
+                               '0,0,1000,0,1000,0\n')
+            grafo, _ = carregar_grafos_direcionais(arquivo, modelo='cmem', carga_kg=20000, velocidade_kmh=36)
+            self.assertAlmostEqual(grafo[(0, 0)][0][2], r.co2_g)
 
     def test_segmentacao_preserva_custo_em_rampa_uniforme(self):
         for dz in (-80, 0, 80):
@@ -50,7 +65,7 @@ class EmissoesTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as pasta:
             arquivo = Path(pasta)/'grafo.csv'
             arquivo.write_text('origem_x,origem_y,destino_x,destino_y,distancia_m,delta_z\n0,0,100,0,100,5\n')
-            g, r = carregar_grafos_direcionais(arquivo)
+            g, r = carregar_grafos_direcionais(arquivo, modelo='cmem')
             self.assertGreater(g[(0,0)][0][2], g[(100,0)][0][2])
             self.assertEqual(g[(0,0)][0][1:], r[(100,0)][0][1:])
             antigo,_ = carregar_grafos_direcionais(arquivo,200,modelo='legado')

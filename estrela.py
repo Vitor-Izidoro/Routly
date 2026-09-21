@@ -3,7 +3,8 @@ import math
 import heapq
 import matplotlib.pyplot as plt
 import warnings
-from emissoes import CaminhaoCMEM, consumo_trecho, emissao_legada, validar_cenario
+from emissoes import configurar_caminhao, consumo_trecho, emissao_legada, validar_cenario
+from vtcpfm import CaminhaoVTCPFM, consumo_trecho_vtcpfm
 
 def carregar_catalogo_veiculos(caminho_dataset):
     print("Carregando catálogo de emissões de veículos do dataset...")
@@ -23,29 +24,36 @@ def carregar_catalogo_veiculos(caminho_dataset):
 
 
 def carregar_grafos_direcionais(caminho_csv, taxa_emissao_g_km=None, *,
-                                modelo="cmem", caminhao=None, carga_kg=0.0,
+                                modelo="vtcpfm", caminhao=None, carga_kg=0.0,
                                 velocidade_kmh=30.0):
-    if modelo not in ("cmem", "legado"):
-        raise ValueError("Modelo deve ser cmem ou legado.")
+    if modelo not in ("vtcpfm", "cmem", "legado"):
+        raise ValueError("Modelo deve ser vtcpfm, cmem ou legado.")
     validar_cenario(carga_kg, velocidade_kmh)
-    if modelo == "cmem" and taxa_emissao_g_km is not None:
+    if modelo != "legado" and taxa_emissao_g_km is not None:
         raise ValueError("Taxa em g/km só se aplica ao modelo legado.")
     if modelo == "legado":
         emissao_legada(0, 0, taxa_emissao_g_km if taxa_emissao_g_km is not None else float('nan'))
-    caminhao = caminhao or CaminhaoCMEM()
+    caminhao = caminhao or (CaminhaoVTCPFM() if modelo == "vtcpfm" else configurar_caminhao())
+    if modelo == "vtcpfm" and not isinstance(caminhao, CaminhaoVTCPFM):
+        raise ValueError('VT-CPFM exige parâmetros CaminhaoVTCPFM.')
     print(f"Montando grafos na memória (modelo: {modelo})...")
     df = pd.read_csv(caminho_csv)
     colunas = ['origem_x', 'origem_y', 'destino_x', 'destino_y', 'distancia_m', 'delta_z']
+    if modelo == "vtcpfm":
+        colunas += ['origem_z', 'destino_z']
+    if not set(colunas).issubset(df.columns):
+        raise ValueError(f'CSV deve conter as colunas: {", ".join(colunas)}.')
     if not all(math.isfinite(float(x)) for x in df[colunas].to_numpy().flat):
         raise ValueError("Grafo contém coordenadas/distâncias/altitudes ausentes ou não finitas.")
     if (df.distancia_m < 0).any() or ((df.distancia_m == 0) & (df.delta_z != 0)).any():
         raise ValueError("Grafo contém distância inválida.")
     suspeitos = int((df.delta_z.abs() > 0.20 * df.distancia_m).sum())
-    if modelo == "cmem" and suspeitos:
+    if modelo != "legado" and suspeitos:
         warnings.warn(f"{suspeitos} segmentos têm declividade estimada acima de 20%; "
                       "revise as altitudes antes de interpretar emissões como valores reais.",
                       UserWarning, stacklevel=2)
     grafo_ida, grafo_volta = {}, {}
+    potencia_excedida = 0
     for row in df.itertuples(index=False):
         u = (row.origem_x, row.origem_y)
         v = (row.destino_x, row.destino_y)
@@ -53,13 +61,25 @@ def carregar_grafos_direcionais(caminho_csv, taxa_emissao_g_km=None, *,
             grafo_ida.setdefault(no, [])
             grafo_volta.setdefault(no, [])
         for origem, destino, dz in ((u, v, row.delta_z), (v, u, -row.delta_z)):
-            if modelo == "cmem":
+            if modelo == "vtcpfm":
+                consumo = consumo_trecho_vtcpfm(
+                    row.distancia_m, dz, caminhao,
+                    altitude_m=(row.origem_z + row.destino_z) / 2,
+                    carga_kg=carga_kg, velocidade_kmh=velocidade_kmh)
+                emissao = consumo.co2_g
+                potencia_excedida += consumo.potencia_excedida
+            elif modelo == "cmem":
                 emissao = consumo_trecho(row.distancia_m, dz, caminhao,
                                          carga_kg=carga_kg, velocidade_kmh=velocidade_kmh).co2_g
             else:
                 emissao = emissao_legada(row.distancia_m, dz, taxa_emissao_g_km)
             grafo_ida[origem].append((destino, row.distancia_m, emissao))
             grafo_volta[destino].append((origem, row.distancia_m, emissao))
+    if potencia_excedida:
+        warnings.warn(f'{potencia_excedida} arcos exigem potência acima de '
+                      f'{caminhao.potencia_nominal_kw:.1f} kW no cenário VT-CPFM; '
+                      'a velocidade constante pode ser inviável. Custos mantidos sem recorte.',
+                      UserWarning, stacklevel=2)
     return grafo_ida, grafo_volta
 
 def carregar_indice_ruas(caminho_csv):
@@ -219,7 +239,7 @@ def gerar_instrucoes_de_rota(rota_nos, df_arestas):
             
     return instrucoes
 
-def plotar_rota_no_mapa(df_arestas, rota_nos, modo_escolhido):
+def plotar_rota_no_mapa(df_arestas, rota_nos, modo_escolhido, *, cenario_co2=None):
     print("\nDesenhando o mapa de Curitiba com a rota gerada...")
     plt.figure(figsize=(10, 10))
     
@@ -239,7 +259,10 @@ def plotar_rota_no_mapa(df_arestas, rota_nos, modo_escolhido):
         plt.scatter(x_rota[0], y_rota[0], color='green', s=100, label='Início', zorder=5)
         plt.scatter(x_rota[-1], y_rota[-1], color='red', s=100, label='Destino', zorder=5)
         
-    plt.title(f"Grafo de Ruas - Curitiba (Otimizado para {modo_escolhido.upper()})")
+    titulo = f"Grafo de Ruas - Curitiba (Otimizado para {modo_escolhido.upper()})"
+    if cenario_co2:
+        titulo += f'\n{cenario_co2}'
+    plt.title(titulo)
     plt.axis('equal')
     plt.legend()
     plt.show()
