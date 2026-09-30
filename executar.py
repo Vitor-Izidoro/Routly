@@ -9,6 +9,7 @@ from emissoes import configurar_caminhao, validar_cenario
 from veiculos import HDDT1
 from vtcpfm import configurar_vtcpfm
 from cenarios_co2 import selecionar_cenario_co2
+from dados_co2 import CAMINHO_DATASET, garantir_dataset_co2
 from estrela import (carregar_catalogo_veiculos, carregar_grafos_direcionais,
                      carregar_indice_ruas, pegar_um_no_da_rua,
                      gerar_instrucoes_de_rota, plotar_rota_no_mapa, nba_estrela)
@@ -85,8 +86,12 @@ def main():
         parser.error(str(erro))
     taxa = args.taxa_emissao
     if args.modelo_emissao == 'legado' and taxa is None:
-        catalogo_path = BASE / 'CO2 Emissions_Canada.csv'
-        catalogo = carregar_catalogo_veiculos(catalogo_path) if catalogo_path.exists() else {}
+        try:
+            catalogo_path = garantir_dataset_co2(BASE / CAMINHO_DATASET.name)
+            catalogo = carregar_catalogo_veiculos(catalogo_path)
+        except (OSError, ValueError) as erro:
+            print(f'[CONFIG] Download do catálogo indisponível: {erro}')
+            catalogo = {}
         taxa = catalogo.get((args.veiculo or 'CHEVROLET CRUZE').upper())
         if taxa is None:
             taxa = 200.0

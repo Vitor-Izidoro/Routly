@@ -18,11 +18,13 @@ if str(BASE) not in sys.path:
     sys.path.insert(0, str(BASE))
 
 from cenarios_co2 import FATOR_EPA_G_L
+from dados_co2 import (CAMINHO_DATASET, FONTE_DATASET, NOTEBOOK_REFERENCIA,
+                       URL_DOWNLOAD, garantir_dataset_co2)
 from vtcpfm import consumo_trecho_vtcpfm, vazao_combustivel
 
 CONSUMO = 'Fuel Consumption Comb (L/100 km)'
 EMISSAO = 'CO2 Emissions(g/km)'
-FONTE = 'https://www.kaggle.com/datasets/karomatovdovudkhon/co2-emissions-canada'
+FONTE = FONTE_DATASET
 
 
 def positivo(valor):
@@ -114,16 +116,21 @@ def analisar(caminho):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--dataset', type=Path, default=BASE / 'CO2 Emissions_Canada.csv')
+    parser.add_argument('--dataset', type=Path, default=CAMINHO_DATASET,
+                        help='CSV local; se estiver ausente, será baixado automaticamente do Kaggle.')
     parser.add_argument('--saida', type=Path, default=BASE / 'experimentos/resultados_conversao_co2')
     args = parser.parse_args(argv)
+    dataset_baixado = not args.dataset.is_file()
     try:
-        resumo, detalhes = analisar(args.dataset)
+        dataset = garantir_dataset_co2(args.dataset)
+        resumo, detalhes = analisar(dataset)
     except (OSError, ValueError) as erro:
         parser.error(str(erro))
     verificacoes = verificar_unidades()
-    resumo.update(fonte=FONTE, dataset=str(args.dataset.resolve()),
-                  sha256=hashlib.sha256(args.dataset.read_bytes()).hexdigest(),
+    resumo.update(fonte=FONTE, notebook_referencia=NOTEBOOK_REFERENCIA,
+                  url_download=URL_DOWNLOAD, dataset_baixado=dataset_baixado,
+                  dataset=str(dataset.resolve()),
+                  sha256=hashlib.sha256(dataset.read_bytes()).hexdigest(),
                   python=platform.python_version(), verificacoes_unidades=verificacoes,
                   criterio='Comparação descritiva; sem limiar de aprovação empírica.',
                   limitacoes='Não valida consumo do caminhão. Consumo e CO₂ do catálogo '
@@ -149,7 +156,10 @@ def main(argv=None):
         'A diferença descreve a proximidade dos fatores; não é um teste de equivalência '
         'nem uma aprovação do modelo físico. Nenhum parâmetro foi recalibrado.\n\n'
         + resumo['limitacoes'] + '\n\n'
-        f'Fonte: {FONTE}\n\nSHA-256 do CSV: `{resumo["sha256"]}`\n'
+        f'Fonte do dataset: {FONTE}\n\n'
+        f'Notebook de referência: {NOTEBOOK_REFERENCIA}\n\n'
+        f'URL de download automático: {URL_DOWNLOAD}\n\n'
+        f'SHA-256 do CSV: `{resumo["sha256"]}`\n'
     )
     (args.saida / 'relatorio.md').write_text(relatorio, encoding='utf-8')
     # Terminais Windows antigos não representam CO₂; arquivos seguem em UTF-8.

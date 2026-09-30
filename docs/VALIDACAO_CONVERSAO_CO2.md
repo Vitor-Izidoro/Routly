@@ -7,10 +7,18 @@ python experimentos/validar_conversao_co2.py
 python -m unittest discover -s tests -p test_conversao_co2.py -v
 ```
 
-O script usa somente a biblioteca padrão. O CSV, ignorado pelo Git, deve estar
-em `CO2 Emissions_Canada.csv`, ou ser indicado por `--dataset CAMINHO`.
-Fonte: https://www.kaggle.com/datasets/karomatovdovudkhon/co2-emissions-canada
-Notebook de origem: https://www.kaggle.com/code/muizah/c02-emission
+O script usa somente a biblioteca padrão. Se o CSV ignorado pelo Git não existir,
+ele baixa automaticamente o pacote público do Kaggle, extrai apenas
+`CO2 Emissions_Canada.csv` e confere suas colunas antes da análise. Um caminho
+alternativo pode ser indicado por `--dataset CAMINHO`; se também estiver ausente,
+o arquivo será baixado nesse local.
+
+- Dataset: https://www.kaggle.com/datasets/debajyotipodder/co2-emission-by-vehicles
+- Notebook de referência: https://www.kaggle.com/code/muizah/c02-emission
+
+O CSV é reutilizado nas execuções seguintes. O relatório registra as URLs, se o
+download ocorreu e o SHA-256 exato do arquivo analisado. Portanto, resultados de
+execuções diferentes podem confirmar se utilizaram os mesmos bytes de entrada.
 
 ## Método
 

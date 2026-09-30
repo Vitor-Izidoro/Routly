@@ -42,7 +42,8 @@
 *   **`main.py`:** Script de ETL. Responsável por ler os Shapefiles brutos, criar a topologia matemática e exportar a matriz de adjacência final.
 *   **`estrela.py`:** O motor de roteamento em tempo real. Contém o geocodificador (busca flexível de nomes de ruas), a lógica do NBA*, e o sistema de plotagem gráfica via `matplotlib`.
 *   **`grafo_curitiba_carbono.csv`:** Artefato gerado pelo `main.py`. Contém mais de 40 mil arestas formatadas com distâncias e deltas de altimetria.
-*   **`CO2 Emissions_Canada.csv`:** Tabela estática de emissão de carbono por modelo veicular.
+*   **`CO2 Emissions_Canada.csv`:** Tabela de emissão por modelo veicular. Quando necessária,
+    é baixada automaticamente do Kaggle e validada antes do uso.
 *   **Arquivos de Debug (`explorar_mapa.py`, `debug_nomes.py`, `ver_colunas.py`,`ver_grafo.py`  ):** Scripts utilitários de validação topológica e inspeção de dados.
 
 ### Reprodução e Acesso aos Dados

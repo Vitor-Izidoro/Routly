@@ -73,3 +73,17 @@ class CenariosCO2Test(unittest.TestCase):
                 self.executar_cli(['--algoritmo', 'alt', '--modelo-emissao', modelo,
                                   '--cenario-co2', cenario])
             self.assertEqual(erro.exception.code, 2)
+
+    def test_cli_legado_obtem_catalogo_automaticamente(self):
+        catalogo = self.base / 'CO2 Emissions_Canada.csv'
+        catalogo.write_text(
+            'Make,Model,CO2 Emissions(g/km)\n'
+            'MARCA,MODELO,321\n', encoding='utf-8')
+        with patch.object(executar, 'garantir_dataset_co2', return_value=catalogo) as garantir:
+            saida = self.executar_cli([
+                '--algoritmo', 'alt', '--modelo-emissao', 'legado',
+                '--veiculo', 'MARCA MODELO',
+            ])
+        garantir.assert_called_once_with(self.base / 'CO2 Emissions_Canada.csv')
+        self.assertIn('Carregando catálogo de emissões', saida)
+        self.assertNotIn('taxa de exemplo', saida)
