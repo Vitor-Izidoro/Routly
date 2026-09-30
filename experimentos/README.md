@@ -1,5 +1,10 @@
 # Avaliação da eficácia do Routly
 
+Para verificar unidades e comparar o fator de CO₂ com os registros diesel do
+catálogo canadense, consulte [Validação da conversão](../docs/VALIDACAO_CONVERSAO_CO2.md)
+e execute `python experimentos/validar_conversao_co2.py`. Essa verificação é
+separada da avaliação de rotas abaixo e não valida consumo físico de caminhões.
+
 Os testes em `tests/test_algoritmos.py`, `test_emissoes.py`, `test_vtcpfm.py` e
 `test_cenarios_co2.py` comprovam que **o código está correto** (algoritmos ótimos,
 fórmulas iguais às dos artigos). Esta pasta e `tests/test_eficacia.py` respondem a
