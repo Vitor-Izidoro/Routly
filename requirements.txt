@@ -1,4 +1,8 @@
 pandas
-geopandas
+numpy
+scipy
 matplotlib
+pytest
+# Opcionais: geopandas só para recriar o grafo (menu 1.1); PyQt6 para janelas interativas do matplotlib.
+geopandas
 PyQt6

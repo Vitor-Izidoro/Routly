@@ -13,7 +13,7 @@ fórmulas iguais às dos artigos). Esta pasta e `tests/test_eficacia.py` respond
 outra pergunta: **na malha real de Curitiba, a rota ecológica emite menos CO₂ do
 que a rota que um GPS comum escolheria (a mais curta)? Quanto, e a que custo?**
 
-Ambos precisam de `grafo_curitiba_carbono.csv` na raiz do projeto (gerado por `main.py`).
+Ambos precisam de `grafo_curitiba_carbono.csv` na raiz do projeto (gerado por `etl_ippuc.py`, opção 1.1 do menu `main.py`).
 
 ---
 

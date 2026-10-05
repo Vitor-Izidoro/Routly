@@ -39,9 +39,11 @@
 *Nota de Arquitetura:* Por se tratar de um sistema puramente determinístico baseado na Teoria dos Grafos, este projeto não gera "pesos de modelo" (Model Weights) típicos de redes neurais. O conhecimento do sistema reside em sua matriz de adjacência pré-processada e na *Lookup Table* de veículos.
 
 ### Estrutura do Repositório
-*   **`main.py`:** Script de ETL. Responsável por ler os Shapefiles brutos, criar a topologia matemática e exportar a matriz de adjacência final.
+*   **`main.py`:** Menu principal interativo (CLI central): ETL, mapas, roteamento e comprovações científicas.
+*   **`etl_ippuc.py`:** Script de ETL (antigo `main.py`). Lê os Shapefiles brutos, cria a topologia matemática e exporta a matriz de adjacência final.
+*   **`experimentos/comprovacao_cientifica.py`:** Fronteira de Pareto, perfil altimétrico, Monte Carlo + Wilcoxon e paridade física; resultados em `resultados_validacao/`.
 *   **`estrela.py`:** O motor de roteamento em tempo real. Contém o geocodificador (busca flexível de nomes de ruas), a lógica do NBA*, e o sistema de plotagem gráfica via `matplotlib`.
-*   **`grafo_curitiba_carbono.csv`:** Artefato gerado pelo `main.py`. Contém mais de 40 mil arestas formatadas com distâncias e deltas de altimetria.
+*   **`grafo_curitiba_carbono.csv`:** Artefato gerado pelo `etl_ippuc.py` (menu 1.1). Contém mais de 40 mil arestas formatadas com distâncias e deltas de altimetria.
 *   **`CO2 Emissions_Canada.csv`:** Tabela de emissão por modelo veicular. Quando necessária,
     é baixada automaticamente do Kaggle e validada antes do uso.
 *   **Arquivos de Debug (`explorar_mapa.py`, `debug_nomes.py`, `ver_colunas.py`,`ver_grafo.py`  ):** Scripts utilitários de validação topológica e inspeção de dados.
@@ -58,7 +60,7 @@ Os dados primários para execução deste baseline ultrapassam o limite de repos
 | Etapa | Descrição da Atividade | Status |
 | :--- | :--- | :--- |
 | **Fase 1** | Pesquisa de viabilidade e obtenção dos dados primários (IPPUC e Kaggle). | Concluído |
-| **Fase 2** | Construção do pipeline ETL (`main.py`) e interpolação espacial (R-Tree). | Concluído |
+| **Fase 2** | Construção do pipeline ETL (`etl_ippuc.py`, antigo `main.py`) e interpolação espacial (R-Tree). | Concluído |
 | **Fase 3** | Implementação do algoritmo Bidirecional (NBA*) e geocodificador de texto. | Concluído |
 | **Fase 4** | Refatoração estrutural para sistema Multiobjetivo (Distância vs Emissão). | Concluído |
 | **Fase 5** | Testes de consistência topológica (identificação e tratamento de ilhas). | Em Andamento |
@@ -186,3 +188,28 @@ Referências:
 
 - [ALT — Goldberg e Harrelson](https://www.microsoft.com/en-us/research/wp-content/uploads/2005/01/soda05.pdf).
 - [BOA* — Hernández et al.](https://ojs.aaai.org/index.php/ICAPS/article/view/6655).
+
+## Menu principal e comprovação científica (TCC)
+
+```bash
+python -m pip install -r requirements.txt
+python main.py                          # menu interativo
+python main.py --opcao 3.6 --pares 100  # pipeline completo, sem perguntas
+```
+
+| Menu | Função |
+|---|---|
+| 1.1 | Recria `grafo_curitiba_carbono.csv` a partir dos Shapefiles do IPPUC (`etl_ippuc.py`); sem os `.shp`, avisa e mantém o CSV existente |
+| 1.2 / 1.3 | Mapa interativo (Leaflet, HTML) das rotas curta, compromisso e ecológica; exploração de cruzamentos |
+| 2.x | Todas as opções do `executar.py`: ALT distância/emissão, BOA*, NBA* legado, modelos VT-CPFM/CMEM/legado, cenários de CO₂, carga, velocidade |
+| 3.1 | Conversão de CO₂ (`validar_conversao_co2.py`), eficácia em 3 camadas (`avaliar_eficacia.py`), reprodução de `docs/validacao_cmem.json` e paridade física por declividade (`validacao_fisica_grade.png`, `paridade_fisica_grade.json`) |
+| 3.2 | `pytest` em `tests/` (log em `testes_automatizados.txt`) |
+| 3.3 | A* ponderado C(e) = (1−α)·d̂ + α·Ê, α de 0 a 1, joelho de Pareto e fronteira exata BOA* (`pareto_fronteira.png`, `pareto_tradeoff.csv`) |
+| 3.4 | Altitude e CO₂ acumulado ao longo das rotas α=0 e α=1 (`perfil_altimetrico_comparativo.png`) |
+| 3.5 | Monte Carlo com N pares × 3 cargas + Wilcoxon (`boxplot_cenarios_carga.png`, `relatorio_estatistico.md`) |
+| 3.6 | Executa 3.1 a 3.5 e grava `resultados_validacao/RESUMO.md` |
+
+A normalização usa o ponto utopia (mín. distância, mín. CO₂) e o nadir formado pelas duas
+soluções extremas; o joelho é a solução com menor distância euclidiana ao utopia no espaço
+normalizado. A referência da paridade física é o CMEM com parâmetros de Lai et al. (2024),
+calculado — não são medições de campo.

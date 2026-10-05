@@ -1,0 +1,71 @@
+{
+  "registros_total": 7385,
+  "registros_diesel": 175,
+  "registros_validos": 175,
+  "registros_rejeitados": [],
+  "fator_projeto_g_l": 2697.1966545766954,
+  "fator_implicito_media_g_l": 2688.6146748173433,
+  "fator_implicito_mediana_g_l": 2691.176470588235,
+  "fator_implicito_min_g_l": 2608.695652173913,
+  "fator_implicito_max_g_l": 2755.1020408163263,
+  "diferenca_media_fator_pct": -0.31818146240060186,
+  "fonte": "https://www.kaggle.com/datasets/debajyotipodder/co2-emission-by-vehicles",
+  "notebook_referencia": "https://www.kaggle.com/code/muizah/c02-emission",
+  "url_download": "https://www.kaggle.com/api/v1/datasets/download/debajyotipodder/co2-emission-by-vehicles",
+  "dataset_baixado": false,
+  "dataset": "C:\\Users\\ubivi\\OneDrive\\Documentos\\Routly\\CO2 Emissions_Canada.csv",
+  "sha256": "e832d820e42066d0946b02a58bce8bc1c7da9684f5724348ade9753b8eabec72",
+  "python": "3.13.6",
+  "verificacoes_unidades": [
+    {
+      "verificacao": "10 L/100 km -> 0.1 L/km",
+      "obtido": 0.1,
+      "esperado": 0.1,
+      "passou": true
+    },
+    {
+      "verificacao": "0.1 L/km x 2700 g/L -> 270 g/km",
+      "obtido": 270.0,
+      "esperado": 270,
+      "passou": true
+    },
+    {
+      "verificacao": "Consumo zero -> emissão zero",
+      "obtido": 0.0,
+      "esperado": 0,
+      "passou": true
+    },
+    {
+      "verificacao": "10.21 kg/gal US -> g/L",
+      "obtido": 2697.1966545766954,
+      "esperado": 2697.1966545766954,
+      "passou": true
+    },
+    {
+      "verificacao": "VT-CPFM: vazão L/s integrada por 100 s",
+      "obtido": 0.24096305248348537,
+      "esperado": 0.24096305248348537,
+      "passou": true
+    },
+    {
+      "verificacao": "VT-CPFM: litros -> gramas",
+      "obtido": 649.9247390350454,
+      "esperado": 649.9247390350454,
+      "passou": true
+    },
+    {
+      "verificacao": "VT-CPFM: 10 km consomem 10 vezes 1 km",
+      "obtido": 2.4096305248348537,
+      "esperado": 2.4096305248348537,
+      "passou": true
+    },
+    {
+      "verificacao": "L/100 km -> g/km coincide com trecho de 1 km",
+      "obtido": 649.9247390350454,
+      "esperado": 649.9247390350454,
+      "passou": true
+    }
+  ],
+  "criterio": "Comparação descritiva; sem limiar de aprovação empírica.",
+  "limitacoes": "Não valida consumo do caminhão. Consumo e CO₂ do catálogo podem não ser independentes. Valores arredondados e registros repetidos são preservados; não se estima significância estatística."
+}

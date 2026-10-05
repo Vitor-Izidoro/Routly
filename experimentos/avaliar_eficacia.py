@@ -242,7 +242,7 @@ def main():
     parser.add_argument('--saida', type=Path, default=BASE / 'experimentos' / 'resultados')
     args = parser.parse_args()
     if not CSV_GRAFO.exists():
-        parser.error('Grafo ausente. Disponibilize grafo_curitiba_carbono.csv (gerado por main.py).')
+        parser.error('Grafo ausente. Disponibilize grafo_curitiba_carbono.csv (gerado por etl_ippuc.py, menu 1.1 do main.py).')
     args.saida.mkdir(parents=True, exist_ok=True)
     inicio = perf_counter()
 

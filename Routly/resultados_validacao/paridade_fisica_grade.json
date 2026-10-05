@@ -1,0 +1,308 @@
+{
+  "descricao": "Pontos de referência para a paridade física do modelo do Routly em função da declividade.",
+  "referencia": "CMEM simplificado (emissoes.py), parâmetros HDV de Lai et al. (2024), DOI 10.1016/j.cor.2024.106557, com perfil físico HDDT1. Valores calculados, não medições de campo.",
+  "modelo_routly": "VT-CPFM-1 convexo HDDT1, Wang e Rakha (2017), DOI 10.1016/j.trd.2017.06.011.",
+  "condicoes": {
+    "velocidade_kmh": 30.0,
+    "altitude_m": 910.0,
+    "fator_co2_g_l": 2697.1966545766954,
+    "massa_base_kg": 7182.0
+  },
+  "metricas_globais": {
+    "r2": 0.9940959966947218,
+    "mape": 9.692879507616281,
+    "pearson": 0.9998429188805569
+  },
+  "metricas_por_cenario": {
+    "Vazio": {
+      "r2": 0.9533717904496392,
+      "mape": 10.945722021980384,
+      "pearson": 0.99981636503677
+    },
+    "Meia carga": {
+      "r2": 0.9922792424990617,
+      "mape": 9.324037821519429,
+      "pearson": 0.9998493191861743
+    },
+    "Carregado": {
+      "r2": 0.9967517224831134,
+      "mape": 8.808878679349025,
+      "pearson": 0.9998253511952621
+    }
+  },
+  "pontos": [
+    {
+      "cenario": "Vazio",
+      "carga_kg": 0.0,
+      "rampa_pct": -6.0,
+      "co2_g_km_routly_vtcpfm": 505.8232446278657,
+      "co2_g_km_referencia_cmem": 592.3532830314846
+    },
+    {
+      "cenario": "Vazio",
+      "carga_kg": 0.0,
+      "rampa_pct": -5.0,
+      "co2_g_km_routly_vtcpfm": 505.5459637812297,
+      "co2_g_km_referencia_cmem": 592.0285683775596
+    },
+    {
+      "cenario": "Vazio",
+      "carga_kg": 0.0,
+      "rampa_pct": -4.0,
+      "co2_g_km_routly_vtcpfm": 505.31898446400754,
+      "co2_g_km_referencia_cmem": 591.7627602219147
+    },
+    {
+      "cenario": "Vazio",
+      "carga_kg": 0.0,
+      "rampa_pct": -3.0,
+      "co2_g_km_routly_vtcpfm": 505.14237448326577,
+      "co2_g_km_referencia_cmem": 591.5559379712183
+    },
+    {
+      "cenario": "Vazio",
+      "carga_kg": 0.0,
+      "rampa_pct": -2.0,
+      "co2_g_km_routly_vtcpfm": 505.0161866832196,
+      "co2_g_km_referencia_cmem": 591.4081635096259
+    },
+    {
+      "cenario": "Vazio",
+      "carga_kg": 0.0,
+      "rampa_pct": -1.0,
+      "co2_g_km_routly_vtcpfm": 526.176352965276,
+      "co2_g_km_referencia_cmem": 633.1610859367058
+    },
+    {
+      "cenario": "Vazio",
+      "carga_kg": 0.0,
+      "rampa_pct": 0.0,
+      "co2_g_km_routly_vtcpfm": 690.003295443046,
+      "co2_g_km_referencia_cmem": 792.2917189327775
+    },
+    {
+      "cenario": "Vazio",
+      "carga_kg": 0.0,
+      "rampa_pct": 1.0,
+      "co2_g_km_routly_vtcpfm": 854.1516166163998,
+      "co2_g_km_referencia_cmem": 951.4888463280085
+    },
+    {
+      "cenario": "Vazio",
+      "carga_kg": 0.0,
+      "rampa_pct": 2.0,
+      "co2_g_km_routly_vtcpfm": 1018.6705695206344,
+      "co2_g_km_referencia_cmem": 1110.7524581504824
+    },
+    {
+      "cenario": "Vazio",
+      "carga_kg": 0.0,
+      "rampa_pct": 3.0,
+      "co2_g_km_routly_vtcpfm": 1183.6095132767425,
+      "co2_g_km_referencia_cmem": 1270.0825244993991
+    },
+    {
+      "cenario": "Vazio",
+      "carga_kg": 0.0,
+      "rampa_pct": 4.0,
+      "co2_g_km_routly_vtcpfm": 1349.01788843967,
+      "co2_g_km_referencia_cmem": 1429.4789955898675
+    },
+    {
+      "cenario": "Vazio",
+      "carga_kg": 0.0,
+      "rampa_pct": 5.0,
+      "co2_g_km_routly_vtcpfm": 1514.945192367412,
+      "co2_g_km_referencia_cmem": 1588.941801827387
+    },
+    {
+      "cenario": "Vazio",
+      "carga_kg": 0.0,
+      "rampa_pct": 6.0,
+      "co2_g_km_routly_vtcpfm": 1681.4409546623267,
+      "co2_g_km_referencia_cmem": 1748.4708539117603
+    },
+    {
+      "cenario": "Meia carga",
+      "carga_kg": 10205.828325,
+      "rampa_pct": -6.0,
+      "co2_g_km_routly_vtcpfm": 505.8232446278657,
+      "co2_g_km_referencia_cmem": 592.3532830314846
+    },
+    {
+      "cenario": "Meia carga",
+      "carga_kg": 10205.828325,
+      "rampa_pct": -5.0,
+      "co2_g_km_routly_vtcpfm": 505.5459637812297,
+      "co2_g_km_referencia_cmem": 592.0285683775596
+    },
+    {
+      "cenario": "Meia carga",
+      "carga_kg": 10205.828325,
+      "rampa_pct": -4.0,
+      "co2_g_km_routly_vtcpfm": 505.31898446400754,
+      "co2_g_km_referencia_cmem": 591.7627602219147
+    },
+    {
+      "cenario": "Meia carga",
+      "carga_kg": 10205.828325,
+      "rampa_pct": -3.0,
+      "co2_g_km_routly_vtcpfm": 505.14237448326577,
+      "co2_g_km_referencia_cmem": 591.5559379712183
+    },
+    {
+      "cenario": "Meia carga",
+      "carga_kg": 10205.828325,
+      "rampa_pct": -2.0,
+      "co2_g_km_routly_vtcpfm": 505.0161866832196,
+      "co2_g_km_referencia_cmem": 591.4081635096259
+    },
+    {
+      "cenario": "Meia carga",
+      "carga_kg": 10205.828325,
+      "rampa_pct": -1.0,
+      "co2_g_km_routly_vtcpfm": 504.9404588663317,
+      "co2_g_km_referencia_cmem": 591.3194811063817
+    },
+    {
+      "cenario": "Meia carga",
+      "carga_kg": 10205.828325,
+      "rampa_pct": 0.0,
+      "co2_g_km_routly_vtcpfm": 852.0457434573958,
+      "co2_g_km_referencia_cmem": 973.2328759160899
+    },
+    {
+      "cenario": "Meia carga",
+      "carga_kg": 10205.828325,
+      "rampa_pct": 1.0,
+      "co2_g_km_routly_vtcpfm": 1250.4501036185345,
+      "co2_g_km_referencia_cmem": 1358.6064495404614
+    },
+    {
+      "cenario": "Meia carga",
+      "carga_kg": 10205.828325,
+      "rampa_pct": 2.0,
+      "co2_g_km_routly_vtcpfm": 1650.5386585633998,
+      "co2_g_km_referencia_cmem": 1744.0465075920754
+    },
+    {
+      "cenario": "Meia carga",
+      "carga_kg": 10205.828325,
+      "rampa_pct": 3.0,
+      "co2_g_km_routly_vtcpfm": 2052.4319069431,
+      "co2_g_km_referencia_cmem": 2129.553020170132
+    },
+    {
+      "cenario": "Meia carga",
+      "carga_kg": 10205.828325,
+      "rampa_pct": 4.0,
+      "co2_g_km_routly_vtcpfm": 2456.251088950747,
+      "co2_g_km_referencia_cmem": 2515.12593748974
+    },
+    {
+      "cenario": "Meia carga",
+      "carga_kg": 10205.828325,
+      "rampa_pct": 5.0,
+      "co2_g_km_routly_vtcpfm": 2862.118125534433,
+      "co2_g_km_referencia_cmem": 2900.7651899564007
+    },
+    {
+      "cenario": "Meia carga",
+      "carga_kg": 10205.828325,
+      "rampa_pct": 6.0,
+      "co2_g_km_routly_vtcpfm": 3270.1555573638625,
+      "co2_g_km_referencia_cmem": 3286.470688269915
+    },
+    {
+      "cenario": "Carregado",
+      "carga_kg": 20411.65665,
+      "rampa_pct": -6.0,
+      "co2_g_km_routly_vtcpfm": 505.8232446278657,
+      "co2_g_km_referencia_cmem": 592.3532830314846
+    },
+    {
+      "cenario": "Carregado",
+      "carga_kg": 20411.65665,
+      "rampa_pct": -5.0,
+      "co2_g_km_routly_vtcpfm": 505.5459637812297,
+      "co2_g_km_referencia_cmem": 592.0285683775596
+    },
+    {
+      "cenario": "Carregado",
+      "carga_kg": 20411.65665,
+      "rampa_pct": -4.0,
+      "co2_g_km_routly_vtcpfm": 505.31898446400754,
+      "co2_g_km_referencia_cmem": 591.7627602219147
+    },
+    {
+      "cenario": "Carregado",
+      "carga_kg": 20411.65665,
+      "rampa_pct": -3.0,
+      "co2_g_km_routly_vtcpfm": 505.14237448326577,
+      "co2_g_km_referencia_cmem": 591.5559379712183
+    },
+    {
+      "cenario": "Carregado",
+      "carga_kg": 20411.65665,
+      "rampa_pct": -2.0,
+      "co2_g_km_routly_vtcpfm": 505.0161866832196,
+      "co2_g_km_referencia_cmem": 591.4081635096259
+    },
+    {
+      "cenario": "Carregado",
+      "carga_kg": 20411.65665,
+      "rampa_pct": -1.0,
+      "co2_g_km_routly_vtcpfm": 504.9404588663317,
+      "co2_g_km_referencia_cmem": 591.3194811063817
+    },
+    {
+      "cenario": "Carregado",
+      "carga_kg": 20411.65665,
+      "rampa_pct": 0.0,
+      "co2_g_km_routly_vtcpfm": 1014.3342579585897,
+      "co2_g_km_referencia_cmem": 1154.174032899402
+    },
+    {
+      "cenario": "Carregado",
+      "carga_kg": 20411.65665,
+      "rampa_pct": 1.0,
+      "co2_g_km_routly_vtcpfm": 1648.212574032378,
+      "co2_g_km_referencia_cmem": 1765.7240527529136
+    },
+    {
+      "cenario": "Carregado",
+      "carga_kg": 20411.65665,
+      "rampa_pct": 2.0,
+      "co2_g_km_routly_vtcpfm": 2286.1084643829968,
+      "co2_g_km_referencia_cmem": 2377.3405570336677
+    },
+    {
+      "cenario": "Carregado",
+      "carga_kg": 20411.65665,
+      "rampa_pct": 3.0,
+      "co2_g_km_routly_vtcpfm": 2928.2146964742387,
+      "co2_g_km_referencia_cmem": 2989.0235158408655
+    },
+    {
+      "cenario": "Carregado",
+      "carga_kg": 20411.65665,
+      "rampa_pct": 4.0,
+      "co2_g_km_routly_vtcpfm": 3574.7260497416714,
+      "co2_g_km_referencia_cmem": 3600.7728793896135
+    },
+    {
+      "cenario": "Carregado",
+      "carga_kg": 20411.65665,
+      "rampa_pct": 5.0,
+      "co2_g_km_routly_vtcpfm": 4225.839217401412,
+      "co2_g_km_referencia_cmem": 4212.588578085415
+    },
+    {
+      "cenario": "Carregado",
+      "carga_kg": 20411.65665,
+      "rampa_pct": 6.0,
+      "co2_g_km_routly_vtcpfm": 4881.752707242075,
+      "co2_g_km_referencia_cmem": 4824.4705226280685
+    }
+  ]
+}

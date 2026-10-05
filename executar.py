@@ -100,7 +100,7 @@ def main():
         parser.error('A taxa de emissão deve ser finita e maior que zero.')
     caminho = BASE / 'grafo_curitiba_carbono.csv'
     if not caminho.exists():
-        parser.error('Grafo ausente. Disponibilize os shapefiles e execute main.py antes.')
+        parser.error('Grafo ausente. Disponibilize os shapefiles e gere-o pelo menu 1.1 do main.py (etl_ippuc.py).')
     if args.modelo_emissao != 'legado':
         print(f'[CONFIG] {descricao} | base {caminhao.massa_vazia_kg:g} kg | '
               f'reboque + carga {args.carga_kg:g} kg')

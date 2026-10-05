@@ -1,0 +1,215 @@
+# Mapa-De-Carbono: Sistema de Rotas Ecológicas - Curitiba
+
+> **Atualização do motor:** a execução padrão utiliza o VT-CPFM-1 convexo de Wang e Rakha (2017).
+> O perfil físico padrão é o International 9800 SBA (1997), Cummins M11-330 (HDDT1), com 7.182 kg de massa base.
+> Consulte [o perfil do caminhão](docs/CAMINHAO_REFERENCIA.md) e [as equações implementadas](docs/VTCPFM.md).
+> `--cenario-co2 epa` (padrão) usa 2.697,20 g/L; `--cenario-co2 artigo` reproduz o fator empírico de 2.070 g/L do estudo, com VT-CPFM.
+> A fórmula antiga abaixo é o baseline histórico. Consulte [o modelo, as fontes e a validação](docs/MODELO_EMISSOES.md).
+
+## Grupo: Alex Menegatti Secco, Gabriel Marques Simini, Mariana de Castro, Vitor Rodrigues Izidoro
+## 1. Descrição, Contextualização e Escopo do Projeto
+
+**Contextualização:** Sistemas de navegação tradicionais frequentemente calculam a rota mais rápida ou mais curta, ignorando o relevo topográfico. Em cidades com variações de altitude significativas como Curitiba, rotas com aclives severos aumentam exponencialmente o esforço do motor e, consequentemente, a emissão de gases de efeito estufa. 
+
+**Descrição:** Este projeto consiste no desenvolvimento de um motor de roteamento espacial multiobjetivo operando em nível de memória. O sistema cruza os dados oficiais de arruamento e altimetria da cidade de Curitiba com o catálogo de emissões de veículos para calcular rotas personalizadas.
+
+**Escopo:** O sistema permite ao usuário inserir a origem e o destino (via nomes de ruas) e selecionar o veículo que será utilizado. O algoritmo entrega a rota instruída passo a passo (turn-by-turn) otimizando para dois modos à escolha do usuário:
+*   **Modo Distância:** O trajeto geometricamente mais curto.
+*   **Modo Emissão:** O trajeto com a menor emissão de carbono (evitando aclives severos para veículos a combustão).
+
+---
+
+## 2. Materiais e Métodos
+
+**Materiais (Bases de Dados):**
+*   **Dados Geográficos (IPPUC):** Shapefiles oficiais de "Eixos de Rua" e "Curvas de Nível" de Curitiba (Sistema de Coordenadas SIRGAS 2000).
+*   **Dados Veiculares:** Dataset `CO2 Emissions_Canada.csv`, fornecendo a taxa de emissão base ($E$) em g/km para diversos modelos e motores reais.
+
+**Métodos (Engenharia e Algoritmos):**
+1.  **Pipeline ETL (Extração, Transformação e Carga):** Processamento espacial utilizando as bibliotecas `GeoPandas` e `Shapely` em Python. Os vértices das ruas são cruzados com as curvas de nível utilizando uma R-Tree (`sjoin_nearest`) para interpolação da cota altimétrica ($Z$) em complexidade otimizada.
+2.  **Modelagem Matemática do Carbono:** O custo $C$ de uma aresta (rua) no grafo é calculado deterministicamente pela fórmula: 
+    $$ C = (d_{km} \times E) \times (1 + (\Delta Z \times k)) $$
+    Sendo $d_{km}$ a distância do segmento, $E$ a emissão do veículo (g/km), $\Delta Z$ a variação de altitude, e $k$ a constante de penalidade do motor em aclives.
+3.  **Busca de Caminho (NBA*):** Implementação do Algoritmo *New Bidirectional A** (A-Estrela Bidirecional) operando em uma Lista de Adjacência. O espaço de busca explora a malha simultaneamente a partir da origem e do destino, utilizando a distância euclidiana projetada sobre o consumo do veículo como função heurística admissível.
+
+---
+
+## 3. Baseline de Implementação (Artefatos e Logs)
+
+*Nota de Arquitetura:* Por se tratar de um sistema puramente determinístico baseado na Teoria dos Grafos, este projeto não gera "pesos de modelo" (Model Weights) típicos de redes neurais. O conhecimento do sistema reside em sua matriz de adjacência pré-processada e na *Lookup Table* de veículos.
+
+### Estrutura do Repositório
+*   **`main.py`:** Menu principal interativo (CLI central): ETL, mapas, roteamento e comprovações científicas.
+*   **`etl_ippuc.py`:** Script de ETL (antigo `main.py`). Lê os Shapefiles brutos, cria a topologia matemática e exporta a matriz de adjacência final.
+*   **`experimentos/comprovacao_cientifica.py`:** Fronteira de Pareto, perfil altimétrico, Monte Carlo + Wilcoxon e paridade física; resultados em `resultados_validacao/`.
+*   **`estrela.py`:** O motor de roteamento em tempo real. Contém o geocodificador (busca flexível de nomes de ruas), a lógica do NBA*, e o sistema de plotagem gráfica via `matplotlib`.
+*   **`grafo_curitiba_carbono.csv`:** Artefato gerado pelo `etl_ippuc.py` (menu 1.1). Contém mais de 40 mil arestas formatadas com distâncias e deltas de altimetria.
+*   **`CO2 Emissions_Canada.csv`:** Tabela de emissão por modelo veicular. Quando necessária,
+    é baixada automaticamente do Kaggle e validada antes do uso.
+*   **Arquivos de Debug (`explorar_mapa.py`, `debug_nomes.py`, `ver_colunas.py`,`ver_grafo.py`  ):** Scripts utilitários de validação topológica e inspeção de dados.
+
+### Reprodução e Acesso aos Dados
+Os dados primários para execução deste baseline ultrapassam o limite de repositórios padrão devido à resolução do Shapefile. 
+*   **Bases oficiais:** Podem ser baixadas no Portal do IPPUC (https://ippuc.org.br/geodownloads/geo.htm). É obrigatória a escolha da projeção **SIRGAS**.
+*   **Base congelada do projeto:** Disponível no drive do grupo (https://drive.google.com/file/d/1G_TyDlhXrZ-uHM17ONIaw-5KRDzijHaS/view?usp=sharing).
+
+---
+
+## 4. Cronograma de Execução
+
+| Etapa | Descrição da Atividade | Status |
+| :--- | :--- | :--- |
+| **Fase 1** | Pesquisa de viabilidade e obtenção dos dados primários (IPPUC e Kaggle). | Concluído |
+| **Fase 2** | Construção do pipeline ETL (`etl_ippuc.py`, antigo `main.py`) e interpolação espacial (R-Tree). | Concluído |
+| **Fase 3** | Implementação do algoritmo Bidirecional (NBA*) e geocodificador de texto. | Concluído |
+| **Fase 4** | Refatoração estrutural para sistema Multiobjetivo (Distância vs Emissão). | Concluído |
+| **Fase 5** | Testes de consistência topológica (identificação e tratamento de ilhas). | Em Andamento |
+| **Fase 6** | Embasamento em artigos cíentificos sobre caminhões para desenvolver uma nova fórmula única de emissão de carbono. | Em Andamento |
+| **Fase 7** | Substituir o dataset de emissão de carbono de carros para especializar o algoritmo em rotas para caminhões. | A iniciar |
+| **Fase 8** | Análise de resultados, validação matemática das rotas e geração de logs. | A Iniciar |
+| **Fase 9** | Redação do documento final, formatação acadêmica e defesa. | A Iniciar |
+---
+## Exemplo de funcionamento
+**Entrada no Código:**
+```python
+carro_escolhido = "CHEVROLET CRUZE" 
+print("\n--- SISTEMA DE ROTAS DE CURITIBA (NBA*) ---")
+rua_origem = "R. AMADEU ASSAD YASSIM"
+rua_destino = "R. GEN. LUIZ CARLOS PEREIRA TOURINHO"
+```
+### Saida no terminal
+
+```plaintext
+
+--- SISTEMA DE ROTAS DE CURITIBA (NBA*) ---
+
+Executando o motor de roteamento Bidirecional...
+
+[SUCESSO!] Rota gerada passando por 240 cruzamentos (nós).
+[RESULTADO] Emissão total estimada: 4888.73 gramas de CO2
+
+[GERANDO INSTRUÇÕES DE NAVEGAÇÃO...]
+
+--- PASSO A PASSO DA ROTA ---
+-> Saia pela: R. PURÚS
+-> Entre na: R. GUSTAVO RATTMAN
+-> Entre na: R. FAGUNDES VARELA
+-> Entre na: R. AUGUSTO STRESSER
+-> Entre na: R. FLÁVIO DALLEGRAVE
+-> Entre na: R. ZEILA MOURA DOS SANTOS
+-> Entre na: AV. PRES. AFFONSO CAMARGO
+-> Entre na: VIADUTO DO CAPANEMA
+-> Entre na: AV. DR. DARIO LOPES DOS SANTOS
+-> Entre na: R. CONS. LAURINDO
+-> Entre na: R. CHILE
+-> Entre na: AV. MAL. FLORIANO PEIXOTO
+-> Entre na: AV. PRES. KENNEDY
+-> Entre na: AV. REPÚBLICA ARGENTINA
+-> Entre na: AV. WINSTON CHURCHILL
+-> Entre na: ROD. BR-476
+-> Entre na: R. NICOLA PELLANDA
+-> Entre na: R. STELLA ANTONIASSI GROCHEWSKI
+-> Entre na: R. MARIANO SNAK
+-> Entre na: R. BRASÍLIO PERY MOREIRA
+-> Entre na: ROD. BR-476
+-> Entre na: ROD. BR-116 - RÉGIS BITTENCOURT
+-> Entre na: R. VER. ANGELO BURBELLO
+-> Entre na: ESTR. DEL. BRUNO DE ALMEIDA
+-> Entre na: R. JÚLIO PEREIRA SOBRINHO
+-> Entre na: R. EMANOEL ERNESTO BERTOLDI
+-> Entre na: R. CRESCÊNCIA BERTHOLDI
+-> Entre na: R. LUCAS CARVALHO
+-> Entre na: R. GEN. LUIZ CARLOS PEREIRA TOURINHO
+-> [CHEGOU AO DESTINO]
+
+Desenhando o mapa de Curitiba com a rota gerada...
+
+```
+
+<img width="1636" height="909" alt="image" src="https://github.com/user-attachments/assets/a4cc73b6-55cd-46d9-8636-ff2d370405e3" />
+
+    
+
+
+
+
+## ALT e BOA*: execução e validação
+
+Crie um ambiente virtual e instale as dependências:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python estrela.py
+```
+
+O menu oferece ALT por distância, ALT por emissão e BOA* para alternativas
+entre os dois objetivos. Pressione Enter para aceitar as ruas de exemplo.
+No BOA*, escolha o número da alternativa para visualizar seu mapa e instruções.
+Os caminhos dos CSVs são resolvidos a partir da pasta dos scripts.
+O padrão é o HDDT1 com 7.182 kg de massa base, massa adicional configurável (reboque + carga) e
+velocidade constante configurável. O modelo legado ainda permite catálogo ou
+taxa de exemplo de 200 g/km, com indicação explícita do fallback.
+
+Execução sem perguntas (adicione `--sem-mapa` para ambientes sem interface gráfica):
+
+```bash
+.venv/bin/python estrela.py --algoritmo alt --modo distancia
+.venv/bin/python estrela.py --algoritmo alt --modo emissao --landmarks 4
+.venv/bin/python estrela.py --algoritmo alt --cenario-co2 artigo --carga-kg 20411.65665
+.venv/bin/python estrela.py --algoritmo boa --carga-kg 10000 --velocidade-kmh 30 --rota 1
+.venv/bin/python estrela.py --algoritmo nba --modo emissao
+.venv/bin/python estrela.py --algoritmo alt --modelo-emissao cmem --caminhao hdv-generico --sem-mapa
+.venv/bin/python -m unittest discover -s tests -v
+```
+
+Use `--origem "NOME EXATO"` e `--destino "NOME EXATO"` para alterar as ruas.
+O nó de cada rua é escolhido deterministicamente pela menor coordenada.
+
+`algoritmos.py` contém um ALT dirigido com tabelas de distâncias de/para cada
+landmark, separadas por métrica. A classe `IndiceALT` permite reutilizar o
+pré-processamento em várias chamadas de `buscar`; cada execução do terminal
+reconstrói o índice. O tempo de pré-processamento é mostrado separadamente.
+
+BOA* usa uma fila lexicográfica e poda por menor emissão já expandida em cada
+nó, seguindo o algoritmo 3 de Hernández et al. Dois Dijkstras no grafo reverso
+calculam heurísticas por objetivo. Retorna uma rota por par de custos não
+dominado, sem limitar artificialmente o número de alternativas. Sua memória e
+seu tempo podem crescer com a fronteira. O tempo exibido inclui as heurísticas.
+Os custos usam ponto flutuante, como no modelo original.
+
+As emissões usam VT-CPFM com custos não negativos, altitude média por trecho,
+velocidade constante e aceleração zero. CMEM continua disponível com
+`--modelo-emissao cmem`, e a fórmula original com `--modelo-emissao legado`. Consulte
+[MODELO_EMISSOES.md](docs/MODELO_EMISSOES.md) para hipóteses e fontes. A malha ainda trata todas as ruas como transitáveis nos dois
+sentidos. A implementação NBA* anterior foi mantida como opção legada.
+
+Referências:
+
+- [ALT — Goldberg e Harrelson](https://www.microsoft.com/en-us/research/wp-content/uploads/2005/01/soda05.pdf).
+- [BOA* — Hernández et al.](https://ojs.aaai.org/index.php/ICAPS/article/view/6655).
+
+## Menu principal e comprovação científica (TCC)
+
+```bash
+python -m pip install -r requirements.txt
+python main.py                          # menu interativo
+python main.py --opcao 3.6 --pares 100  # pipeline completo, sem perguntas
+```
+
+| Menu | Função |
+|---|---|
+| 1.1 | Recria `grafo_curitiba_carbono.csv` a partir dos Shapefiles do IPPUC (`etl_ippuc.py`); sem os `.shp`, avisa e mantém o CSV existente |
+| 1.2 / 1.3 | Mapa interativo (Leaflet, HTML) das rotas curta, compromisso e ecológica; exploração de cruzamentos |
+| 2.x | Todas as opções do `executar.py`: ALT distância/emissão, BOA*, NBA* legado, modelos VT-CPFM/CMEM/legado, cenários de CO₂, carga, velocidade |
+| 3.1 | Conversão de CO₂ (`validar_conversao_co2.py`), eficácia em 3 camadas (`avaliar_eficacia.py`), reprodução de `docs/validacao_cmem.json` e paridade física por declividade (`validacao_fisica_grade.png`, `paridade_fisica_grade.json`) |
+| 3.2 | `pytest` em `tests/` (log em `testes_automatizados.txt`) |
+| 3.3 | A* ponderado C(e) = (1−α)·d̂ + α·Ê, α de 0 a 1, joelho de Pareto e fronteira exata BOA* (`pareto_fronteira.png`, `pareto_tradeoff.csv`) |
+| 3.4 | Altitude e CO₂ acumulado ao longo das rotas α=0 e α=1 (`perfil_altimetrico_comparativo.png`) |
+| 3.5 | Monte Carlo com N pares × 3 cargas + Wilcoxon (`boxplot_cenarios_carga.png`, `relatorio_estatistico.md`) |
+| 3.6 | Executa 3.1 a 3.5 e grava `resultados_validacao/RESUMO.md` |
+
+A normalização usa o ponto utopia (mín. distância, mín. CO₂) e o nadir formado pelas duas
+soluções extremas; o joelho é a solução com menor distância euclidiana ao utopia no espaço
+normalizado. A referência da paridade física é o CMEM com parâmetros de Lai et al. (2024),
+calculado — não são medições de campo.

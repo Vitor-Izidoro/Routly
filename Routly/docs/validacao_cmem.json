@@ -1,0 +1,76 @@
+{
+  "data": "2026-09-09",
+  "grafo_sha256": "3037976cef04594a937ec581be2e452474c929d46f41463facdae166063c7979",
+  "origem": "R. AMADEU ASSAD YASSIM",
+  "destino": "R. GEN. LUIZ CARLOS PEREIRA TOURINHO",
+  "selecao_no": "menor tupla (X,Y) da rua",
+  "parametros": {
+    "massa_vazia_kg": 13000.0,
+    "atrito_motor_kj_rev_l": 0.17,
+    "rotacao_rev_s": 33.0,
+    "cilindrada_l": 11.0,
+    "area_frontal_m2": 8.2,
+    "coef_arrasto": 0.7,
+    "coef_rolamento": 0.008,
+    "eficiencia_transmissao": 0.4,
+    "eficiencia_motor": 0.9,
+    "poder_calorifico_kj_g": 45.0,
+    "conversao_combustivel_g_l": 737.0,
+    "densidade_ar_kg_m3": 1.2041,
+    "gravidade_m_s2": 9.81,
+    "fator_co2_g_l": 2697.1966545766954
+  },
+  "resultados": [
+    {
+      "carga_kg": 0,
+      "velocidade_kmh": 30,
+      "modo": "distancia",
+      "distancia_m": 28831.86999999999,
+      "co2_g": 29944.976223578768,
+      "combustivel_l": 11.10225914479284,
+      "preparo_s": 0.45504071599998497,
+      "consulta_s": 0.10658734599974196,
+      "custo_dijkstra": 28831.86999999999
+    },
+    {
+      "carga_kg": 0,
+      "velocidade_kmh": 30,
+      "modo": "emissao",
+      "distancia_m": 30441.710000000006,
+      "co2_g": 29359.05225559381,
+      "combustivel_l": 10.885024718452163,
+      "preparo_s": 0.40655088299990894,
+      "consulta_s": 0.1657712160003939,
+      "custo_dijkstra": 29359.05225559381
+    },
+    {
+      "carga_kg": 10000,
+      "velocidade_kmh": 30,
+      "modo": "distancia",
+      "distancia_m": 28831.86999999999,
+      "co2_g": 38759.63718294136,
+      "combustivel_l": 14.370341560810067,
+      "preparo_s": 0.43520238600012817,
+      "consulta_s": 0.18382182199957242,
+      "custo_dijkstra": 28831.86999999999
+    },
+    {
+      "carga_kg": 10000,
+      "velocidade_kmh": 30,
+      "modo": "emissao",
+      "distancia_m": 30792.589999999993,
+      "co2_g": 36850.0566995868,
+      "combustivel_l": 13.662354443847601,
+      "preparo_s": 0.42517174200020236,
+      "consulta_s": 0.09499112999992576,
+      "custo_dijkstra": 36850.0566995868
+    }
+  ],
+  "nota": "Estimativas de cenário sem calibração local; tempos de uma execução, não benchmark estatístico.",
+  "boa_carga_zero": {
+    "alternativas": 39,
+    "extremo_distancia_m": 28831.86999999999,
+    "extremo_emissao_g": 29359.05225559381,
+    "fronteira_nao_dominada": true
+  }
+}
