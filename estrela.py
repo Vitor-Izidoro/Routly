@@ -2,6 +2,7 @@ import pandas as pd
 import math
 import heapq
 import matplotlib.pyplot as plt
+from matplotlib.collections import LineCollection
 import warnings
 from emissoes import configurar_caminhao, consumo_trecho, emissao_legada, validar_cenario
 from vtcpfm import CaminhaoVTCPFM, consumo_trecho_vtcpfm
@@ -243,11 +244,11 @@ def plotar_rota_no_mapa(df_arestas, rota_nos, modo_escolhido, *, cenario_co2=Non
     print("\nDesenhando o mapa de Curitiba com a rota gerada...")
     plt.figure(figsize=(10, 10))
     
-    plt.plot(
-        [df_arestas['origem_x'], df_arestas['destino_x']], 
-        [df_arestas['origem_y'], df_arestas['destino_y']], 
-        color='grey', alpha=0.1, linewidth=0.5
-    )
+    # Uma coleção evita criar dezenas de milhares de objetos Line2D,
+    # tornando a exportação da malha completa viável no painel e no terminal.
+    segmentos = df_arestas[['origem_x', 'origem_y', 'destino_x', 'destino_y']].to_numpy().reshape(-1, 2, 2)
+    plt.gca().add_collection(LineCollection(segmentos, colors='grey', alpha=0.1, linewidths=0.5))
+    plt.gca().autoscale_view()
     
     if rota_nos:
         x_rota = [no[0] for no in rota_nos]
@@ -264,7 +265,7 @@ def plotar_rota_no_mapa(df_arestas, rota_nos, modo_escolhido, *, cenario_co2=Non
         titulo += f'\n{cenario_co2}'
     plt.title(titulo)
     plt.axis('equal')
-    plt.legend()
+    plt.legend(loc='upper right')
     plt.show()
 
 if __name__ == "__main__":

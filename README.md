@@ -1,5 +1,19 @@
 # Mapa-De-Carbono: Sistema de Rotas Ecológicas - Curitiba
 
+## Interface gráfica do Routly
+
+O painel local permite executar os testes por grupos e consultar logs, gráficos, mapas,
+tabelas e relatórios. Inclui fila, cancelamento e histórico de execuções, com estilo em verde pastel.
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe interface.py
+```
+
+Abra `http://127.0.0.1:8765`. Também disponível por `python main.py --interface`.
+No Linux/macOS, use `.venv/bin/python`. Veja [grupos, parâmetros e resultados](docs/INTERFACE.md).
+
 > **Atualização do motor:** a execução padrão utiliza o VT-CPFM-1 convexo de Wang e Rakha (2017).
 > O perfil físico padrão é o International 9800 SBA (1997), Cummins M11-330 (HDDT1), com 7.182 kg de massa base.
 > Consulte [o perfil do caminhão](docs/CAMINHAO_REFERENCIA.md) e [as equações implementadas](docs/VTCPFM.md).

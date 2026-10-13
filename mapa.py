@@ -69,7 +69,8 @@ _MODELO_HTML = """<!doctype html>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
-  html, body, #mapa { height: 100%; margin: 0; font-family: Georgia, serif; }
+  html, body, #mapa { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; }
+  #mapa { background: #f0f4e9; }
   .painel { position: absolute; top: 12px; right: 12px; z-index: 1000; background: #fcfcfb;
             color: #0b0b0b; padding: 10px 14px; border-radius: 8px; max-width: 340px;
             box-shadow: 0 1px 6px rgba(0,0,0,.25); font-size: 13px; line-height: 1.45; }
@@ -79,9 +80,17 @@ _MODELO_HTML = """<!doctype html>
 <body><div id="mapa"></div><div class="painel" id="painel"></div>
 <script>
 const DADOS = __DADOS__;
-const mapa = L.map('mapa');
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {maxZoom: 19, attribution: '&copy; OpenStreetMap | malha viária IPPUC'}).addTo(mapa);
+const mapa = L.map('mapa', {preferCanvas: true});
+// A malha do próprio experimento funciona sem solicitar imagens de terceiros.
+const malha = L.polyline(DADOS.malha, {color: '#afbea3', weight: 1, opacity: .55, interactive: false}).addTo(mapa);
+const baseOnline = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {maxZoom: 19, attribution: '&copy; OpenStreetMap'});
+L.control.layers({}, {'Malha IPPUC': malha, 'Mapa-base online': baseOnline}, {position: 'bottomleft'}).addTo(mapa);
+mapa.attributionControl.addAttribution('Malha viária IPPUC');
+baseOnline.on('tileerror', () => {
+  mapa.removeLayer(baseOnline);
+  document.getElementById('nota-base').textContent = 'Mapa-base online indisponível. As rotas e a malha local continuam disponíveis.';
+});
 const limites = [];
 let html = `<h1>${DADOS.titulo}</h1>`;
 for (const r of DADOS.rotas) {
@@ -90,7 +99,7 @@ for (const r of DADOS.rotas) {
   limites.push(...r.pontos);
   html += `<div><span class="linha" style="border-color:${r.cor}"></span><b>${r.nome}</b><br>${r.resumo}</div>`;
 }
-html += `<div style="margin-top:6px;color:#52514e">${DADOS.nota}</div>`;
+html += `<div style="margin-top:6px;color:#52514e">${DADOS.nota}</div><div id="nota-base" style="margin-top:6px;color:#65715f;font-size:11px">Malha local IPPUC. O mapa-base online é opcional no controle de camadas.</div>`;
 document.getElementById('painel').innerHTML = html;
 L.circleMarker(DADOS.origem, {radius: 8, color: '#0b0b0b', fillColor: '#ffffff', fillOpacity: 1})
   .bindTooltip('Origem', {permanent: true}).addTo(mapa);
@@ -120,13 +129,16 @@ def gerar_mapa_rotas(origem, destino, cenario='Carregado', saida=SAIDA / 'mapa_r
                       'resumo': (f'{t.distancia / 1000:.2f} km · {t.emissao / 1000:.2f} kg CO₂ · '
                                  f"{-s['co2_economizado_pct']:+.1f} % CO₂ · "
                                  f"{s['distancia_adicional_pct']:+.1f} % distância").replace('.', ',')})
-    dados = {'titulo': f'{origem.title()} → {destino.title()}', 'rotas': rotas,
+    coordenadas = {no: utm_para_latlon(*no) for no in grafo}
+    malha = [[coordenadas[u], coordenadas[v]] for u, arestas in grafo.items()
+             for v, *_ in arestas if u < v]
+    dados = {'titulo': f'{origem.title()} → {destino.title()}', 'rotas': rotas, 'malha': malha,
              'origem': utm_para_latlon(*o), 'destino': utm_para_latlon(*d),
              'nota': f"HDDT1 {cenario.lower()} ({f'{carga:,.0f}'.replace(',', '.')} kg adicionais), "
                      f'{VELOCIDADE_KMH:g} km/h, VT-CPFM. Clique numa rota para ver os detalhes.'}
     saida = Path(saida)
     saida.parent.mkdir(parents=True, exist_ok=True)
-    saida.write_text(_MODELO_HTML.replace('__DADOS__', json.dumps(dados, ensure_ascii=False)), encoding='utf-8')
+    saida.write_text(_MODELO_HTML.replace('__DADOS__', json.dumps(dados, ensure_ascii=False).replace('<', '\\u003c')), encoding='utf-8')
     print(f'[MAPA] Mapa interativo salvo em {saida}')
     if abrir:
         webbrowser.open(saida.as_uri())

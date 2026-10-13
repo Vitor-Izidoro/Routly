@@ -1,0 +1,62 @@
+/* Movimentos curtos: navegação responde imediatamente; o acabamento acompanha. */
+:root { --motion-ease: cubic-bezier(.22, 1, .36, 1); --motion-fast: 180ms; --motion-base: 280ms; }
+html { scrollbar-gutter: stable; }
+#experiments, #results-section { scroll-margin-top: 24px; }
+.history #history-list, .result-content, .terminal { scrollbar-gutter: stable; }
+.history #history-list { overflow-anchor: none; }
+.history-item { position: relative; }
+.history-item, .nav-button, .card-run, .button, .icon-button, .hero-link,
+.cancel-button, .result-tabs button, .artifact, .test-card, .stat {
+  transition: background-color var(--motion-base) ease, color var(--motion-fast) ease,
+    border-color var(--motion-base) ease, box-shadow var(--motion-base) ease,
+    transform var(--motion-base) var(--motion-ease), opacity var(--motion-fast) ease;
+}
+.button:active, .card-run:active, .cancel-button:active, .icon-button:active { transform: scale(.97); }
+.nav-button:active { transform: translateX(2px); }
+.nav-button svg, .card-icon, .stat-icon, .hero-link span {
+  transition: transform var(--motion-base) var(--motion-ease), color var(--motion-base) ease;
+}
+.search, .form-field input, .form-field select {
+  transition: border-color var(--motion-fast) ease, box-shadow var(--motion-fast) ease, background-color var(--motion-fast) ease;
+}
+.search:focus-within, .form-field input:focus, .form-field select:focus {
+  border-color: #91ad7d; box-shadow: 0 0 0 3px #a8c49120;
+}
+.result-tabs button { position: relative; border-bottom-color: transparent !important; }
+.result-tabs button::after {
+  content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px;
+  background: #77965b; transform: scaleX(0); transform-origin: left;
+  transition: transform var(--motion-base) var(--motion-ease);
+}
+.result-tabs button.active::after { transform: scaleX(1); }
+.badge, #queue-status, #artifact-count, #history-count { display: inline-flex; align-items: center; }
+.badge { transition: background-color var(--motion-base) ease, color var(--motion-base) ease; }
+.badge.executando::before, #queue-status.is-running::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor;
+  margin-right: 5px; flex-shrink: 0; animation: status-breathe 1.8s ease-in-out infinite;
+}
+dialog { transform-origin: center; }
+dialog[open]::backdrop { animation: backdrop-in 260ms ease both; }
+dialog.is-closing::backdrop { animation: backdrop-out 160ms ease both; }
+.is-loading::before {
+  content: ''; width: 12px; height: 12px; border: 2px solid #ffffff55;
+  border-top-color: currentColor; border-radius: 50%; animation: loading-spin 800ms linear infinite;
+}
+.is-loading { cursor: progress; }
+@media (hover: hover) and (pointer: fine) {
+  .test-card:hover, .artifact:hover { transform: translateY(-3px); box-shadow: 0 8px 22px #24412e0a; }
+  .test-card:hover .card-icon, .stat:hover .stat-icon { transform: translateY(-2px); }
+  .nav-button:hover svg { transform: translateX(2px); }
+  .hero-link:hover span { display: inline-block; transform: translateX(3px); }
+  .card-run:hover, .icon-button:hover { transform: translateY(-1px); }
+}
+@keyframes status-breathe { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes loading-spin { to { transform: rotate(360deg); } }
+@keyframes backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes backdrop-out { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .test-card:hover, .artifact:hover, .button:active, .card-run:hover, .card-run:active,
+  .icon-button:hover, .icon-button:active, .nav-button:active, .cancel-button:active,
+  .test-card:hover .card-icon, .stat:hover .stat-icon, .nav-button:hover svg, .hero-link:hover span { transform: none; }
+}
