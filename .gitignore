@@ -6,3 +6,8 @@ grafo_curitiba_carbono.csv
 
 .venv/
 __pycache__/
+
+# Resultados locais e histórico do painel
+.routly/
+.pytest_cache/
+experimentos/resultados_conversao_co2/

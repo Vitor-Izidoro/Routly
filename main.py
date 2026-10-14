@@ -316,7 +316,13 @@ def main(argv=None):
     parser.add_argument('--opcao', choices=[k for k in OPCOES if k != '2'],
                         help='Executa uma opção sem abrir o menu.')
     parser.add_argument('--pares', type=int, help='N do Monte Carlo (opções 3.5 e 3.6).')
+    parser.add_argument('--interface', action='store_true', help='Abre o painel gráfico local do Routly.')
     args = parser.parse_args(argv)
+    if args.interface:
+        from interface.servidor import main as abrir_interface
+        with patch.object(sys, 'argv', ['interface.py']):
+            abrir_interface()
+        return 0
     try:
         if args.opcao in ('3.5', '3.6'):
             executar_opcao(args.opcao, n_pares=args.pares or 100)
