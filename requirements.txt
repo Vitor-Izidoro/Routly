@@ -1,5 +1,6 @@
 pandas
 numpy
+networkx
 scipy
 matplotlib
 pytest

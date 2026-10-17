@@ -62,6 +62,7 @@ def catalogo():
                   campo('velocidades', 'Velocidades (km/h)', 'numbers', '30', min=0.01),
                   campo('ruido', 'Desvios de altitude (m; vazio desativa)', 'numbers', '1, 2', min=0, vazio=True),
                   campo('cmem', 'Validar também com CMEM', 'checkbox', True)], grafo=True),
+        operacao('comparacao_rotas', 'ciencia', 'Comparação de rotas · subidas e CO₂', 'Compara a rota mais curta com a mais ecológica: distância, subida acumulada, emissões e ruas. Resultados no Terminal.', grafo=True),
         operacao('pareto', 'ciencia', 'Fronteira de Pareto', 'Distância × emissão, solução de compromisso e fronteira exata BOA*.', [ORIGEM, DESTINO, CARGA, PASSOS, BOA], grafo=True),
         operacao('perfil', 'ciencia', 'Perfil altimétrico', 'Elevação e CO₂ acumulado nas rotas mais curta e mais ecológica.', [ORIGEM, DESTINO, CARGA], grafo=True),
         operacao('monte_carlo', 'ciencia', 'Monte Carlo + Wilcoxon', 'Pares aleatórios em três cargas, intervalos de confiança e teste pareado.', [PARES, SEMENTE], grafo=True),
