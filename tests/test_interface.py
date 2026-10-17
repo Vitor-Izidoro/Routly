@@ -1,5 +1,7 @@
 """Contratos da interface: parâmetros, fila, falhas, cancelamento e acesso a arquivos."""
 import json
+import io
+from contextlib import redirect_stdout
 import shutil
 from pathlib import Path
 import subprocess
@@ -59,6 +61,28 @@ class CatalogoTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp, patch('pytest.main', return_value=1), self.assertRaises(SystemExit) as erro:
             executar(op, p, Path(temp))
         self.assertEqual(erro.exception.code, 1)
+
+    def test_comparacao_rotas_executa_script_e_exibe_resultados(self):
+        import pandas as pd
+        op, p = validar('comparacao_rotas', {})
+        self.assertEqual(op['grupo'], 'ciencia')
+        df = pd.DataFrame([
+            (0, 0, 2, 0, 10, 20, 'Subida', 8),
+            (0, 0, 1, 0, 6, 4, 'Desvio A', 1),
+            (1, 0, 2, 0, 6, 4, 'Desvio B', 1),
+            (2, 0, 0, 0, 10, 10, 'Volta', -8),
+        ], columns=['origem_x', 'origem_y', 'destino_x', 'destino_y',
+                    'distancia_m', 'custo_carbono', 'nome_rua', 'delta_z'])
+        saida = io.StringIO()
+        with tempfile.TemporaryDirectory() as temp, redirect_stdout(saida), \
+                patch('pathlib.Path.is_file', return_value=True), \
+                patch('pandas.read_csv', return_value=df), \
+                patch('random.choice', side_effect=[(0, 0), (2, 0)]):
+            executar(op, p, Path(temp))
+        self.assertIn('Rota Mais Curta', saida.getvalue())
+        self.assertIn('Rota Mais Ecológica', saida.getvalue())
+        self.assertIn('economia de 12.00 g de CO2', saida.getvalue())
+        self.assertIn('2.00 metros mais longo', saida.getvalue())
 
     def test_worker_reutiliza_rota_e_exporta_figura(self):
         import matplotlib.pyplot as plt

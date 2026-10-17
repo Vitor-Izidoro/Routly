@@ -75,6 +75,8 @@ def executar(op, p, pasta):
             if not p['mapa']:
                 args += ['--sem-mapa']
             rodar_modulo('executar', args)
+        elif id == 'comparacao_rotas':
+            rodar_modulo('teste_comparacao_rotas', [])
         elif id == 'conversao':
             from experimentos.validar_conversao_co2 import main
             raise SystemExit(main(['--saida', str(pasta)]))
