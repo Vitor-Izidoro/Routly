@@ -150,6 +150,12 @@ const explicacoes = {
     'Abra mapa_rotas.html nos resultados, alterne as camadas e compare distância e CO₂ de cada alternativa. Observe se a redução estimada de emissão exige um desvio e se as rotas seguem os trechos representados na malha.',
     'O mapa é uma inspeção visual, sem critério automático de aprovação. Não prova, sozinho, a correção do algoritmo ou economia real. Os custos usam as hipóteses fixas do experimento, sem incorporar automaticamente trânsito e restrições de circulação atuais.'
   ],
+  exaustivo_rotas: [
+    'Compara as três alternativas do mapa em 100 execuções, apresenta as médias e pode exportar os 300 resultados individuais em CSV e boxplots, sem gerar mapa.',
+    'Usa o mesmo cálculo do mapa: VT-CPFM, carga escolhida, 30 km/h e 11 valores de α, sem BOA*. Sorteia 100 pares na maior componente com semente reproduzível ou repete o mesmo trajeto informado.',
+    'O Terminal identifica origem e destino e os valores das três rotas por teste, com médias finais. Com boxplots habilitados, abra Resultados: cada caixa usa 100 valores individuais; linha = mediana, losango = média e pontos além das hastes = valores extremos. O CSV tem 300 linhas, identificadas por teste e alternativa, com ruas, coordenadas e parâmetros. Os percentuais são relativos à rota mais curta de cada par.',
+    'Mais rápida significa menor distância sob a velocidade constante de 30 km/h; não considera trânsito. O lote de 100 consultas não enumera todos os caminhos. Repetir o mesmo par produz valores iguais, pois o cálculo é determinístico.'
+  ],
   cruzamentos: [
     'Identifica ruas que compartilham pelo menos um nó com a rua informada na representação do grafo.',
     'Procura o nome da rua e compara as coordenadas de origem e destino de seus segmentos com os segmentos das outras ruas. O terminal informa o total encontrado e lista até 50 nomes.',

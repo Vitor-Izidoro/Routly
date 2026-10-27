@@ -89,6 +89,12 @@ def executar(op, p, pasta):
         elif id == 'mapa':
             from mapa import gerar_mapa_rotas
             gerar_mapa_rotas(p['origem'], p['destino'], p['carga'], pasta / 'mapa_rotas.html', abrir=False)
+        elif id == 'exaustivo_rotas':
+            from experimentos.teste_exaustivo_rotas import executar_teste_exaustivo, exportar_boxplots
+            par = (p['origem'], p['destino']) if p['amostragem'] == 'Mesmo trajeto' else (None, None)
+            resultado = executar_teste_exaustivo(p['carga'], p['semente'], *par)
+            if p['boxplots']:
+                exportar_boxplots(resultado, pasta)
         elif id == 'cruzamentos':
             from mapa import explorar_cruzamentos
             explorar_cruzamentos(p['rua'].upper(), limite=50)
@@ -155,7 +161,11 @@ def main():
     op, parametros = validar(job['operacao'], job['parametros'])
     pasta = job_path.parent / 'artefatos'
     pasta.mkdir(exist_ok=True)
-    print(f'ROUTLY · {op["nome"]}\nParâmetros: {json.dumps(parametros, ensure_ascii=False)}\n', flush=True)
+    parametros_log = parametros.copy()
+    if op['id'] == 'exaustivo_rotas' and parametros['amostragem'] == 'Pares aleatórios':
+        parametros_log.pop('origem', None)
+        parametros_log.pop('destino', None)
+    print(f'ROUTLY · {op["nome"]}\nParâmetros: {json.dumps(parametros_log, ensure_ascii=False)}\n', flush=True)
     try:
         executar(op, parametros, pasta)
     except ModuleNotFoundError as erro:

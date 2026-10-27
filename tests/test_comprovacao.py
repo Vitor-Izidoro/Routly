@@ -36,7 +36,7 @@ class ImportacoesTest(unittest.TestCase):
 
     def test_opcoes_do_menu_existem(self):
         import main
-        self.assertEqual(set(main.OPCOES), {'1.1', '1.2', '1.3', '2', '3.1', '3.2', '3.3', '3.4', '3.5', '3.6'})
+        self.assertEqual(set(main.OPCOES), {'1.1', '1.2', '1.3', '2', '3.1', '3.2', '3.3', '3.4', '3.5', '3.6', '3.7'})
         self.assertTrue(all(callable(funcao) for _, funcao in main.OPCOES.values()))
 
 
