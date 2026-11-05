@@ -1,5 +1,49 @@
 # Avaliação da eficácia do Routly
 
+## Lote de 100 testes do mapa, sem HTML
+
+A última operação de **Dados e mapas** na interface, **Teste exaustivo de
+rotas · 100 execuções**, repete o cálculo do mapa interativo, exibe os valores
+no Terminal e permite exportar CSV e boxplots. O cálculo pelo terminal também
+está disponível na opção **3.7** do `main.py`.
+
+```bash
+python -m experimentos.teste_exaustivo_rotas --semente 42 --carga Carregado
+python -m experimentos.teste_exaustivo_rotas --origem "R. AMADEU ASSAD YASSIM" --destino "R. GEN. LUIZ CARLOS PEREIRA TOURINHO"
+```
+
+O padrão sorteia 100 pares na maior componente conectada. Informar as duas ruas
+repete o mesmo trajeto 100 vezes, recalculando todas as alternativas. A semente
+permite reproduzir o sorteio. O cálculo mantém VT-CPFM, 30 km/h, carga escolhida
+e 11 passos de α, como no mapa, sem calcular a fronteira BOA*.
+
+Cada teste identifica a origem e o destino usados, com os nomes das ruas e as
+coordenadas dos nós. Em cruzamentos, mostra todas as ruas associadas ao nó.
+O cabeçalho do sorteio não exibe as ruas padrão do formulário.
+Depois lista as rotas **mais econômica** (menor CO₂), **compromisso** (joelho)
+e **mais rápida** (menor distância, pois a velocidade é constante). A saída
+contém km, kg de CO₂, economia percentual de CO₂ e distância adicional em
+relação à rota mais curta. Ao final, apresenta a média aritmética de cada valor
+por alternativa nos 100 testes, incluindo a média dos percentuais individuais.
+O lote não gera mapa HTML. Na interface, **Gerar boxplots e CSV das 300 alternativas**
+fica habilitado por padrão. Ao concluir, abra **Resultados** para ver
+`boxplots_rotas.png`, a versão vetorial `boxplots_rotas.svg` e `rotas_100_testes.csv`.
+O CSV mantém a precisão dos valores individuais e identifica teste, alternativa,
+ruas, coordenadas, cenário, carga, velocidade e semente. Cada boxplot usa os 100
+valores de uma alternativa, com mediana, média, quartis e valores extremos;
+os quatro painéis mostram distância, CO₂ e os dois percentuais. Os três grupos
+compartilham os mesmos pares. Na mais curta, os percentuais são zero por definição.
+Para gerar os arquivos pelo terminal:
+
+```bash
+python -m experimentos.teste_exaustivo_rotas --semente 42 --boxplots
+```
+
+Desmarcar a opção na interface ou omitir `--boxplots` mantém somente o terminal.
+Uma consulta que falha interrompe o lote, sem apresentar médias parciais como
+se fossem de 100 testes. Este lote não enumera todos os caminhos possíveis e
+não mede tempo de viagem com trânsito. Repetir o mesmo par produz valores iguais.
+
 Para verificar unidades e comparar o fator de CO₂ com os registros diesel do
 catálogo canadense, consulte [Validação da conversão](../docs/VALIDACAO_CONVERSAO_CO2.md)
 e execute `python experimentos/validar_conversao_co2.py`. Essa verificação é

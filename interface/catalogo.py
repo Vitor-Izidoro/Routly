@@ -46,7 +46,7 @@ def catalogo():
     nomes = {'algoritmos': 'Algoritmos de busca', 'cenarios_co2': 'Cenários de CO₂',
              'comprovacao': 'Comprovação científica', 'conversao_co2': 'Conversão e unidades',
              'eficacia': 'Eficácia das rotas', 'emissoes': 'Modelo CMEM', 'vtcpfm': 'Modelo VT-CPFM',
-             'interface': 'Interface e execução'}
+             'interface': 'Interface e execução', 'exaustivo_rotas': 'Regressões do lote de 100 rotas'}
     for arquivo in sorted((BASE / 'tests').glob('test_*.py')):
         chave = arquivo.stem.removeprefix('test_')
         itens.append(operacao('teste_' + chave, 'testes', nomes.get(chave, chave.replace('_', ' ').title()),
@@ -77,6 +77,14 @@ def catalogo():
         operacao('colunas', 'dados', 'Inspecionar shapefile', 'Exibe as colunas e as primeiras linhas da base de ruas do IPPUC.', shapefiles=True),
         operacao('nomes', 'dados', 'Diagnóstico de nomes', 'Lista nomes do grafo e colunas do shapefile.', grafo=True, shapefiles=True),
         operacao('etl', 'dados', 'Gerar grafo do IPPUC', 'Converte os shapefiles em uma nova malha. O CSV gerado fica nos resultados desta execução.', shapefiles=True, batch=False),
+        operacao('exaustivo_rotas', 'dados', 'Teste exaustivo de rotas · 100 execuções',
+                 'Compara as três rotas em 100 testes, com valores no Terminal e exportação opcional de CSV e boxplots nos Resultados. Sem mapa HTML. Mais rápida = menor distância a 30 km/h.',
+                 [campo('amostragem', 'Trajetos dos 100 testes', 'select', 'Pares aleatórios',
+                        opcoes=['Pares aleatórios', 'Mesmo trajeto']),
+                  {**ORIGEM, 'quando': {'amostragem': 'Mesmo trajeto'}},
+                  {**DESTINO, 'quando': {'amostragem': 'Mesmo trajeto'}}, CARGA,
+                  {**SEMENTE, 'quando': {'amostragem': 'Pares aleatórios'}},
+                  campo('boxplots', 'Gerar boxplots e CSV das 300 alternativas', 'checkbox', True)], grafo=True, batch=False, terminal=True),
     ]
     return itens
 

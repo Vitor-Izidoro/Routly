@@ -80,6 +80,13 @@ test('seleção durante polling carrega imediatamente a execução escolhida', a
   assert.equal(h.run('state.detail.id'),'b');
 });
 
+test('lote de 100 rotas concluído reabre diretamente no Terminal', async()=>{
+  const h=harness(async()=>({ok:true,json:async()=>({id:'lote',artefatos:[]})}));
+  h.run("renderHistory=()=>{}; renderResult=()=>{}; state.catalogo={operacoes:[{id:'exaustivo_rotas',terminal:true}]}; state.jobs=[{id:'lote',operacao:'exaustivo_rotas',status:'concluido'}];");
+  await h.run("selectJob('lote')");
+  assert.equal(h.run('state.tab'),'log');
+});
+
 test('alternar A → B → A ignora respostas antigas mesmo com o mesmo id', async()=>{
   const responses=[];
   const h=harness(()=>{const response=deferred();responses.push(response);return response.promise;});

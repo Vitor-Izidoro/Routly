@@ -101,7 +101,7 @@ async function api(url, body) {
   const data = await response.json(); if (!response.ok) throw new Error(data.erro || 'Não foi possível concluir a solicitação.'); return data;
 }
 function grupo(id) { return state.catalogo.grupos.find(g => g.id === id); }
-function operacao(id) { return state.catalogo.operacoes.find(o => o.id === id); }
+function operacao(id) { return state.catalogo?.operacoes.find(o => o.id === id); }
 function hydrateIcons(root=document) { root.querySelectorAll('[data-icon]').forEach(n => n.innerHTML = icon(n.dataset.icon)); }
 function dataHora(value) { return new Date(value).toLocaleString('pt-BR', {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}); }
 function duration(job) {
@@ -184,7 +184,7 @@ function configure(ops) {
   $('#config-fields').onchange = dependencies; dependencies();
   const missing = [...new Set(ops.map(disponibilidade).filter(s => s !== 'Pronto para executar'))];
   const notes = [...missing];
-  if (ops.some(o => ['pareto','boa','pipeline','mapa'].includes(o.id))) notes.push('O cálculo de Pareto pode demorar, conforme a origem e o destino. Você pode cancelar a execução no histórico.');
+  if (ops.some(o => ['pareto','boa','pipeline','mapa','exaustivo_rotas'].includes(o.id))) notes.push('O cálculo de Pareto pode demorar, conforme a origem e o destino. Você pode cancelar a execução no histórico.');
   if (ops.some(o => o.id === 'pipeline')) notes.push('O pipeline mantém os padrões do terminal: eficácia com 100 pares, HDDT1 carregado e 21 passos de α. O número de pares deste formulário controla o Monte Carlo.');
   $('#config-notice').hidden = !notes.length; $('#config-notice').textContent = notes.join(' · ');
   openDialog($('#config-dialog'));
@@ -252,7 +252,8 @@ async function selectJob(id) {
   if (state.selected === id && state.detail?.id === id) return;
   const version = ++selectionVersion;
   state.selected = id; state.detail = null;
-  state.tab = ['fila','executando'].includes(state.jobs.find(j=>j.id===id)?.status) ? 'log' : 'results';
+  const selectedJob = state.jobs.find(j=>j.id===id);
+  state.tab = operacao(selectedJob?.operacao)?.terminal || ['fila','executando'].includes(selectedJob?.status) ? 'log' : 'results';
   renderHistory(); renderResult();
   try {
     // A seleção não depende do polling: um refresh em andamento não pode

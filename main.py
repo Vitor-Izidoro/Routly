@@ -244,6 +244,17 @@ def opcao_3_6(n_pares=None):
     _cc().rodar_tudo(SAIDA, max(2, n))
 
 
+def opcao_3_7():
+    if not exigir_grafo():
+        return
+    from experimentos.teste_exaustivo_rotas import executar_teste_exaustivo
+    modo = perguntar('Trajetos: 1. sortear 100 pares  2. repetir o mesmo trajeto', '1', ['1', '2'])
+    origem, destino = _escolher_par() if modo == '2' else (None, None)
+    cenario = _escolher_cenario_carga()
+    semente = perguntar('Semente aleatória', '42', tipo=int) if modo == '1' else 42
+    executar_teste_exaustivo(cenario, semente, origem, destino)
+
+
 OPCOES = {
     '1.1': ('Gerar/Recriar grafo base a partir dos Shapefiles do IPPUC', opcao_1_1),
     '1.2': ('Gerar/Visualizar mapa interativo de rotas (HTML)', opcao_1_2),
@@ -255,6 +266,7 @@ OPCOES = {
     '3.4': ('Perfil altimétrico comparativo (elevação × CO₂ acumulado)', opcao_3_4),
     '3.5': ('Monte Carlo + teste de Wilcoxon', opcao_3_5),
     '3.6': ('RODAR TUDO — pipeline completo de comprovação', opcao_3_6),
+    '3.7': ('Teste exaustivo de rotas — 100 execuções, sem mapa, com médias no terminal', opcao_3_7),
 }
 
 
@@ -278,7 +290,7 @@ def menu_principal():
             print(f'  {chave} {OPCOES[chave][0]}')
         print('[2] EXECUÇÃO E ROTEAMENTO\n  2   Abrir submenu (ALT, BOA*, NBA*, assistente, CLI)')
         print('[3] COMPROVAÇÕES CIENTÍFICAS E VALIDAÇÃO (TCC)')
-        for chave in ('3.1', '3.2', '3.3', '3.4', '3.5', '3.6'):
+        for chave in ('3.1', '3.2', '3.3', '3.4', '3.5', '3.6', '3.7'):
             print(f'  {chave} {OPCOES[chave][0]}')
         print('  0   Sair   (em qualquer pergunta, digite v para voltar)')
         escolha = input('Opção: ').strip()
