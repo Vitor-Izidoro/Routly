@@ -1,6 +1,6 @@
 # Resumo da comprovação científica — Routly
 
-Pipeline completo em 302 s. Par representativo: R. AMADEU ASSAD YASSIM → R. GEN. LUIZ CARLOS PEREIRA TOURINHO (HDDT1 carregado, 30 km/h).
+Pipeline completo em 309 s. Par representativo: R. AMADEU ASSAD YASSIM → R. GEN. LUIZ CARLOS PEREIRA TOURINHO (HDDT1 carregado, 30 km/h).
 
 ## Arquivos
 
@@ -12,6 +12,8 @@ Pipeline completo em 302 s. Par representativo: R. AMADEU ASSAD YASSIM → R. GE
 - `eficacia/histograma_economia.png`
 - `eficacia/pares.csv`
 - `eficacia/resumo.csv`
+- `logs/lote_100_rotas_3.7_log.txt`
+- `logs/pipeline_3.6_log.txt`
 - `monte_carlo_resultados.csv`
 - `pareto_fronteira.png`
 - `pareto_tradeoff.csv`
@@ -24,7 +26,7 @@ Pipeline completo em 302 s. Par representativo: R. AMADEU ASSAD YASSIM → R. GE
 
 ## Métricas principais
 
-- **Testes automatizados:** aprovados — 50 passed, 110 subtests passed in 29.13s
+- **Testes automatizados:** aprovados — 72 passed, 122 subtests passed in 33.96s
 - **Paridade física (VT-CPFM × CMEM, grade −6 % a +6 %):** R² = 0.994, MAPE = 9.7 %, Pearson = 1.000
 - **Conversão de CO₂ (diesel, Kaggle):** fator implícito médio 2688.6 g/L vs. projeto (EPA) 2697.2 g/L (-0.32 %), n = 175; verificações de unidades 8/8
 - **Reprodução de `docs/validacao_cmem.json`:** 16/16 verificações idênticas ao registro histórico

@@ -1,0 +1,114 @@
+
+=== 3.1 Validação VT-CPFM / CMEM e conversão de CO₂ ===
+[DADOS] CO2 Emissions_Canada.csv ausente; baixando o dataset público do Kaggle...
+[DADOS] Dataset salvo em C:\Users\ubivi\OneDrive\Documentos\nova-versao\Routly\CO2 Emissions_Canada.csv.
+# Verificação da conversão de consumo em CO₂
+
+Verificações de unidades: 8/8 passaram.
+
+Registros diesel válidos: 175; rejeitados: 0.
+
+Fator do projeto: 2697.1967 g/L.
+
+Fator implícito médio: 2688.6147 g/L; mediana: 2691.1765 g/L.
+
+Intervalo observado: 2608.6957–2755.1020 g/L.
+
+Diferença da média em relação ao projeto: -0.3182%.
+
+A diferença descreve a proximidade dos fatores; não é um teste de equivalência nem uma aprovação do modelo físico. Nenhum parâmetro foi recalibrado.
+
+Não valida consumo do caminhão. Consumo e CO₂ do catálogo podem não ser independentes. Valores arredondados e registros repetidos são preservados; não se estima significância estatística.
+
+Fonte do dataset: https://www.kaggle.com/datasets/debajyotipodder/co2-emission-by-vehicles
+
+Notebook de referência: https://www.kaggle.com/code/muizah/c02-emission
+
+URL de download automático: https://www.kaggle.com/api/v1/datasets/download/debajyotipodder/co2-emission-by-vehicles
+
+SHA-256 do CSV: `e832d820e42066d0946b02a58bce8bc1c7da9684f5724348ade9753b8eabec72`
+
+
+--- Eficácia em 3 camadas (experimentos/avaliar_eficacia.py) ---
+Montando grafos na memória (modelo: vtcpfm)...
+Malha: 29471 nós, maior componente 26318. 100 pares, semente 42.
+
+== Camada 1: economia de CO₂ (VT-CPFM) ==
+Montando grafos na memória (modelo: vtcpfm)...
+VT-CPFM | 0 kg | 30 km/h                                       n=100  economia   3.21% [IC95 2.79–3.68] mediana   3.13% | +dist  2.59% | negativos 0 | p=1.2e-17
+  VT-CPFM | 0 kg | 30 km/h | curta (<3 km)                     n=4    economia   0.56% [IC95 0.05–1.40] mediana   0.20% | +dist  1.56% | negativos 0 | p=0.11
+  VT-CPFM | 0 kg | 30 km/h | média (3–8 km)                    n=21   economia   2.80% [IC95 1.98–3.67] mediana   2.50% | +dist  2.87% | negativos 0 | p=8.9e-05
+  VT-CPFM | 0 kg | 30 km/h | longa (>8 km)                     n=75   economia   3.46% [IC95 2.96–3.98] mediana   3.31% | +dist  2.56% | negativos 0 | p=7.7e-14
+  VT-CPFM | 0 kg | 30 km/h | relevo plano (limite 13.1 m/km)   n=50   economia   2.55% [IC95 2.02–3.11] mediana   2.16% | +dist  1.88% | negativos 0 | p=1.6e-09
+  VT-CPFM | 0 kg | 30 km/h | relevo acidentado (limite 13.1 m/km) n=50   economia   3.87% [IC95 3.18–4.58] mediana   3.64% | +dist  3.30% | negativos 0 | p=1.1e-09
+Montando grafos na memória (modelo: vtcpfm)...
+VT-CPFM | 10205.8 kg | 30 km/h                                 n=100  economia   7.67% [IC95 6.82–8.60] mediana   7.26% | +dist  4.56% | negativos 0 | p=1.2e-17
+  VT-CPFM | 10205.8 kg | 30 km/h | curta (<3 km)               n=4    economia   1.76% [IC95 0.13–4.03] mediana   0.87% | +dist  1.56% | negativos 0 | p=0.11
+  VT-CPFM | 10205.8 kg | 30 km/h | média (3–8 km)              n=21   economia   6.79% [IC95 5.02–8.55] mediana   5.84% | +dist  4.37% | negativos 0 | p=8.9e-05
+  VT-CPFM | 10205.8 kg | 30 km/h | longa (>8 km)               n=75   economia   8.23% [IC95 7.24–9.22] mediana   8.07% | +dist  4.77% | negativos 0 | p=7.7e-14
+  VT-CPFM | 10205.8 kg | 30 km/h | relevo plano (limite 13.1 m/km) n=50   economia   6.30% [IC95 5.18–7.38] mediana   6.06% | +dist  3.45% | negativos 0 | p=1.6e-09
+  VT-CPFM | 10205.8 kg | 30 km/h | relevo acidentado (limite 13.1 m/km) n=50   economia   9.03% [IC95 7.73–10.37] mediana   9.32% | +dist  5.67% | negativos 0 | p=1.1e-09
+Montando grafos na memória (modelo: vtcpfm)...
+VT-CPFM | 20411.7 kg | 30 km/h                                 n=100  economia  10.39% [IC95 9.34–11.54] mediana  10.39% | +dist  6.39% | negativos 0 | p=8.3e-18
+  VT-CPFM | 20411.7 kg | 30 km/h | curta (<3 km)               n=4    economia   2.64% [IC95 0.22–5.87] mediana   1.42% | +dist  4.93% | negativos 0 | p=0.068
+  VT-CPFM | 20411.7 kg | 30 km/h | média (3–8 km)              n=21   economia   9.12% [IC95 6.84–11.44] mediana   7.33% | +dist  5.90% | negativos 0 | p=8.9e-05
+  VT-CPFM | 20411.7 kg | 30 km/h | longa (>8 km)               n=75   economia  11.16% [IC95 9.93–12.39] mediana  10.78% | +dist  6.61% | negativos 0 | p=7.7e-14
+  VT-CPFM | 20411.7 kg | 30 km/h | relevo plano (limite 13.1 m/km) n=50   economia   8.74% [IC95 7.31–10.15] mediana   8.42% | +dist  4.45% | negativos 0 | p=1.6e-09
+  VT-CPFM | 20411.7 kg | 30 km/h | relevo acidentado (limite 13.1 m/km) n=50   economia  12.05% [IC95 10.40–13.72] mediana  11.88% | +dist  8.33% | negativos 0 | p=7.6e-10
+
+== Camada 2: rota escolhida por VT-CPFM, medida com CMEM ==
+Montando grafos na memória (modelo: vtcpfm)...
+Montando grafos na memória (modelo: cmem)...
+VT-CPFM→CMEM | 0 kg | 30 km/h                                  n=100  economia   2.38% [IC95 2.03–2.76] mediana   2.17% | +dist  2.59% | negativos 4 | p=6.4e-17
+Montando grafos na memória (modelo: vtcpfm)...
+Montando grafos na memória (modelo: cmem)...
+VT-CPFM→CMEM | 10205.8 kg | 30 km/h                            n=100  economia   6.14% [IC95 5.42–6.92] mediana   5.55% | +dist  4.56% | negativos 1 | p=1.3e-17
+Montando grafos na memória (modelo: vtcpfm)...
+Montando grafos na memória (modelo: cmem)...
+VT-CPFM→CMEM | 20411.7 kg | 30 km/h                            n=100  economia   8.48% [IC95 7.56–9.49] mediana   8.44% | +dist  6.39% | negativos 1 | p=8.6e-18
+
+== Camada 3: altitudes com ruído, medida na malha original (20411.7 kg) ==
+Montando grafos na memória (modelo: vtcpfm)...
+Montando grafos na memória (modelo: vtcpfm)...
+Ruído ±1 m | 20411.7 kg | 30 km/h                              n=100  economia   8.01% [IC95 6.90–9.17] mediana   7.94% | +dist  7.20% | negativos 6 | p=1.9e-16
+Montando grafos na memória (modelo: vtcpfm)...
+Ruído ±2 m | 20411.7 kg | 30 km/h                              n=100  economia   4.76% [IC95 3.56–5.98] mediana   5.09% | +dist  8.43% | negativos 21 | p=3.9e-10
+
+Resultados em C:\Users\ubivi\OneDrive\Documentos\nova-versao\Routly\resultados_validacao\eficacia (153 s).
+
+--- Reprodução de docs/validacao_cmem.json ---
+Montando índice de ruas...
+Montando grafos na memória (modelo: cmem)...
+Montando grafos na memória (modelo: cmem)...
+[CMEM] Registro histórico reproduzido: 16/16 -> reproducao_validacao_cmem.md
+[SALVO] resultados_validacao\validacao_fisica_grade.png
+[SALVO] paridade_fisica_grade.json
+
+=== 3.2 Testes automatizados ===
+72 passed, 122 subtests passed in 33.96s
+
+=== 3.3 + 3.4 Fronteira de Pareto e perfil altimétrico ===
+Montando grafos na memória (modelo: vtcpfm)...
+Montando índice de ruas...
+[SALVO] pareto_tradeoff.csv
+[SALVO] resultados_validacao\pareto_fronteira.png
+[SALVO] resultados_validacao\perfil_altimetrico_comparativo.png
+
+=== 3.5 Monte Carlo (100 pares) + Wilcoxon ===
+Montando grafos na memória (modelo: vtcpfm)...
+Montando grafos na memória (modelo: cmem)...
+[MONTE CARLO] Vazio: 100 pares em 32.6 s
+Montando grafos na memória (modelo: vtcpfm)...
+Montando grafos na memória (modelo: cmem)...
+[MONTE CARLO] Meia carga: 100 pares em 33.1 s
+Montando grafos na memória (modelo: vtcpfm)...
+Montando grafos na memória (modelo: cmem)...
+[MONTE CARLO] Carregado: 100 pares em 33.4 s
+[SALVO] resultados_validacao\boxplot_cenarios_carga.png
+[SALVO] relatorio_estatistico.md, monte_carlo_resultados.csv
+
+[SALVO] RESUMO.md — veja C:\Users\ubivi\OneDrive\Documentos\nova-versao\Routly\resultados_validacao
+
+real	5m13.371s
+user	0m0.015s
+sys	0m0.016s

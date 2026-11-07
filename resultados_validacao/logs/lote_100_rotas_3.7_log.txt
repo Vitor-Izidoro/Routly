@@ -1,0 +1,612 @@
+Teste 001/100
+  Origem: R. MAL. CARDOSO JÚNIOR / R. RODOLPHO SENFF (X=677585.409; Y=7182709.658)
+  Destino: R. ARCÉSIO DE BARROS LIMA / R. POETA BERNARDO GUIMARÃES (X=667169.465; Y=7170954.954)
+  Mais econômica: 20.035 km | 26.047 kg CO₂ | economia CO₂ 10.16% | distância adicional +1.11%
+  Compromisso: 19.914 km | 26.676 kg CO₂ | economia CO₂ 7.99% | distância adicional +0.50%
+  Mais rápida (menor distância): 19.815 km | 28.993 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 002/100
+  Origem: R. DEP. HEITOR ALENCAR FURTADO / R. TEÓFILO WISNIEWSKI (X=665479.400; Y=7184258.515)
+  Destino: R. MACEIÓ / R. TEREZA OLINECK (X=680155.977; Y=7182875.397)
+  Mais econômica: 19.706 km | 23.485 kg CO₂ | economia CO₂ 10.78% | distância adicional +7.87%
+  Compromisso: 18.675 km | 24.317 kg CO₂ | economia CO₂ 7.62% | distância adicional +2.23%
+  Mais rápida (menor distância): 18.268 km | 26.322 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 003/100
+  Origem: R. ATÍLIO BRUNETTI / R. FR. TEÓFILO (X=670936.610; Y=7178326.014)
+  Destino: R. FELINTO BENTO VIANNA / R. ITATIAIA (X=670182.718; Y=7181029.988)
+  Mais econômica: 3.646 km | 4.812 kg CO₂ | economia CO₂ 15.77% | distância adicional +7.44%
+  Compromisso: 3.438 km | 5.201 kg CO₂ | economia CO₂ 8.97% | distância adicional +1.33%
+  Mais rápida (menor distância): 3.393 km | 5.713 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 004/100
+  Origem: R. JOÃO SAROT (X=669549.387; Y=7171750.700)
+  Destino: R. DES. CID CAMPELO / R. ORESTES THÁ (X=667606.285; Y=7177293.309)
+  Mais econômica: 7.999 km | 7.599 kg CO₂ | economia CO₂ 7.29% | distância adicional +0.74%
+  Compromisso: 7.941 km | 7.701 kg CO₂ | economia CO₂ 6.04% | distância adicional +0.01%
+  Mais rápida (menor distância): 7.940 km | 8.196 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 005/100
+  Origem: R. GUILHERME WISNIEWSKI / R. HERMES MARQUES (X=680031.416; Y=7192877.222)
+  Destino: NAN / R. JOSÉ IZIDORO BIAZETTO (X=667037.909; Y=7186073.299)
+  Mais econômica: 17.451 km | 29.775 kg CO₂ | economia CO₂ 4.21% | distância adicional +2.48%
+  Compromisso: 17.083 km | 30.209 kg CO₂ | economia CO₂ 2.81% | distância adicional +0.31%
+  Mais rápida (menor distância): 17.030 km | 31.083 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 006/100
+  Origem: R. DONAIDE SILVEIRA DA COSTA / R. PROF. RUBENS GOMES DE SOUZA (X=678519.472; Y=7186052.347)
+  Destino: R. ANTÔNIO SCHEIDT / R. DR. JOÃO ANTÔNIO FERREIRA (X=680130.899; Y=7192973.678)
+  Mais econômica: 10.012 km | 13.968 kg CO₂ | economia CO₂ 14.65% | distância adicional +13.20%
+  Compromisso: 9.258 km | 14.287 kg CO₂ | economia CO₂ 12.71% | distância adicional +4.67%
+  Mais rápida (menor distância): 8.845 km | 16.367 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 007/100
+  Origem: R. ANTONIO GROCOSKE / R. IAPÓ (X=675594.657; Y=7183464.466)
+  Destino: R. AMOR PERFEITO / R. ESTRELA DO SUL (X=666815.463; Y=7178514.045)
+  Mais econômica: 13.153 km | 16.979 kg CO₂ | economia CO₂ 12.83% | distância adicional +4.92%
+  Compromisso: 12.586 km | 18.175 kg CO₂ | economia CO₂ 6.69% | distância adicional +0.40%
+  Mais rápida (menor distância): 12.536 km | 19.478 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 008/100
+  Origem: R. ALM. DONADELLO / R. ISMAEL ROCHA CORDEIRO (X=676393.124; Y=7173761.175)
+  Destino: R. COM. LUSTOZA DE ANDRADE / R. DR. JOÃO DE OLIVEIRA PASSOS (X=673667.042; Y=7188659.493)
+  Mais econômica: 17.431 km | 22.528 kg CO₂ | economia CO₂ 16.76% | distância adicional +1.87%
+  Compromisso: 17.329 km | 22.742 kg CO₂ | economia CO₂ 15.97% | distância adicional +1.27%
+  Mais rápida (menor distância): 17.112 km | 27.065 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 009/100
+  Origem: R. PEDRO CHARNESKI (X=665653.421; Y=7187723.083)
+  Destino: R. MARCOS ANTÔNIO MALUCELLI / R. TUNEIRAS DO OESTE (X=665598.508; Y=7180156.986)
+  Mais econômica: 10.047 km | 10.422 kg CO₂ | economia CO₂ 6.00% | distância adicional +0.62%
+  Compromisso: 10.017 km | 10.708 kg CO₂ | economia CO₂ 3.41% | distância adicional +0.32%
+  Mais rápida (menor distância): 9.986 km | 11.086 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 010/100
+  Origem: R. SEN. ACCIOLY FILHO (X=666910.040; Y=7178898.843)
+  Destino: R. ANNA CIUPKA / R. HUGO KINZELMANN / R. MONS. IVO ZANLORENZI (X=669408.527; Y=7185270.925)
+  Mais econômica: 10.514 km | 13.997 kg CO₂ | economia CO₂ 15.84% | distância adicional +8.94%
+  Compromisso: 9.881 km | 14.535 kg CO₂ | economia CO₂ 12.60% | distância adicional +2.39%
+  Mais rápida (menor distância): 9.651 km | 16.631 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 011/100
+  Origem: NAN / R. PROF. PEDRO VIRIATO PARIGOT DE SOUZA (X=669807.991; Y=7185617.820)
+  Destino: R. BOANERGES DE MENEZES CALDAS / R. FLÁVIO DALLEGRAVE (X=674953.385; Y=7191224.832)
+  Mais econômica: 10.766 km | 17.150 kg CO₂ | economia CO₂ 16.40% | distância adicional +12.03%
+  Compromisso: 9.762 km | 17.812 kg CO₂ | economia CO₂ 13.18% | distância adicional +1.58%
+  Mais rápida (menor distância): 9.610 km | 20.515 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 012/100
+  Origem: R. PREF. ÂNGELO FERRÁRIO LOPES / R. XV DE NOVEMBRO (X=676638.073; Y=7186545.507)
+  Destino: R. MARCOS ANTÔNIO MALUCELLI / R. REINALDO STROBEL (X=665522.020; Y=7180358.898)
+  Mais econômica: 14.869 km | 20.450 kg CO₂ | economia CO₂ 12.61% | distância adicional +4.67%
+  Compromisso: 14.754 km | 20.580 kg CO₂ | economia CO₂ 12.06% | distância adicional +3.86%
+  Mais rápida (menor distância): 14.206 km | 23.401 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 013/100
+  Origem: R. DO HERVAL / R. ZEILA MOURA DOS SANTOS (X=675871.023; Y=7186009.881)
+  Destino: R. BENJAMIM MOSSELIN (X=668769.939; Y=7190564.576)
+  Mais econômica: 10.962 km | 21.718 kg CO₂ | economia CO₂ 9.72% | distância adicional +11.02%
+  Compromisso: 10.083 km | 22.258 kg CO₂ | economia CO₂ 7.48% | distância adicional +2.12%
+  Mais rápida (menor distância): 9.874 km | 24.058 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 014/100
+  Origem: AV. DA INTEGRAÇÃO / R. WILSON PORTUGAL LOBATO (X=679504.067; Y=7188478.941)
+  Destino: AV. PARANÁ / R. ARARY SOUTO / R. FERNANDO DE NORONHA (X=677829.093; Y=7191278.938)
+  Mais econômica: 4.728 km | 6.905 kg CO₂ | economia CO₂ 2.72% | distância adicional +2.88%
+  Compromisso: 4.600 km | 6.987 kg CO₂ | economia CO₂ 1.57% | distância adicional +0.10%
+  Mais rápida (menor distância): 4.596 km | 7.099 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 015/100
+  Origem: R. AMÉRICO PASINI / R. GERMÂNIA (X=679152.144; Y=7184517.725)
+  Destino: R. DAS ACÁCIAS / R. MARIA LUIZA DOS ANJOS MAYER (X=675587.103; Y=7192353.759)
+  Mais econômica: 12.229 km | 16.865 kg CO₂ | economia CO₂ 9.27% | distância adicional +16.60%
+  Compromisso: 10.682 km | 17.181 kg CO₂ | economia CO₂ 7.57% | distância adicional +1.85%
+  Mais rápida (menor distância): 10.488 km | 18.588 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 016/100
+  Origem: R. OSCAR WILDE / TRAV. ARTHUR ROMARLI  LESSA MONTEIRO (X=673632.124; Y=7180805.361)
+  Destino: R. ALMERINDO PEREIRA DA SILVA / R. PE. TIAGO ALBERIONE (X=669464.522; Y=7189335.083)
+  Mais econômica: 12.757 km | 24.399 kg CO₂ | economia CO₂ 11.36% | distância adicional +5.67%
+  Compromisso: 12.404 km | 24.449 kg CO₂ | economia CO₂ 11.17% | distância adicional +2.74%
+  Mais rápida (menor distância): 12.073 km | 27.525 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 017/100
+  Origem: AC. WALDEMIRO TULIO (X=674094.539; Y=7182780.560)
+  Destino: R. BRIG. ANTONIO DE SAMPAIO / R. HILDEBRANDO DE ARAÚJO (X=676370.347; Y=7185081.256)
+  Mais econômica: 4.027 km | 4.701 kg CO₂ | economia CO₂ 7.33% | distância adicional +1.89%
+  Compromisso: 3.955 km | 4.829 kg CO₂ | economia CO₂ 4.82% | distância adicional +0.07%
+  Mais rápida (menor distância): 3.952 km | 5.073 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 018/100
+  Origem: R. MAL. JOSÉ BERNARDINO BORMANN / R. MARTIM AFONSO (X=671007.175; Y=7185880.734)
+  Destino: NAN (X=664688.011; Y=7189421.109)
+  Mais econômica: 9.419 km | 17.464 kg CO₂ | economia CO₂ 5.69% | distância adicional +0.55%
+  Compromisso: 9.385 km | 17.565 kg CO₂ | economia CO₂ 5.14% | distância adicional +0.19%
+  Mais rápida (menor distância): 9.367 km | 18.517 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 019/100
+  Origem: R. JORDÂNIA / R. NHUNDIAQUARA (X=680582.747; Y=7182313.948)
+  Destino: R. ALFREDO SCHWARTZ / R. FRANCISCO DOS SANTOS LIMA (X=668019.293; Y=7186505.812)
+  Mais econômica: 16.156 km | 24.669 kg CO₂ | economia CO₂ 1.11% | distância adicional +2.19%
+  Compromisso: 15.870 km | 24.773 kg CO₂ | economia CO₂ 0.69% | distância adicional +0.38%
+  Mais rápida (menor distância): 15.810 km | 24.946 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 020/100
+  Origem: ESTR. NOVA DE COLOMBO (X=679084.410; Y=7193585.308)
+  Destino: R. ANTÔNIO PEGORARO / R. JOSÉ BRENNY (X=673676.277; Y=7190845.418)
+  Mais econômica: 8.346 km | 17.353 kg CO₂ | economia CO₂ 11.06% | distância adicional +11.46%
+  Compromisso: 7.940 km | 17.603 kg CO₂ | economia CO₂ 9.77% | distância adicional +6.03%
+  Mais rápida (menor distância): 7.488 km | 19.509 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 021/100
+  Origem: R. ALEXANDRE VON HUMBOLDT / R. JORGE CURY BRAHIM (X=672327.450; Y=7190411.577)
+  Destino: R. DA. ALICE TIBIRIÇÁ / R. JERÔNIMO DURSKI (X=671000.575; Y=7185254.823)
+  Mais econômica: 7.526 km | 9.942 kg CO₂ | economia CO₂ 20.16% | distância adicional +12.60%
+  Compromisso: 6.947 km | 10.443 kg CO₂ | economia CO₂ 16.13% | distância adicional +3.94%
+  Mais rápida (menor distância): 6.683 km | 12.452 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 022/100
+  Origem: R. CLÁUDIO DA LUZ REIS / R. ROSA DE BARROS (X=667927.391; Y=7182160.030)
+  Destino: R. IRINEU GONÇALVES PADILHA FILHO (X=669283.911; Y=7178249.967)
+  Mais econômica: 5.311 km | 9.438 kg CO₂ | economia CO₂ 2.60% | distância adicional +0.20%
+  Compromisso: 5.301 km | 9.690 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+  Mais rápida (menor distância): 5.301 km | 9.690 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 023/100
+  Origem: R. PINTOR RICARDO KRIEGER / R. ROALDO BRUN (X=680684.745; Y=7191340.091)
+  Destino: R. DES. MOTTA / R. PE. AGOSTINHO (X=672255.488; Y=7186698.677)
+  Mais econômica: 12.507 km | 18.758 kg CO₂ | economia CO₂ 5.50% | distância adicional +12.80%
+  Compromisso: 11.311 km | 19.020 kg CO₂ | economia CO₂ 4.18% | distância adicional +2.01%
+  Mais rápida (menor distância): 11.088 km | 19.850 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 024/100
+  Origem: R. ELEONORA BRASIL POMPEO / R. PAPA PIO IX (X=667033.567; Y=7169971.642)
+  Destino: R. OSWALDO BAGGIO / R. THEODORO JAVORSKI (X=666895.734; Y=7173661.419)
+  Mais econômica: 4.997 km | 5.653 kg CO₂ | economia CO₂ 5.50% | distância adicional +0.04%
+  Compromisso: 4.996 km | 5.789 kg CO₂ | economia CO₂ 3.22% | distância adicional +0.01%
+  Mais rápida (menor distância): 4.996 km | 5.982 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 025/100
+  Origem: R. GAIPAVA (X=673017.892; Y=7175369.900)
+  Destino: R. JOSÉ BOTEGA / R. PEDRO FERRARI (X=666947.740; Y=7190579.675)
+  Mais econômica: 21.094 km | 31.270 kg CO₂ | economia CO₂ 9.25% | distância adicional +7.04%
+  Compromisso: 19.847 km | 32.645 kg CO₂ | economia CO₂ 5.26% | distância adicional +0.71%
+  Mais rápida (menor distância): 19.707 km | 34.456 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 026/100
+  Origem: R. EMANUEL KANT / R. MIGUEL GASKA (X=672654.258; Y=7178886.137)
+  Destino: R. PAULO GRAESER SOBRINHO / R. TEN. JOÃO GOMES DA SILVA (X=672387.908; Y=7187851.186)
+  Mais econômica: 10.859 km | 15.431 kg CO₂ | economia CO₂ 24.82% | distância adicional +4.18%
+  Compromisso: 10.627 km | 15.463 kg CO₂ | economia CO₂ 24.66% | distância adicional +1.95%
+  Mais rápida (menor distância): 10.423 km | 20.525 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 027/100
+  Origem: R. EDGAR BRUNO FRANKE (X=676666.221; Y=7191386.813)
+  Destino: R. DA CONSTITUIÇÃO / R. OSÓRIO DAMAS DE OLIVEIRA (X=670714.613; Y=7176064.485)
+  Mais econômica: 20.088 km | 24.429 kg CO₂ | economia CO₂ 13.39% | distância adicional +6.79%
+  Compromisso: 18.957 km | 26.337 kg CO₂ | economia CO₂ 6.63% | distância adicional +0.78%
+  Mais rápida (menor distância): 18.811 km | 28.208 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 028/100
+  Origem: R. EDUARDO SPRADA / R. ROGÉRIO PEREIRA DE CAMARGO (X=665957.001; Y=7184467.629)
+  Destino: R. BERNARDO MILANO / R. FRANCISCO MOTA MACHADO (X=679851.811; Y=7184764.758)
+  Mais econômica: 17.294 km | 20.465 kg CO₂ | economia CO₂ 13.82% | distância adicional +7.74%
+  Compromisso: 16.396 km | 21.533 kg CO₂ | economia CO₂ 9.32% | distância adicional +2.15%
+  Mais rápida (menor distância): 16.052 km | 23.746 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 029/100
+  Origem: R. AMARO DE SANTA RITA / R. OMÍLIO MONTEIRO SOARES (X=674254.215; Y=7180520.207)
+  Destino: R. DES. VATÉL GONÇALVES PEREIRA / R. LAERTES LUIZ FOGGIATO (X=675441.537; Y=7174478.514)
+  Mais econômica: 8.011 km | 10.536 kg CO₂ | economia CO₂ 10.95% | distância adicional +10.32%
+  Compromisso: 7.262 km | 11.797 kg CO₂ | economia CO₂ 0.30% | distância adicional +0.01%
+  Mais rápida (menor distância): 7.262 km | 11.832 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 030/100
+  Origem: R. ARNAN CHEMIN BRANCO / R. DEUSDETE PALMEIDA SILVA (X=667356.335; Y=7175773.221)
+  Destino: R. JOSÉ CARLOS DE GODOY / TRAV. TABOÃO (X=672993.195; Y=7193581.084)
+  Mais econômica: 23.483 km | 32.656 kg CO₂ | economia CO₂ 19.73% | distância adicional +6.42%
+  Compromisso: 22.291 km | 36.671 kg CO₂ | economia CO₂ 9.87% | distância adicional +1.02%
+  Mais rápida (menor distância): 22.067 km | 40.685 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 031/100
+  Origem: R. NELSON ANTÔNIO ZAMPROGNA / R. SÃO MAXIMILIANO MARIA KOLBE (X=666694.171; Y=7170503.298)
+  Destino: R. DR. CARLOS FRANCO FERREIRA DA COSTA / R. SANTA RIZETTO LAZARI (X=675710.165; Y=7172839.451)
+  Mais econômica: 12.611 km | 16.046 kg CO₂ | economia CO₂ 15.96% | distância adicional +2.05%
+  Compromisso: 12.524 km | 16.255 kg CO₂ | economia CO₂ 14.86% | distância adicional +1.35%
+  Mais rápida (menor distância): 12.357 km | 19.092 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 032/100
+  Origem: R. JOÃO AMARO DA LUZ / R. NICOLA PELLANDA (X=671355.320; Y=7173997.719)
+  Destino: R. CLETO DA SILVA / R. O BRASIL PARA CRISTO (X=677328.899; Y=7180162.435)
+  Mais econômica: 10.912 km | 11.854 kg CO₂ | economia CO₂ 2.53% | distância adicional +2.07%
+  Compromisso: 10.699 km | 11.915 kg CO₂ | economia CO₂ 2.03% | distância adicional +0.07%
+  Mais rápida (menor distância): 10.691 km | 12.162 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 033/100
+  Origem: R. ANTÔNIO CAMILO DA PAZ / R. VER. ANTÔNIO GIACOMASSI (X=677042.934; Y=7175248.214)
+  Destino: AL. PRUDENTE DE MORAES / AL. PSA. IZABEL / R. PROF. FERNANDO MOREIRA (X=672708.790; Y=7186341.295)
+  Mais econômica: 14.337 km | 17.972 kg CO₂ | economia CO₂ 6.18% | distância adicional +10.12%
+  Compromisso: 13.181 km | 18.204 kg CO₂ | economia CO₂ 4.98% | distância adicional +1.24%
+  Mais rápida (menor distância): 13.019 km | 19.157 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 034/100
+  Origem: R. AGOSTINHO ZANINELLI / R. DOS ALFENEIROS / R. LUIZA LÉLIA GULIN GERONASSO (X=676143.584; Y=7192200.570)
+  Destino: R. HUGO MIRÓ / R. JOSÉ LACERDA JÚNIOR / R. PE. GASTON (X=668639.263; Y=7176955.404)
+  Mais econômica: 22.242 km | 27.284 kg CO₂ | economia CO₂ 16.37% | distância adicional +9.67%
+  Compromisso: 20.707 km | 28.463 kg CO₂ | economia CO₂ 12.76% | distância adicional +2.10%
+  Mais rápida (menor distância): 20.281 km | 32.625 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 035/100
+  Origem: R. CANAL BELÉM - MARGINAL OESTE / R. DIOGO MUGIATTI (X=679223.751; Y=7177824.768)
+  Destino: R. ODIN DE OLIVEIRA PACHECO (X=666534.986; Y=7193154.445)
+  Mais econômica: 24.688 km | 37.142 kg CO₂ | economia CO₂ 3.10% | distância adicional +6.76%
+  Compromisso: 23.270 km | 37.707 kg CO₂ | economia CO₂ 1.62% | distância adicional +0.62%
+  Mais rápida (menor distância): 23.125 km | 38.329 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 036/100
+  Origem: R. CESÁRIO KUROSKI / R. HERVAL D'OESTE / R. IPHIGÊNIO DALGUTT (X=666018.634; Y=7183052.414)
+  Destino: R. DR. BRAZILIO FERREIRA DA LUZ / R. SINKE FERREIRA (X=678126.423; Y=7182735.780)
+  Mais econômica: 16.650 km | 22.447 kg CO₂ | economia CO₂ 12.98% | distância adicional +8.41%
+  Compromisso: 15.643 km | 24.108 kg CO₂ | economia CO₂ 6.54% | distância adicional +1.85%
+  Mais rápida (menor distância): 15.358 km | 25.794 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 037/100
+  Origem: R. GILBERTO PINTO MILEO / R. JOÃO FLORENTINO ANSAI (X=669669.620; Y=7178618.080)
+  Destino: R. HENRIQUE CORREIA / R. JOAQUIM DA COSTA RIBEIRO (X=680896.205; Y=7188873.730)
+  Mais econômica: 20.026 km | 23.059 kg CO₂ | economia CO₂ 19.67% | distância adicional +14.25%
+  Compromisso: 18.244 km | 24.742 kg CO₂ | economia CO₂ 13.81% | distância adicional +4.08%
+  Mais rápida (menor distância): 17.528 km | 28.705 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 038/100
+  Origem: R. ÁUREA BRITTES DE OLIVEIRA (X=671270.027; Y=7191552.689)
+  Destino: R. BRESCIA / R. FR. TARCÍSIO MASTENA (X=666707.822; Y=7189253.084)
+  Mais econômica: 12.227 km | 22.858 kg CO₂ | economia CO₂ 10.46% | distância adicional +17.43%
+  Compromisso: 11.197 km | 24.037 kg CO₂ | economia CO₂ 5.84% | distância adicional +7.54%
+  Mais rápida (menor distância): 10.412 km | 25.529 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 039/100
+  Origem: R. GEN. DALTRO FILHO / R. HENRIQUE GREGÓRIO MACHADO / R. PROF. FÁBIO DE SOUZA (X=669817.548; Y=7183705.467)
+  Destino: R. PAULINO MOCELIN (X=667014.810; Y=7180267.821)
+  Mais econômica: 6.245 km | 9.337 kg CO₂ | economia CO₂ 18.62% | distância adicional +6.72%
+  Compromisso: 5.871 km | 10.241 kg CO₂ | economia CO₂ 10.74% | distância adicional +0.32%
+  Mais rápida (menor distância): 5.852 km | 11.473 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 040/100
+  Origem: R. BR. DE SANTO ÂNGELO / R. MAHATMA GANDHI (X=673018.954; Y=7177275.913)
+  Destino: R. GEN. ARISTIDES ATHAYDE JÚNIOR / R. JÚLIA WANDERLEY (X=671002.187; Y=7186536.271)
+  Mais econômica: 10.743 km | 16.292 kg CO₂ | economia CO₂ 9.48% | distância adicional +0.62%
+  Compromisso: 10.691 km | 16.690 kg CO₂ | economia CO₂ 7.27% | distância adicional +0.13%
+  Mais rápida (menor distância): 10.678 km | 17.999 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 041/100
+  Origem: R. OURIZONA / R. TEREZA PELLANDA NICHELLE (X=674152.054; Y=7173165.679)
+  Destino: R. LOTHÁRIO PEREIRA / R. WALDEMAR MONASTIER (X=677495.548; Y=7174150.029)
+  Mais econômica: 7.098 km | 8.369 kg CO₂ | economia CO₂ 3.85% | distância adicional +2.73%
+  Compromisso: 6.920 km | 8.639 kg CO₂ | economia CO₂ 0.74% | distância adicional +0.16%
+  Mais rápida (menor distância): 6.909 km | 8.704 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 042/100
+  Origem: R. MAJ. EULALIO DUDEK / R. MARISA DE FÁTIMA FOSQUERAU FURMAN (X=672763.923; Y=7175975.643)
+  Destino: R. LÉA MOREIRA DE SOUZA MOURA (X=668088.620; Y=7177449.680)
+  Mais econômica: 9.330 km | 11.321 kg CO₂ | economia CO₂ 13.55% | distância adicional +7.18%
+  Compromisso: 9.083 km | 11.668 kg CO₂ | economia CO₂ 10.91% | distância adicional +4.34%
+  Mais rápida (menor distância): 8.706 km | 13.096 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 043/100
+  Origem: R. PE. ANCHIETA (X=672857.481; Y=7186787.201)
+  Destino: R. JOÃO LOURENÇO DE PAULA (X=672583.956; Y=7174868.216)
+  Mais econômica: 14.119 km | 17.740 kg CO₂ | economia CO₂ 3.06% | distância adicional +1.33%
+  Compromisso: 14.000 km | 17.895 kg CO₂ | economia CO₂ 2.21% | distância adicional +0.48%
+  Mais rápida (menor distância): 13.933 km | 18.300 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 044/100
+  Origem: R. JOSÉ LUIZ GARRATINI (X=669093.926; Y=7170715.883)
+  Destino: R. ENG. PAULO GABRIEL PASSOS BRANDÃO (X=678344.408; Y=7192152.910)
+  Mais econômica: 28.642 km | 37.278 kg CO₂ | economia CO₂ 6.45% | distância adicional +6.67%
+  Compromisso: 28.108 km | 37.543 kg CO₂ | economia CO₂ 5.79% | distância adicional +4.69%
+  Mais rápida (menor distância): 26.850 km | 39.850 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 045/100
+  Origem: R. FÁTIMA BARK / R. JAIME RODRIGUES DA ROCHA (X=670760.223; Y=7176812.490)
+  Destino: R. CUIABÁ / R. MIGUEL CALUF (X=679160.166; Y=7183227.740)
+  Mais econômica: 14.714 km | 17.392 kg CO₂ | economia CO₂ 7.39% | distância adicional +17.05%
+  Compromisso: 13.041 km | 17.514 kg CO₂ | economia CO₂ 6.74% | distância adicional +3.74%
+  Mais rápida (menor distância): 12.571 km | 18.780 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 046/100
+  Origem: R. ELIEZER DISARÓ FANGUEIRO / R. ISEO DIZARÓ (X=678692.207; Y=7181728.817)
+  Destino: R. NAFTALI REISS / R. PAULO NADOLNY (X=677781.507; Y=7190579.646)
+  Mais econômica: 10.859 km | 14.440 kg CO₂ | economia CO₂ 3.46% | distância adicional +4.08%
+  Compromisso: 10.466 km | 14.619 kg CO₂ | economia CO₂ 2.26% | distância adicional +0.31%
+  Mais rápida (menor distância): 10.433 km | 14.957 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 047/100
+  Origem: R. JOAQUIM DE SOUZA / R. PROF. THEODÓCIO JORGE ATHERINO (X=666566.169; Y=7181138.146)
+  Destino: R. DR. ALCIDES VIEIRA ARCO-VERDE / R. SILVEIRA MARTINS (X=676796.123; Y=7182884.224)
+  Mais econômica: 12.701 km | 17.039 kg CO₂ | economia CO₂ 8.25% | distância adicional +2.27%
+  Compromisso: 12.460 km | 17.234 kg CO₂ | economia CO₂ 7.20% | distância adicional +0.33%
+  Mais rápida (menor distância): 12.419 km | 18.570 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 048/100
+  Origem: R. PAULO ARENDARCHUK / R. TEN. CEL. VILAGRAN CABRITA (X=677480.507; Y=7175947.886)
+  Destino: R. JOSÉ TEIXEIRA DE MELLO / R. MAXIMILIANO BOSCARDIN (X=668259.443; Y=7180196.380)
+  Mais econômica: 12.915 km | 17.121 kg CO₂ | economia CO₂ 12.18% | distância adicional +5.65%
+  Compromisso: 12.379 km | 17.355 kg CO₂ | economia CO₂ 10.97% | distância adicional +1.27%
+  Mais rápida (menor distância): 12.224 km | 19.495 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 049/100
+  Origem: AV. PRES. AFFONSO CAMARGO / R. DA PAZ (X=675408.539; Y=7185662.954)
+  Destino: R. COLIBRI / R. JOSÉ DE LIMA (X=679838.254; Y=7190459.174)
+  Mais econômica: 7.573 km | 12.777 kg CO₂ | economia CO₂ 6.62% | distância adicional +3.96%
+  Compromisso: 7.287 km | 12.996 kg CO₂ | economia CO₂ 5.01% | distância adicional +0.04%
+  Mais rápida (menor distância): 7.284 km | 13.682 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 050/100
+  Origem: R. CAETANO MARCHESINI / R. FELINTO BENTO VIANNA (X=670179.880; Y=7181148.049)
+  Destino: R. DR. ADINAR DOS SANTOS RIBEIRO / R. VIRIATO CORRÊA (X=668108.168; Y=7180635.152)
+  Mais econômica: 2.635 km | 2.381 kg CO₂ | economia CO₂ 7.69% | distância adicional +4.25%
+  Compromisso: 2.532 km | 2.516 kg CO₂ | economia CO₂ 2.43% | distância adicional +0.17%
+  Mais rápida (menor distância): 2.528 km | 2.579 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 051/100
+  Origem: R. ANTÔNIO REBELATTO / R. TEN. OLDERICO GABARDO (X=674295.658; Y=7179110.709)
+  Destino: R. JOSÉ MANOEL VOLUZ / R. JOÃO SOCHA (X=673010.597; Y=7174805.822)
+  Mais econômica: 6.092 km | 7.386 kg CO₂ | economia CO₂ 3.60% | distância adicional +0.59%
+  Compromisso: 6.058 km | 7.422 kg CO₂ | economia CO₂ 3.13% | distância adicional +0.04%
+  Mais rápida (menor distância): 6.056 km | 7.662 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 052/100
+  Origem: R. CIDADE ALTO PARANÁ / RIO PASSO DO FRANÇA (X=670822.636; Y=7174057.856)
+  Destino: R. DR. JOÃO EVANGELISTA ESPINDOLA / R. MARCO BIGARELLA (X=677594.940; Y=7186342.041)
+  Mais econômica: 17.670 km | 21.365 kg CO₂ | economia CO₂ 8.60% | distância adicional +4.91%
+  Compromisso: 17.065 km | 22.473 kg CO₂ | economia CO₂ 3.86% | distância adicional +1.32%
+  Mais rápida (menor distância): 16.843 km | 23.376 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 053/100
+  Origem: R. CEL. CARLOS BARDELLI / R. SALVADOR (X=678819.718; Y=7183494.522)
+  Destino: R. BONIFÁCIO BATISTA RIBAS (X=675798.785; Y=7193676.497)
+  Mais econômica: 13.984 km | 22.342 kg CO₂ | economia CO₂ 9.19% | distância adicional +7.85%
+  Compromisso: 13.025 km | 22.994 kg CO₂ | economia CO₂ 6.54% | distância adicional +0.46%
+  Mais rápida (menor distância): 12.966 km | 24.603 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 054/100
+  Origem: R. FRANCISCO HERNANDES BASTIDA (X=669444.285; Y=7190347.500)
+  Destino: R. ANITA RIBAS / R. MÁRIO DO AMARAL / ROD. BR-476 (X=678721.127; Y=7187774.581)
+  Mais econômica: 12.647 km | 22.319 kg CO₂ | economia CO₂ 7.66% | distância adicional +12.25%
+  Compromisso: 11.875 km | 22.609 kg CO₂ | economia CO₂ 6.47% | distância adicional +5.40%
+  Mais rápida (menor distância): 11.267 km | 24.172 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 055/100
+  Origem: R. CIRILO ORTOLANI / R. MSTO. HERRMANN (X=672033.427; Y=7189869.434)
+  Destino: R. BRUNO LOBO (X=680795.659; Y=7186282.992)
+  Mais econômica: 11.860 km | 11.663 kg CO₂ | economia CO₂ 10.86% | distância adicional +6.65%
+  Compromisso: 11.414 km | 11.978 kg CO₂ | economia CO₂ 8.46% | distância adicional +2.63%
+  Mais rápida (menor distância): 11.121 km | 13.085 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 056/100
+  Origem: R. OLGA LINDER MARCON (X=680955.525; Y=7184333.145)
+  Destino: R. GEVERSON PLOMBOM / R. JOÃO AUGUSTO MARTINS (X=666277.122; Y=7183370.774)
+  Mais econômica: 18.247 km | 29.145 kg CO₂ | economia CO₂ 3.82% | distância adicional +5.44%
+  Compromisso: 17.505 km | 29.593 kg CO₂ | economia CO₂ 2.34% | distância adicional +1.15%
+  Mais rápida (menor distância): 17.305 km | 30.301 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 057/100
+  Origem: R. FLÁVIO RIBEIRO / R. JOSÉ JÚLIO BISCAIA (X=669698.082; Y=7181992.508)
+  Destino: R. THEÓPHILO BENATO (X=665656.707; Y=7189098.197)
+  Mais econômica: 13.324 km | 22.447 kg CO₂ | economia CO₂ 13.75% | distância adicional +5.33%
+  Compromisso: 12.837 km | 22.861 kg CO₂ | economia CO₂ 12.16% | distância adicional +1.48%
+  Mais rápida (menor distância): 12.650 km | 26.026 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 058/100
+  Origem: R. DOMINGOS ANTÔNIO MORO / R. MARIA JOANA FARIAS (X=671839.988; Y=7191820.479)
+  Destino: R. ALEXANDRE SCHROEDER / R. TEN. MIGUEL ANSELMO DA SILVA (X=673363.869; Y=7190525.811)
+  Mais econômica: 2.617 km | 4.455 kg CO₂ | economia CO₂ 2.43% | distância adicional +13.56%
+  Compromisso: 2.349 km | 4.477 kg CO₂ | economia CO₂ 1.95% | distância adicional +1.94%
+  Mais rápida (menor distância): 2.304 km | 4.566 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 059/100
+  Origem: R. GUSTAVO SCHIER / R. OLGA DE ARAÚJO ESPÍNDOLA (X=670772.869; Y=7179618.366)
+  Destino: R. CATANDUVAS / R. IRMÃS NAKADAIRA (X=666471.713; Y=7182452.016)
+  Mais econômica: 6.628 km | 8.850 kg CO₂ | economia CO₂ 5.63% | distância adicional +1.77%
+  Compromisso: 6.572 km | 8.913 kg CO₂ | economia CO₂ 4.96% | distância adicional +0.92%
+  Mais rápida (menor distância): 6.513 km | 9.378 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 060/100
+  Origem: R. JÚLIO BATISTA PEREIRA (X=669135.999; Y=7172154.069)
+  Destino: R. AGENOR ANTÔNIO RODRIGUES / R. MILTON MIRAMIR VISINONI (X=675967.811; Y=7173292.214)
+  Mais econômica: 9.961 km | 12.259 kg CO₂ | economia CO₂ 14.01% | distância adicional +2.10%
+  Compromisso: 9.838 km | 12.468 kg CO₂ | economia CO₂ 12.54% | distância adicional +0.84%
+  Mais rápida (menor distância): 9.756 km | 14.256 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 061/100
+  Origem: R. FRATERNIDADE / R. JOÃO GRIBOGI (X=679551.229; Y=7182222.736)
+  Destino: R. D. JOÃO BRAGA (X=671826.011; Y=7188207.404)
+  Mais econômica: 11.418 km | 17.723 kg CO₂ | economia CO₂ 8.23% | distância adicional +2.81%
+  Compromisso: 11.172 km | 17.949 kg CO₂ | economia CO₂ 7.06% | distância adicional +0.60%
+  Mais rápida (menor distância): 11.105 km | 19.313 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 062/100
+  Origem: R. MATHEUS LUIZ DALAGASSA / TRAV. ITAMAR CORTÊS (X=669198.200; Y=7171977.039)
+  Destino: R. CLÓVIS BEVILAQUA SOBRINHO / R. FRANCISCO TIMÓTEO DE SIMAS (X=677978.463; Y=7180519.206)
+  Mais econômica: 16.965 km | 24.408 kg CO₂ | economia CO₂ 1.56% | distância adicional +1.62%
+  Compromisso: 16.752 km | 24.469 kg CO₂ | economia CO₂ 1.32% | distância adicional +0.35%
+  Mais rápida (menor distância): 16.694 km | 24.796 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 063/100
+  Origem: R. EUGÊNIO PEDRO QUARTAROLLI / R. PROF. GUILHERME BUTLER / R. SÊNECA (X=674856.085; Y=7192429.528)
+  Destino: R. 14 BIS / R. CID MARCONDES DE ALBUQUERQUE (X=673269.021; Y=7176429.779)
+  Mais econômica: 19.421 km | 21.058 kg CO₂ | economia CO₂ 16.69% | distância adicional +4.42%
+  Compromisso: 18.695 km | 21.856 kg CO₂ | economia CO₂ 13.53% | distância adicional +0.51%
+  Mais rápida (menor distância): 18.600 km | 25.276 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 064/100
+  Origem: R. DRA. JENNY LAGOS PEREIRA DE SOUZA / R. HILDO DA PAZ (X=677663.068; Y=7193457.792)
+  Destino: AV. SETE DE SETEMBRO / R. LOURENÇO PINTO (X=674240.247; Y=7185433.578)
+  Mais econômica: 11.469 km | 15.200 kg CO₂ | economia CO₂ 14.42% | distância adicional +12.46%
+  Compromisso: 10.552 km | 15.852 kg CO₂ | economia CO₂ 10.75% | distância adicional +3.47%
+  Mais rápida (menor distância): 10.198 km | 17.762 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 065/100
+  Origem: R. DR. ADINAR DOS SANTOS RIBEIRO / R. PINHEIRO MACHADO (X=667663.559; Y=7180206.471)
+  Destino: R. MARIA JOSÉ DE SOUZA (X=670723.327; Y=7173759.535)
+  Mais econômica: 8.802 km | 11.310 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+  Compromisso: 8.802 km | 11.310 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+  Mais rápida (menor distância): 8.802 km | 11.310 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 066/100
+  Origem: R. OLIVARDO KONOROSKI BUENO (X=667607.197; Y=7170301.538)
+  Destino: R. JOSÉ ALCIDES DE LIMA (X=670213.832; Y=7179683.798)
+  Mais econômica: 13.650 km | 16.642 kg CO₂ | economia CO₂ 21.00% | distância adicional +8.14%
+  Compromisso: 12.910 km | 18.123 kg CO₂ | economia CO₂ 13.97% | distância adicional +2.29%
+  Mais rápida (menor distância): 12.622 km | 21.067 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 067/100
+  Origem: R. ADA MACAGGI / R. JOSÉ VERÍSSIMO (X=680233.906; Y=7186701.844)
+  Destino: AV. SEN. SALGADO FILHO / R. THOMAS EDISON (X=675872.788; Y=7183350.992)
+  Mais econômica: 7.914 km | 10.011 kg CO₂ | economia CO₂ 13.74% | distância adicional +9.39%
+  Compromisso: 7.364 km | 10.605 kg CO₂ | economia CO₂ 8.63% | distância adicional +1.79%
+  Mais rápida (menor distância): 7.235 km | 11.606 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 068/100
+  Origem: R. ABRAM FRÜSE / R. CIDADE DE PALMAS (X=675485.754; Y=7173281.722)
+  Destino: R. ORLANDO ALBINO VON DER OSTEN / TRAV. HUMBERTO LAVALLE (X=670668.196; Y=7179319.187)
+  Mais econômica: 9.771 km | 13.620 kg CO₂ | economia CO₂ 13.79% | distância adicional +4.11%
+  Compromisso: 9.511 km | 14.743 kg CO₂ | economia CO₂ 6.68% | distância adicional +1.35%
+  Mais rápida (menor distância): 9.385 km | 15.799 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 069/100
+  Origem: R. ANTONINO TEIXEIRA / R. DEMÉTRIO DA COSTA (X=680283.725; Y=7193356.590)
+  Destino: R. CAMÕES (X=676285.669; Y=7187123.072)
+  Mais econômica: 9.361 km | 14.472 kg CO₂ | economia CO₂ 6.56% | distância adicional +9.25%
+  Compromisso: 8.757 km | 14.515 kg CO₂ | economia CO₂ 6.28% | distância adicional +2.20%
+  Mais rápida (menor distância): 8.569 km | 15.487 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 070/100
+  Origem: R. THEODORO ZUBINSKI / R. UBERLÂNDIA (X=673761.874; Y=7193925.633)
+  Destino: AV. COM. FRANCO / R. PLÁCIDA THOMAZI ZANOTO (X=676267.611; Y=7184300.315)
+  Mais econômica: 12.056 km | 11.695 kg CO₂ | economia CO₂ 21.88% | distância adicional +6.53%
+  Compromisso: 11.743 km | 12.542 kg CO₂ | economia CO₂ 16.22% | distância adicional +3.75%
+  Mais rápida (menor distância): 11.318 km | 14.971 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 071/100
+  Origem: R. 1º DE MAIO / R. JOSÉ OSIRES BAGLIOLI (X=673334.821; Y=7176798.339)
+  Destino: R. LINA MARIA MARTINS MOREIRA (X=672716.328; Y=7175021.909)
+  Mais econômica: 4.574 km | 7.141 kg CO₂ | economia CO₂ 11.05% | distância adicional +6.97%
+  Compromisso: 4.570 km | 7.142 kg CO₂ | economia CO₂ 11.04% | distância adicional +6.88%
+  Mais rápida (menor distância): 4.276 km | 8.028 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 072/100
+  Origem: R. NAPOLEÃO BARTACHEVITS (X=669433.367; Y=7180760.670)
+  Destino: R. VALDECIR DOS SANTOS (X=667586.694; Y=7174983.419)
+  Mais econômica: 7.124 km | 7.751 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+  Compromisso: 7.124 km | 7.751 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+  Mais rápida (menor distância): 7.124 km | 7.751 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 073/100
+  Origem: R. PLATÃO / R. PROF. GUILHERME BUTLER (X=675018.537; Y=7191954.518)
+  Destino: R. PRES. PÁDUA FLEURY / R. PROF. JOSÉ NOGUEIRA DOS SANTOS (X=674771.891; Y=7180630.012)
+  Mais econômica: 13.757 km | 14.039 kg CO₂ | economia CO₂ 5.38% | distância adicional +5.57%
+  Compromisso: 13.066 km | 14.738 kg CO₂ | economia CO₂ 0.67% | distância adicional +0.27%
+  Mais rápida (menor distância): 13.030 km | 14.837 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 074/100
+  Origem: R. ELOYLIA POLZIN / R. ENETTE DUBARD / R. POETA BERNARDO GUIMARÃES (X=666867.850; Y=7171036.564)
+  Destino: R. CLÁVIO MOLINARI / R. JORGE LUIS DELLA COLETTA (X=680516.867; Y=7184832.195)
+  Mais econômica: 26.221 km | 31.257 kg CO₂ | economia CO₂ 5.83% | distância adicional +9.79%
+  Compromisso: 24.080 km | 32.427 kg CO₂ | economia CO₂ 2.30% | distância adicional +0.82%
+  Mais rápida (menor distância): 23.884 km | 33.192 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 075/100
+  Origem: R. IPHIGÊNIO DALGUTT (X=666050.098; Y=7183113.143)
+  Destino: R. ARCÉSIO DE BARROS LIMA / R. DR. CEZAR PERNETTA (X=667144.388; Y=7170806.673)
+  Mais econômica: 14.861 km | 15.690 kg CO₂ | economia CO₂ 1.05% | distância adicional +0.01%
+  Compromisso: 14.860 km | 15.857 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+  Mais rápida (menor distância): 14.860 km | 15.857 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 076/100
+  Origem: R. ROBERTO MENGHINI (X=667865.810; Y=7176770.120)
+  Destino: R. FR. ORLANDO / R. RAUL JOAQUIM QUADROS GOMES (X=677296.589; Y=7186331.946)
+  Mais econômica: 16.262 km | 21.202 kg CO₂ | economia CO₂ 10.76% | distância adicional +2.23%
+  Compromisso: 15.953 km | 21.658 kg CO₂ | economia CO₂ 8.84% | distância adicional +0.28%
+  Mais rápida (menor distância): 15.908 km | 23.759 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 077/100
+  Origem: R. BELMIRO PEREIRA DE LARA / R. DOLORES GUEDES (X=668026.376; Y=7171911.190)
+  Destino: R. RIO JARI (X=681338.699; Y=7188431.289)
+  Mais econômica: 29.269 km | 34.053 kg CO₂ | economia CO₂ 13.44% | distância adicional +10.23%
+  Compromisso: 27.041 km | 37.046 kg CO₂ | economia CO₂ 5.83% | distância adicional +1.84%
+  Mais rápida (menor distância): 26.553 km | 39.340 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 078/100
+  Origem: R. ARATICUM / R. JOÃO ANTÔNIO PROSDÓCIMO (X=678612.173; Y=7181031.344)
+  Destino: R. ANTÔNIO KRAINISKI / R. BENEDITO CORREIA DE FREITAS (X=673670.744; Y=7191432.118)
+  Mais econômica: 14.420 km | 21.618 kg CO₂ | economia CO₂ 14.09% | distância adicional +6.80%
+  Compromisso: 13.604 km | 24.265 kg CO₂ | economia CO₂ 3.58% | distância adicional +0.76%
+  Mais rápida (menor distância): 13.502 km | 25.165 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 079/100
+  Origem: R. FERNANDES DE BARROS / R. JAIME BALÃO (X=676509.892; Y=7188069.118)
+  Destino: R. EVILÁSIO PINHEIRO / R. PROFA. POMPÍLIA LOPES  DOS SANTOS (X=666426.964; Y=7178584.761)
+  Mais econômica: 17.139 km | 21.322 kg CO₂ | economia CO₂ 15.17% | distância adicional +5.56%
+  Compromisso: 16.834 km | 21.580 kg CO₂ | economia CO₂ 14.14% | distância adicional +3.69%
+  Mais rápida (menor distância): 16.235 km | 25.135 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 080/100
+  Origem: AC. VICTÓRIO FABRI / R. JOÃO SOCHA / R. PEDRO RODRIGUES DE LIMA (X=673090.792; Y=7174835.393)
+  Destino: R. CEL. JOÃO CÂNDIDO DE OLIVEIRA / TRAV. TABOÃO (X=673043.388; Y=7193655.101)
+  Mais econômica: 23.139 km | 32.779 kg CO₂ | economia CO₂ 15.96% | distância adicional +3.82%
+  Compromisso: 22.742 km | 34.733 kg CO₂ | economia CO₂ 10.95% | distância adicional +2.04%
+  Mais rápida (menor distância): 22.286 km | 39.004 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 081/100
+  Origem: R. GEN. ANOR PINHO / R. OSWALD DE ANDRADE (X=676500.212; Y=7192162.489)
+  Destino: AV. HENRY FORD / R. RANDOLFO SERZEDELO (X=674388.373; Y=7181390.830)
+  Mais econômica: 13.713 km | 13.966 kg CO₂ | economia CO₂ 10.36% | distância adicional +5.32%
+  Compromisso: 13.384 km | 14.104 kg CO₂ | economia CO₂ 9.47% | distância adicional +2.79%
+  Mais rápida (menor distância): 13.021 km | 15.580 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 082/100
+  Origem: R. APARECIDO CAETANO (X=675326.535; Y=7171578.497)
+  Destino: R. GUSTAVO SCHIER / R. JOÃO SURIAN (X=670353.314; Y=7179620.708)
+  Mais econômica: 12.717 km | 17.335 kg CO₂ | economia CO₂ 13.78% | distância adicional +12.24%
+  Compromisso: 11.664 km | 17.893 kg CO₂ | economia CO₂ 11.01% | distância adicional +2.95%
+  Mais rápida (menor distância): 11.330 km | 20.106 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 083/100
+  Origem: R. ARISTIDES MARQUEZINI / R. EDGARD CAVALCANTI DE ALBUQUERQUE (X=675728.754; Y=7174396.171)
+  Destino: R. ENG. JOÃO VISINONI / R. JÚLIO WOSS / R. PE. ESTANISLAU PIASECKI (X=664912.216; Y=7185734.285)
+  Mais econômica: 20.897 km | 27.506 kg CO₂ | economia CO₂ 20.42% | distância adicional +6.36%
+  Compromisso: 19.910 km | 31.220 kg CO₂ | economia CO₂ 9.67% | distância adicional +1.33%
+  Mais rápida (menor distância): 19.648 km | 34.562 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 084/100
+  Origem: AV. FRANCISCO MANOEL ALBIZU / R. JOAQUIM GONÇALVES DE BARROS (X=678605.311; Y=7189881.333)
+  Destino: R. ALF. MARCÍLIO MACHADO / R. JOÃO IVANOSKI (X=679616.250; Y=7190302.070)
+  Mais econômica: 1.251 km | 2.586 kg CO₂ | economia CO₂ 0.04% | distância adicional +1.86%
+  Compromisso: 1.228 km | 2.587 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+  Mais rápida (menor distância): 1.228 km | 2.587 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 085/100
+  Origem: R. BRUNO BERTOLDI / R. LUCAS CARVALHO (X=667214.740; Y=7168581.919)
+  Destino: R. PROF. PAULO D'ASSUMPÇÃO / R. VISC. DE CARAVELAS (X=678643.934; Y=7182226.999)
+  Mais econômica: 22.450 km | 30.586 kg CO₂ | economia CO₂ 2.75% | distância adicional +4.55%
+  Compromisso: 21.682 km | 30.778 kg CO₂ | economia CO₂ 2.14% | distância adicional +0.97%
+  Mais rápida (menor distância): 21.474 km | 31.451 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 086/100
+  Origem: R. CHICHORRO JÚNIOR / R. DOS PASSIONISTAS (X=675450.758; Y=7189023.992)
+  Destino: AV. DA INTEGRAÇÃO / R. EPAMINONDAS SANTOS (X=680390.931; Y=7188837.770)
+  Mais econômica: 6.370 km | 9.987 kg CO₂ | economia CO₂ 12.41% | distância adicional +4.31%
+  Compromisso: 6.158 km | 10.248 kg CO₂ | economia CO₂ 10.12% | distância adicional +0.84%
+  Mais rápida (menor distância): 6.107 km | 11.402 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 087/100
+  Origem: AV. IGUAÇÚ / R. CEL. HOCHE PEDRA PIRES (X=670757.809; Y=7183667.363)
+  Destino: AV. JORN. ADERBAL GAERTNER STRESSER / R. AYRTON TURRA / R. SEBASTIÃO MOLETTA (X=680799.384; Y=7181621.363)
+  Mais econômica: 14.547 km | 16.552 kg CO₂ | economia CO₂ 15.23% | distância adicional +2.37%
+  Compromisso: 14.346 km | 17.075 kg CO₂ | economia CO₂ 12.55% | distância adicional +0.95%
+  Mais rápida (menor distância): 14.211 km | 19.526 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 088/100
+  Origem: R. ACYRDO RASMUSSEN (X=677616.564; Y=7193041.164)
+  Destino: R. MQ. DO PARANÁ / R. MURILO DO AMARAL FERREIRA (X=672322.751; Y=7183083.463)
+  Mais econômica: 14.369 km | 19.772 kg CO₂ | economia CO₂ 15.38% | distância adicional +6.33%
+  Compromisso: 13.694 km | 22.032 kg CO₂ | economia CO₂ 5.71% | distância adicional +1.34%
+  Mais rápida (menor distância): 13.513 km | 23.366 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 089/100
+  Origem: R. DR. RAFI SALUM / R. GUARANDI (X=667173.798; Y=7187485.856)
+  Destino: AL. NOSSA SENHORA DO SAGRADO CORAÇÃO / R. ANTÔNIO CLAUDINO / R. JOSÉ BREDA SOBRINHO (X=671361.901; Y=7175261.335)
+  Mais econômica: 15.903 km | 20.248 kg CO₂ | economia CO₂ 9.33% | distância adicional +4.32%
+  Compromisso: 15.367 km | 21.020 kg CO₂ | economia CO₂ 5.88% | distância adicional +0.79%
+  Mais rápida (menor distância): 15.245 km | 22.332 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 090/100
+  Origem: AV. HENRY FORD / R. DURVAL PACHECO DE CARVALHO (X=673853.722; Y=7180968.580)
+  Destino: AV. FREDERICO LAMBERTUCCI / R. HENRIQUE MATTIOLI (X=667987.079; Y=7180219.287)
+  Mais econômica: 7.861 km | 10.491 kg CO₂ | economia CO₂ 16.11% | distância adicional +12.40%
+  Compromisso: 7.023 km | 11.095 kg CO₂ | economia CO₂ 11.28% | distância adicional +0.42%
+  Mais rápida (menor distância): 6.994 km | 12.505 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 091/100
+  Origem: R. GREGÓRIO DE MATOS / R. VITÓRIO FOGGIATO (X=674155.974; Y=7189542.850)
+  Destino: R. BRASÍLIO CUMAN / R. ELLA FERDINANDA DOROTHEIA PAASCHE (X=664328.191; Y=7188913.239)
+  Mais econômica: 15.108 km | 25.086 kg CO₂ | economia CO₂ 8.77% | distância adicional +24.89%
+  Compromisso: 12.844 km | 25.359 kg CO₂ | economia CO₂ 7.78% | distância adicional +6.17%
+  Mais rápida (menor distância): 12.097 km | 27.497 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 092/100
+  Origem: R. CAJÁ-MANGA / R. LIMA (X=679655.592; Y=7179532.689)
+  Destino: R. BUTIÁ / R. LOUIS ESQUIER (X=679591.359; Y=7179663.479)
+  Mais econômica: 0.206 km | 0.785 kg CO₂ | economia CO₂ 0.41% | distância adicional +0.06%
+  Compromisso: 0.205 km | 0.789 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+  Mais rápida (menor distância): 0.205 km | 0.789 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 093/100
+  Origem: AV. IGUAÇÚ / R. CEL. ENOCK DE LIMA (X=670682.248; Y=7183638.422)
+  Destino: R. FR. HENRIQUE DE COIMBRA / R. PROF. JOSÉ NOGUEIRA DOS SANTOS (X=674880.248; Y=7180376.250)
+  Mais econômica: 7.154 km | 9.734 kg CO₂ | economia CO₂ 10.06% | distância adicional +16.78%
+  Compromisso: 6.560 km | 9.852 kg CO₂ | economia CO₂ 8.97% | distância adicional +7.09%
+  Mais rápida (menor distância): 6.126 km | 10.823 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 094/100
+  Origem: R. OSÍRIS DEL CORSO (X=680650.778; Y=7181824.706)
+  Destino: R. VICENZA (X=668395.722; Y=7189845.983)
+  Mais econômica: 18.992 km | 28.859 kg CO₂ | economia CO₂ 16.05% | distância adicional +6.11%
+  Compromisso: 18.079 km | 31.706 kg CO₂ | economia CO₂ 7.77% | distância adicional +1.01%
+  Mais rápida (menor distância): 17.899 km | 34.376 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 095/100
+  Origem: R. ESCR. JOSÉ PEREIRA DA GRAÇA ARANHA / R. SANT'ANA DO ITARARÉ (X=674989.992; Y=7174180.101)
+  Destino: AV. MANOEL RIBAS / R. ANTÔNIO STIVAL (X=667087.186; Y=7189814.347)
+  Mais econômica: 22.072 km | 32.834 kg CO₂ | economia CO₂ 18.60% | distância adicional +5.19%
+  Compromisso: 21.168 km | 34.125 kg CO₂ | economia CO₂ 15.40% | distância adicional +0.88%
+  Mais rápida (menor distância): 20.982 km | 40.338 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 096/100
+  Origem: AV. PARANÁ / R. DEP. ATÍLIO DE ALMEIDA BARBOSA (X=677235.602; Y=7190592.059)
+  Destino: AV. REPÚBLICA ARGENTINA / R. PROFA. DORACY CEZZARINO (X=671473.879; Y=7181904.283)
+  Mais econômica: 12.156 km | 16.020 kg CO₂ | economia CO₂ 10.36% | distância adicional +7.97%
+  Compromisso: 12.041 km | 16.150 kg CO₂ | economia CO₂ 9.64% | distância adicional +6.95%
+  Mais rápida (menor distância): 11.259 km | 17.872 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 097/100
+  Origem: R. DR. HELENO DA SILVEIRA / R. MSTO. CARLOS FRANK (X=677572.427; Y=7176390.959)
+  Destino: R. ESCR. JOSÉ PEREIRA DA GRAÇA ARANHA / R. SANT'ANA DO ITARARÉ (X=674989.992; Y=7174180.101)
+  Mais econômica: 4.580 km | 6.944 kg CO₂ | economia CO₂ 6.54% | distância adicional +10.76%
+  Compromisso: 4.315 km | 7.004 kg CO₂ | economia CO₂ 5.73% | distância adicional +4.34%
+  Mais rápida (menor distância): 4.136 km | 7.430 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 098/100
+  Origem: R. ANTÔNIO LAGO / R. CARLOS GARIBALDI BIAZETTO (X=676792.909; Y=7191161.167)
+  Destino: R. ANGELINA ANSAI / R. CARLOS ALBERTO DE LIMA FAGUNDES (X=668771.035; Y=7180927.560)
+  Mais econômica: 16.692 km | 20.292 kg CO₂ | economia CO₂ 20.20% | distância adicional +9.58%
+  Compromisso: 15.562 km | 22.200 kg CO₂ | economia CO₂ 12.69% | distância adicional +2.16%
+  Mais rápida (menor distância): 15.233 km | 25.428 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 099/100
+  Origem: R. ROBERTO MENGHINI (X=667865.810; Y=7176770.120)
+  Destino: R. ANNA BENDETT / R. JOÃO DALLEDONE SOBRINHO (X=672914.985; Y=7190096.589)
+  Mais econômica: 18.463 km | 26.193 kg CO₂ | economia CO₂ 16.80% | distância adicional +6.46%
+  Compromisso: 17.523 km | 28.009 kg CO₂ | economia CO₂ 11.03% | distância adicional +1.04%
+  Mais rápida (menor distância): 17.343 km | 31.482 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+Teste 100/100
+  Origem: R. JOÃO GOTTI (X=680664.661; Y=7190495.671)
+  Destino: R. DR. EGON ARMANDO KRUEGER / R. PROF. ALGACYR MUNHOZ MADER (X=668067.720; Y=7179259.181)
+  Mais econômica: 19.586 km | 26.342 kg CO₂ | economia CO₂ 10.41% | distância adicional +1.58%
+  Compromisso: 19.330 km | 26.598 kg CO₂ | economia CO₂ 9.54% | distância adicional +0.25%
+  Mais rápida (menor distância): 19.282 km | 29.403 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+
+MÉDIAS DOS 100 TESTES
+  Mais econômica: 13.024 km | 17.674 kg CO₂ | economia CO₂ 10.39% | distância adicional +6.39%
+  Compromisso: 12.445 km | 18.331 kg CO₂ | economia CO₂ 7.43% | distância adicional +1.71%
+  Mais rápida (menor distância): 12.239 km | 19.922 kg CO₂ | economia CO₂ 0.00% | distância adicional +0.00%
+[SALVO] C:\Users\ubivi\OneDrive\Documentos\nova-versao\Routly\resultados_validacao\teste_exaustivo_rotas\rotas_100_testes.csv
+[SALVO] C:\Users\ubivi\OneDrive\Documentos\nova-versao\Routly\resultados_validacao\teste_exaustivo_rotas\boxplots_rotas.png
+[SALVO] C:\Users\ubivi\OneDrive\Documentos\nova-versao\Routly\resultados_validacao\teste_exaustivo_rotas\boxplots_rotas.svg
+
+real	0m47.862s
+user	0m0.015s
+sys	0m0.016s

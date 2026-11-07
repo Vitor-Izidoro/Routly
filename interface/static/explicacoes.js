@@ -1,10 +1,10 @@
 /* Guias de leitura das operações, baseados nos testes e motores do projeto. */
 const explicacoes = {
   comparacao_rotas: [
-    'Compara a rota de menor distância com a de menor custo de carbono e mostra como a subida acumulada difere entre elas.',
+    'Compara a rota de menor distância com a de menor custo legado de carbono (distância + 5 × subida, coluna custo_carbono do CSV) e mostra como a subida acumulada difere entre elas.',
     'Usa os custos já presentes no CSV do grafo e sorteia até 50 pares na maior componente fortemente conexa. Encerra ao encontrar duas rotas diferentes, calculadas com NetworkX.',
-    'Consulte o Terminal para ver origem, destino, ruas, distância, subida acumulada e CO₂ de cada rota, além das diferenças entre elas. Esta operação não gera gráficos ou tabelas de arquivos.',
-    'Os pontos são aleatórios e podem mudar a cada execução. Se as 50 tentativas produzirem rotas iguais, o Terminal informa isso. Um exemplo encontrado não demonstra economia para toda a malha nem comprova emissões medidas em campo.'
+    'Consulte o Terminal para ver origem, destino, ruas, distância, subida acumulada e custo legado de cada rota, além das diferenças entre elas. Esta operação não gera gráficos ou tabelas de arquivos.',
+    'Os pontos são sorteados com semente fixa (42), então o resultado se repete. O custo legado é adimensional, não g de CO₂; para CO₂ físico use as análises VT-CPFM. Se as 50 tentativas produzirem rotas iguais, o Terminal informa isso. Um exemplo encontrado não demonstra economia para toda a malha.'
   ],
   testes_todos: [
     'Verifica em conjunto os comportamentos cobertos pelos testes do Routly: algoritmos de busca, modelos de emissão, unidades, cenários, análises científicas e interface.',

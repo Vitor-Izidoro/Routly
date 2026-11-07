@@ -81,7 +81,7 @@ class CatalogoTest(unittest.TestCase):
             executar(op, p, Path(temp))
         self.assertIn('Rota Mais Curta', saida.getvalue())
         self.assertIn('Rota Mais Ecológica', saida.getvalue())
-        self.assertIn('economia de 12.00 g de CO2', saida.getvalue())
+        self.assertIn('custo legado de carbono em 12.00 unidades', saida.getvalue())
         self.assertIn('2.00 metros mais longo', saida.getvalue())
 
     def test_worker_reutiliza_rota_e_exporta_figura(self):

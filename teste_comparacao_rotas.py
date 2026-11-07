@@ -1,6 +1,20 @@
+"""Exemplo ilustrativo: rota mais curta × rota de menor custo legado de carbono.
+
+Usa a coluna `custo_carbono` do CSV, gerada pelo ETL (distância em m + 5 × subida em m).
+Esse custo é adimensional: não é g de CO₂ nem usa o VT-CPFM. Para CO₂ físico,
+use main.py (opções 2.x e 3.x) ou experimentos/comprovacao_cientifica.py.
+
+Uso: python teste_comparacao_rotas.py [--semente 42]
+"""
+import argparse
+from pathlib import Path
+import sys
+
 import pandas as pd
 import networkx as nx
 import random
+
+CSV_GRAFO = Path(__file__).resolve().parent / "grafo_curitiba_carbono.csv"
 
 def carregar_grafo(caminho_csv):
     print("Carregando a malha viária de Curitiba...")
@@ -56,8 +70,10 @@ def buscar_rota(G, origem, destino, modo='distancia_m'):
     except (nx.NetworkXNoPath, nx.NodeNotFound):
         return None, 0, 0, 0, []
 
-def executar_testes():
-    arquivo_grafo = "grafo_curitiba_carbono.csv"
+def executar_testes(semente=42):
+    arquivo_grafo = CSV_GRAFO
+    # Semente fixa: o mesmo sorteio a cada execução (reprodutibilidade).
+    random.seed(semente)
     
     try:
         G, df_base = carregar_grafo(arquivo_grafo)
@@ -70,7 +86,7 @@ def executar_testes():
     G_conexo = G.subgraph(maior_componente)
     nos_validos = list(G_conexo.nodes())
 
-    print("Sorteando pontos pela cidade para encontrar o melhor cenário de teste...")
+    print(f"Sorteando pontos pela cidade (semente {semente}) para encontrar um cenário de teste...")
     
     for tentativa in range(1, 51):
         origem = random.choice(nos_validos)
@@ -83,7 +99,7 @@ def executar_testes():
         rota_eco, dist_eco, co2_eco, elev_eco, ruas_eco = buscar_rota(G_conexo, origem, destino, modo='custo_carbono')
         
         if rota_curta and rota_eco and rota_curta != rota_eco:
-            print(f"\n✅ SUCESSO NA TENTATIVA {tentativa}!")
+            print(f"\n[OK] SUCESSO NA TENTATIVA {tentativa}!")
             print(f"Origem (X,Y) : {origem}")
             print(f"Destino (X,Y): {destino}")
             
@@ -91,14 +107,14 @@ def executar_testes():
             print(f"  -> {len(rota_curta)} nós percorridos")
             print(f"  -> Distância: {dist_curta:.2f} m")
             print(f"  -> Subida   : +{elev_curta:.2f} m de elevação")
-            print(f"  -> Emissão  : {co2_curta:.2f} g CO2")
+            print(f"  -> Custo legado de carbono: {co2_curta:.2f} (distância + 5 × subida)")
             print(f"  -> Ruas     : {' -> '.join(ruas_curta)}")
             
-            print("\n[B] Rota Mais Ecológica (Foco em CO2)")
+            print("\n[B] Rota Mais Ecológica (menor custo legado de carbono)")
             print(f"  -> {len(rota_eco)} nós percorridos")
             print(f"  -> Distância: {dist_eco:.2f} m")
             print(f"  -> Subida   : +{elev_eco:.2f} m de elevação")
-            print(f"  -> Emissão  : {co2_eco:.2f} g CO2")
+            print(f"  -> Custo legado de carbono: {co2_eco:.2f} (distância + 5 × subida)")
             print(f"  -> Ruas     : {' -> '.join(ruas_eco)}")
             
             print("\n--- TRADE-OFF (O RESULTADO DO TCC) ---")
@@ -107,11 +123,17 @@ def executar_testes():
             diferenca_subida = elev_curta - elev_eco
             
             print(f"A rota ecológica desviou de +{diferenca_subida:.2f} m de subidas.")
-            print(f"Isso gerou uma economia de {economia:.2f} g de CO2.")
+            print(f"Isso reduziu o custo legado de carbono em {economia:.2f} unidades (não são g de CO2).")
             print(f"Em contrapartida, o trajeto ficou {aumento:.2f} metros mais longo.")
             break
     else:
         print("\nAs 50 tentativas aleatórias deram rotas idênticas. Execute novamente.")
 
 if __name__ == "__main__":
-    executar_testes()
+    # Evita UnicodeEncodeError no terminal do Windows (cp1252).
+    for fluxo in (sys.stdout, sys.stderr):
+        if hasattr(fluxo, "reconfigure"):
+            fluxo.reconfigure(encoding="utf-8", errors="replace")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--semente", type=int, default=42, help="Semente do sorteio (padrão: 42).")
+    executar_testes(parser.parse_args().semente)

@@ -12,8 +12,8 @@
   "fonte": "https://www.kaggle.com/datasets/debajyotipodder/co2-emission-by-vehicles",
   "notebook_referencia": "https://www.kaggle.com/code/muizah/c02-emission",
   "url_download": "https://www.kaggle.com/api/v1/datasets/download/debajyotipodder/co2-emission-by-vehicles",
-  "dataset_baixado": false,
-  "dataset": "C:\\Users\\ubivi\\OneDrive\\Documentos\\Routly\\CO2 Emissions_Canada.csv",
+  "dataset_baixado": true,
+  "dataset": "C:\\Users\\ubivi\\OneDrive\\Documentos\\nova-versao\\Routly\\CO2 Emissions_Canada.csv",
   "sha256": "e832d820e42066d0946b02a58bce8bc1c7da9684f5724348ade9753b8eabec72",
   "python": "3.13.6",
   "verificacoes_unidades": [

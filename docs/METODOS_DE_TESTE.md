@@ -8,7 +8,7 @@ O Routly foi verificado em cinco camadas, do código à malha real de Curitiba: 
 
 | Camada | Pergunta | Método | Resultado |
 | --- | --- | --- | --- |
-| 1. Corretude | O código faz o que as equações e os algoritmos dizem? | 50 testes automatizados (pytest), com cálculos independentes e enumeração exaustiva | 50/50 aprovados (+110 subcasos) |
+| 1. Corretude | O código faz o que as equações e os algoritmos dizem? | 72 testes automatizados (pytest), com cálculos independentes e enumeração exaustiva | 72/72 aprovados (+122 subcasos) |
 | 2. Reprodutibilidade | Os resultados se repetem com o mesmo grafo? | Recalcular as rotas do registro `docs/validacao_cmem.json` (09/09/2026) | 16/16 valores idênticos |
 | 3. Modelo físico | A emissão estimada é fisicamente plausível? | VT-CPFM (modelo do Routly) × CMEM (Lai et al., 2024) por declividade; fator de CO₂ × dados do Kaggle | R² = 0,994, MAPE = 9,7 %; fator a −0,32 % da EPA |
 | 4. Eficácia | Na malha real, a rota ecológica emite menos que a mais curta? | Monte Carlo (100 pares O-D × 3 cargas) + Wilcoxon pareado; medição cruzada no CMEM; ruído na altimetria | Redução mediana de 3,1 % / 7,3 % / 10,4 % (vazio / meia / cheio), p < 10⁻¹⁶ |
